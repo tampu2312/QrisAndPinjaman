@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Qris And Peminjaman</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root {
+            --bg: #0a0f1a;
+            --card: rgba(15, 23, 42, 0.65);
+            --card-solid: #0f172a;
+            --card2: rgba(20, 30, 55, 0.7);
+            --border: rgba(99, 102, 241, 0.15);
+            --border2: rgba(99, 102, 241, 0.3);
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass2: rgba(255, 255, 255, 0.06);
+            --accent: #818cf8;
+            --accent2: #6366f1;
+            --accent-glow: rgba(99, 102, 241, 0.2);
+            --accent-glow2: rgba(99, 102, 241, 0.1);
+            --fg: #e2e8f0;
+            --fg2: #94a3b8;
+            --muted: #64748b;
+            --danger: #f43f5e;
+            --amber: #f59e0b;
+            --amber-dim: rgba(245, 158, 11, 0.12);
+            --amber-border: rgba(245, 158, 11, 0.25);
+            --gold: #fbbf24;
+            --gold-dim: rgba(251, 191, 36, 0.15);
+            --gold-border: rgba(251, 191, 36, 0.3);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--fg);
+            min-height: 100vh;
+            overflow-x: hidden;
+            background: #0a0f1a;
+            background-image: url('https://cdn.areabermain.club/assets/cdn/az7/2026/06/13/20260613/6440b79d16d7215decaa0bf5a2f9f1a0/8e35011e-6793-4bfc-ba03-ac317c74beca.png');
+            background-size: cover;
+            background-position: center top;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+
+        body::before {
+            content: '';
+            position: fixed; inset: 0;
+            background: linear-gradient(
+                180deg,
+                rgba(10, 15, 26, 0.82) 0%,
+                rgba(10, 15, 26, 0.88) 40%,
+                rgba(10, 15, 26, 0.92) 100%
+            );
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        body::after {
+            content: '';
+            position: fixed; inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+            pointer-events: none; z-index: 0;
+        }
+
+        .bg-glow {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(150px);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .bg-glow-1 { top: -150px; left: -100px; width: 500px; height: 500px; background: var(--accent2); opacity: 0.08; }
+        .bg-glow-2 { bottom: -150px; right: -100px; width: 500px; height: 500px; background: #06b6d4; opacity: 0.06; }
+        .bg-glow-3 { top: 40%; left: 50%; transform: translateX(-50%); width: 600px; height: 600px; background: var(--amber); opacity: 0.03; }
+
+        .mono { font-family: 'JetBrains Mono', monospace; }
+
+        .glass-card {
+            background: var(--card);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .glass-card::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+            pointer-events: none;
+        }
+        .glass-card:hover {
+            border-color: var(--border2);
+            box-shadow: 0 8px 40px rgba(99, 102, 241, 0.08), 0 0 0 1px var(--border2);
+            transform: translateY(-2px);
+        }
+
+        .glass-card-gold {
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--gold-border);
+            border-radius: 16px;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .glass-card-gold::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(251,191,36,0.15), transparent);
+            pointer-events: none;
+        }
+        .glass-card-gold:hover {
+            border-color: rgba(251, 191, 36, 0.45);
+            box-shadow: 0 8px 40px var(--gold-dim), 0 0 0 1px rgba(251,191,36,0.4);
+            transform: translateY(-2px);
+        }
+
+        /* Logo styling */
+        .logo-img {
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 0 12px rgba(6, 182, 212, 0.4));
+            border-radius: 6px;
+        }
+
+        .tab-nav {
+            display: flex; gap: 4px;
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 14px; padding: 5px;
+            position: relative;
+        }
+        .tab-nav::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+            border-radius: 14px 14px 0 0;
+        }
+        .tab-btn {
+            flex: 1; padding: 11px 20px; border: none; border-radius: 10px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700; font-size: 13px; cursor: pointer;
+            transition: all 0.3s; background: transparent; color: var(--muted);
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            position: relative;
+        }
+        .tab-btn:hover { color: var(--fg2); background: var(--glass2); }
+        .tab-btn.active {
+            background: linear-gradient(135deg, var(--accent2), var(--accent));
+            color: #fff;
+            box-shadow: 0 4px 20px var(--accent-glow), inset 0 1px 0 rgba(255,255,255,0.1);
+        }
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; animation: fadeUp 0.4s cubic-bezier(0.16,1,0.3,1) both; }
+
+        textarea {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(5, 10, 20, 0.6);
+            border: 1.5px solid var(--border);
+            color: var(--fg); resize: none; outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            border-radius: 12px; padding: 16px; width: 100%;
+            font-size: 13px; line-height: 1.7;
+        }
+        textarea:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-glow2), 0 0 30px var(--accent-glow2);
+        }
+        textarea.amber-focus:focus {
+            border-color: var(--amber);
+            box-shadow: 0 0 0 3px var(--amber-dim), 0 0 30px var(--amber-dim);
+        }
+        textarea::placeholder { color: var(--muted); }
+
+        .output-box {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(5, 10, 20, 0.5);
+            border: 1.5px solid var(--border);
+            border-radius: 12px; padding: 20px;
+            font-size: 13px; line-height: 2.1;
+            color: var(--fg); white-space: pre-wrap;
+            word-break: break-all; min-height: 140px;
+            position: relative; transition: border-color 0.3s;
+        }
+        .output-box.has-content { border-color: var(--border2); }
+
+        .dock-output {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(5, 10, 20, 0.5);
+            border: 1.5px solid var(--gold-border);
+            border-radius: 12px; padding: 18px 20px;
+            font-size: 14px; line-height: 1.8;
+            color: var(--gold); white-space: pre-wrap;
+            word-break: break-all; min-height: 60px;
+            position: relative; transition: border-color 0.3s;
+            font-weight: 600;
+        }
+        .dock-output.has-content {
+            border-color: var(--gold);
+            box-shadow: 0 0 25px var(--gold-dim);
+        }
+
+        .btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 10px 20px; border-radius: 10px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700; font-size: 13px;
+            border: none; cursor: pointer;
+            transition: all 0.25s; overflow: hidden;
+            position: relative;
+        }
+        .btn::after {
+            content: '';
+            position: absolute; inset: 0;
+            background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        .btn:active { transform: scale(0.96); }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent2), var(--accent));
+            color: #fff;
+            box-shadow: 0 2px 12px var(--accent-glow);
+        }
+        .btn-primary:hover { box-shadow: 0 4px 24px var(--accent-glow); transform: translateY(-1px); }
+        .btn-amber {
+            background: linear-gradient(135deg, #d97706, var(--gold));
+            color: #000;
+            box-shadow: 0 2px 12px var(--gold-dim);
+        }
+        .btn-amber:hover { box-shadow: 0 4px 24px var(--gold-dim); transform: translateY(-1px); }
+        .btn-ghost {
+            background: var(--glass); color: var(--fg2);
+            border: 1.5px solid var(--border);
+        }
+        .btn-ghost::after { display: none; }
+        .btn-ghost:hover { border-color: var(--border2); color: var(--fg); background: var(--glass2); }
+        .btn-danger {
+            background: var(--glass); color: var(--danger);
+            border: 1.5px solid rgba(244, 63, 94, 0.2);
+        }
+        .btn-danger::after { display: none; }
+        .btn-danger:hover { background: rgba(244, 63, 94, 0.08); border-color: rgba(244, 63, 94, 0.4); }
+        .btn-sm { padding: 6px 12px; font-size: 11px; border-radius: 8px; }
+
+        .toast-container {
+            position: fixed; top: 24px; right: 24px;
+            z-index: 9999; display: flex; flex-direction: column; gap: 8px;
+        }
+        .toast {
+            padding: 12px 20px; border-radius: 12px;
+            font-size: 13px; font-weight: 600;
+            display: flex; align-items: center; gap: 10px;
+            animation: toastIn 0.4s cubic-bezier(0.16,1,0.3,1);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+            backdrop-filter: blur(12px);
+        }
+        .toast-success { background: rgba(5, 46, 22, 0.9); color: #86efac; border: 1px solid rgba(34,197,94,0.3); }
+        .toast-error { background: rgba(76, 5, 25, 0.9); color: #fda4af; border: 1px solid rgba(244,63,94,0.3); }
+        .toast-exit { animation: toastOut 0.3s ease forwards; }
+        @keyframes toastIn { from { opacity:0; transform: translateX(40px) scale(0.95); } to { opacity:1; transform: translateX(0) scale(1); } }
+        @keyframes toastOut { to { opacity:0; transform: translateX(40px) scale(0.95); } }
+
+        .history-item {
+            background: var(--card);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: 12px; padding: 12px 16px;
+            transition: all 0.25s; cursor: pointer;
+            position: relative; overflow: hidden;
+        }
+        .history-item::before {
+            content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+            width: 3px; background: var(--accent); opacity: 0; transition: opacity 0.2s;
+        }
+        .history-item:hover { border-color: var(--border2); background: var(--card2); }
+        .history-item:hover::before { opacity: 1; }
+
+        .dock-history-item {
+            background: var(--card);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: 12px; padding: 12px 16px;
+            transition: all 0.25s; cursor: pointer;
+            position: relative; overflow: hidden;
+        }
+        .dock-history-item::before {
+            content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+            width: 3px; background: var(--gold); opacity: 0; transition: opacity 0.2s;
+        }
+        .dock-history-item:hover { border-color: var(--gold-border); background: var(--card2); }
+        .dock-history-item:hover::before { opacity: 1; }
+
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(99,102,241,0.2); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(99,102,241,0.35); }
+
+        .badge {
+            display: inline-flex; align-items: center; justify-content: center;
+            min-width: 22px; height: 22px; border-radius: 6px;
+            font-size: 11px; font-weight: 800; padding: 0 6px;
+        }
+        .badge-accent { background: linear-gradient(135deg, var(--accent2), var(--accent)); color: #fff; }
+        .badge-amber { background: linear-gradient(135deg, #d97706, var(--gold)); color: #000; }
+        .badge-muted { background: var(--glass2); color: var(--fg2); border: 1px solid var(--border); }
+
+        .premium-badge {
+            display: inline-flex; align-items: center; gap: 5px;
+            padding: 4px 10px; border-radius: 6px;
+            font-size: 10px; font-weight: 800;
+            text-transform: uppercase; letter-spacing: 1px;
+            background: linear-gradient(135deg, rgba(251,191,36,0.15), rgba(245,158,11,0.1));
+            color: var(--gold);
+            border: 1px solid var(--gold-border);
+        }
+
+        .pulse-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: var(--accent); position: relative;
+        }
+        .pulse-dot::after {
+            content: ''; position: absolute; inset: -3px;
+            border-radius: 50%; border: 2px solid var(--accent);
+            animation: pulse 2s ease infinite;
+        }
+        @keyframes pulse { 0%,100%{opacity:0;transform:scale(0.8)} 50%{opacity:0.5;transform:scale(1.2)} }
+        .fade-up { animation: fadeUp 0.5s cubic-bezier(0.16,1,0.3,1) both; }
+        @keyframes fadeUp { from { opacity:0; transform: translateY(12px); } to { opacity:1; transform: translateY(0); } }
+
+        .grid-bg {
+            background-image:
+                linear-gradient(rgba(99,102,241,0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(99,102,241,0.06) 1px, transparent 1px);
+            background-size: 40px 40px; opacity: 0.3;
+            position: absolute; inset: 0; border-radius: 12px; pointer-events: none;
+        }
+        .label-tag { color: var(--accent); font-weight: 600; }
+        .header-tag { color: var(--gold); font-weight: 600; }
+
+        .entry-block {
+            padding: 14px 16px; margin-bottom: 10px;
+            background: rgba(99, 102, 241, 0.04);
+            border: 1px solid var(--border); border-radius: 10px; line-height: 2.1;
+        }
+        .entry-block:last-child { margin-bottom: 0; }
+        .header-block {
+            padding: 12px 16px; margin-bottom: 10px;
+            background: rgba(251, 191, 36, 0.05);
+            border: 1px solid var(--gold-border); border-radius: 10px; line-height: 2.1;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        .shimmer-line {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(99,102,241,0.3), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 3s ease infinite;
+        }
+
+        @media (max-width: 768px) {
+            .main-grid { grid-template-columns: 1fr !important; }
+            .stats-row { grid-template-columns: repeat(2, 1fr) !important; }
+            .dock-grid { grid-template-columns: 1fr !important; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+    <div class="bg-glow bg-glow-3"></div>
+    <div class="toast-container" id="toastContainer"></div>
+
+    <div style="position:relative; z-index:1; max-width:1200px; margin:0 auto; padding:24px 20px 60px;">
+
+        <!-- Header -->
+        <header class="fade-up" style="margin-bottom:28px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px;">
+            <div style="display:flex; align-items:center; gap:14px;">
+                <!-- Logo TogelOn -->
+                <img
+                    src="https://z-cdn-media.chatglm.cn/files/d6f4f54f-a86e-4990-a9e6-fb4775d0ff7c.png?auth_key=1882183480-47465a0a44164b24aac46a58ca5cce4a-0-43a632db2c6abae55ad85b42fcfe166c"
+                    alt="TogelOn Logo"
+                    class="logo-img"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                >
+                <!-- Fallback jika gambar gagal load -->
+                <div style="display:none; width:46px; height:46px; border-radius:12px; background:linear-gradient(135deg,var(--accent2),var(--accent)); align-items:center; justify-content:center; box-shadow:0 4px 20px var(--accent-glow);">
+                    <i class="fa-solid fa-file-lines" style="font-size:19px;color:#fff;"></i>
+                </div>
+                <div>
+                    <div style="display:flex;align-items:center;gap:10px;">
+                        <h1 style="font-size:20px;font-weight:900;letter-spacing:-0.3px;line-height:1.2;">Report Qris And Peminjaman</h1>
+                        <span class="premium-badge"><i class="fa-solid fa-crown" style="font-size:8px;"></i> PRO</span>
+                    </div>
+                    <p style="font-size:12px;color:var(--muted);margin-top:2px;">Tempel data, langsung jadi format laporan</p>
+                </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;">
+                <div class="pulse-dot"></div>
+                <span style="font-size:12px;color:var(--fg2);font-weight:600;">Ready</span>
+            </div>
+        </header>
+
+        <div class="shimmer-line fade-up" style="margin-bottom:24px;animation-delay:0.03s;border-radius:1px;"></div>
+
+        <!-- Tab Nav -->
+        <div class="tab-nav fade-up" style="margin-bottom:24px; animation-delay:0.05s;">
+            <button class="tab-btn active" onclick="switchTab('report')" id="tabReport">
+                <i class="fa-solid fa-file-export" style="font-size:12px;"></i> Report Bukti Qris
+            </button>
+            <button class="tab-btn" onclick="switchTab('dock')" id="tabDock">
+                <i class="fa-solid fa-table-columns" style="font-size:12px;"></i> TEMPEL PEMINJAMAN
+            </button>
+        </div>
+
+        <!-- ==================== TAB 1: REPORT FORMAT ==================== -->
+        <div class="tab-panel active" id="panelReport">
+            <div class="stats-row fade-up" style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px;animation-delay:0.1s;">
+                <div class="glass-card" style="padding:18px 20px;cursor:default;transform:none;">
+                    <div style="font-size:10px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:0.8px;">Total Diproses</div>
+                    <div id="statTotal" class="mono" style="font-size:26px;font-weight:800;color:var(--fg);margin-top:6px;">0</div>
+                </div>
+                <div class="glass-card" style="padding:18px 20px;cursor:default;transform:none;">
+                    <div style="font-size:10px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:0.8px;">Sesi Ini</div>
+                    <div id="statSession" class="mono" style="font-size:26px;font-weight:800;color:var(--accent);margin-top:6px;">0</div>
+                </div>
+                <div class="glass-card" style="padding:18px 20px;cursor:default;transform:none;">
+                    <div style="font-size:10px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:0.8px;">Total Nominal</div>
+                    <div id="statNominal" class="mono" style="font-size:26px;font-weight:800;color:var(--fg);margin-top:6px;">Rp. 0</div>
+                </div>
+                <div class="glass-card" style="padding:18px 20px;cursor:default;transform:none;">
+                    <div style="font-size:10px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:0.8px;">Terakhir</div>
+                    <div id="statLast" class="mono" style="font-size:13px;font-weight:600;color:var(--fg2);margin-top:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">-</div>
+                </div>
+            </div>
+
+            <div class="main-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+                <div class="glass-card fade-up" style="padding:20px;animation-delay:0.15s;">
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+                        <label style="font-size:13px;font-weight:700;color:var(--fg2);display:flex;align-items:center;gap:8px;">
+                            <i class="fa-solid fa-paste" style="color:var(--accent);font-size:12px;"></i> INPUT RAW DATA
+                        </label>
+                        <span style="font-size:10px;color:var(--muted);font-weight:600;">Tab-separated</span>
+                    </div>
+                    <textarea id="inputArea" rows="8" placeholder="Tempel data di sini...&#10;&#10;Contoh:&#10;Yadie12	100,000		1poh58e89004		https://sleekshot.app/v/xxx&#10;&#10;Bisa multiple baris sekaligus." spellcheck="false" aria-label="Area tempel data mentah"></textarea>
+                    <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;">
+                        <button class="btn btn-primary" onclick="processInput()"><i class="fa-solid fa-bolt" style="font-size:12px;"></i> Proses</button>
+                        <button class="btn btn-ghost" onclick="pasteFromClipboard()"><i class="fa-solid fa-clipboard" style="font-size:12px;"></i> Paste</button>
+                        <button class="btn btn-danger" onclick="clearInput()"><i class="fa-solid fa-xmark" style="font-size:12px;"></i> Clear</button>
+                    </div>
+                    <div class="glass-card" style="margin-top:16px;padding:14px 16px;cursor:default;transform:none;">
+                        <div style="font-size:10px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:8px;">Format Mapping</div>
+                        <div class="mono" style="font-size:11px;color:var(--fg2);line-height:2;">
+                            <span style="color:var(--accent);">Field 1</span> → User ID<br>
+                            <span style="color:var(--accent);">Field 2</span> → Nominal<br>
+                            <span style="color:var(--accent);">Field 3</span> → RRN<br>
+                            <span style="color:var(--accent);">Field 4</span> → Bukti (URL)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card fade-up" style="padding:20px;animation-delay:0.2s;">
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+                        <label style="font-size:13px;font-weight:700;color:var(--fg2);display:flex;align-items:center;gap:8px;">
+                            <i class="fa-solid fa-file-export" style="color:var(--accent);font-size:12px;"></i> HASIL FORMAT
+                        </label>
+                        <div style="display:flex;align-items:center;gap:8px;">
+                            <span id="lineCount" class="badge badge-muted" style="display:none;">0 baris</span>
+                            <button class="btn btn-ghost btn-sm" onclick="copyOutput()" id="copyBtn" style="display:none;"><i class="fa-regular fa-copy" style="font-size:11px;"></i> Salin</button>
+                        </div>
+                    </div>
+                    <div style="position:relative;">
+                        <div class="grid-bg"></div>
+                        <div class="output-box" id="outputBox" style="position:relative;z-index:1;">
+                            <span style="color:var(--muted);font-size:12px;">Hasil akan muncul di sini setelah diproses...</span>
+                        </div>
+                    </div>
+                    <div id="outputActions" style="display:none;margin-top:12px;gap:8px;flex-wrap:wrap;">
+                        <button class="btn btn-ghost btn-sm" onclick="copyAllOutput()"><i class="fa-solid fa-copy" style="font-size:10px;"></i> Salin Semua</button>
+                        <button class="btn btn-ghost btn-sm" onclick="copyHeaderOnly()"><i class="fa-solid fa-heading" style="font-size:10px;"></i> Salin Header Saja</button>
+                        <button class="btn btn-ghost btn-sm" onclick="copySingleLine()"><i class="fa-solid fa-grip-lines" style="font-size:10px;"></i> Salin 1 Entry Terakhir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fade-up" style="animation-delay:0.25s;margin-top:28px;">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+                    <div style="display:flex;align-items:center;gap:10px;">
+                        <label style="font-size:13px;font-weight:700;color:var(--fg2);display:flex;align-items:center;gap:8px;">
+                            <i class="fa-solid fa-clock-rotate-left" style="color:var(--accent);font-size:12px;"></i> RIWAYAT
+                        </label>
+                        <span id="historyCount" class="badge badge-accent" style="display:none;">0</span>
+                    </div>
+                    <button class="btn btn-danger btn-sm" onclick="clearHistory()" id="clearHistoryBtn" style="display:none;"><i class="fa-solid fa-trash" style="font-size:10px;"></i> Hapus Semua</button>
+                </div>
+                <div id="historyList" style="display:flex;flex-direction:column;gap:8px;">
+                    <div style="text-align:center;padding:32px;color:var(--muted);font-size:13px;">
+                        <i class="fa-regular fa-folder-open" style="font-size:28px;display:block;margin-bottom:10px;opacity:0.3;"></i> Belum ada riwayat
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== TAB 2: BANK TO DOCK ==================== -->
+        <div class="tab-panel" id="panelDock">
+            <div class="dock-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+                <div class="glass-card-gold" style="padding:20px;">
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+                        <label style="font-size:13px;font-weight:700;color:var(--fg2);display:flex;align-items:center;gap:8px;">
+                            <i class="fa-solid fa-building-columns" style="color:var(--gold);font-size:12px;"></i> INPUT DATA REKENING
+                        </label>
+                        <span style="font-size:10px;color:var(--muted);font-weight:600;">Tempel langsung</span>
+                    </div>
+                    <textarea id="dockInput" class="amber-focus" rows="10" placeholder="Tempel data rekening di sini...&#10;&#10;Contoh:&#10;Bank : BCA ( BERSIH )&#10;Nama Rekening : RAHMAT&#10;Nomor Rekening : 5850428672&#10;Nominal : Rp.25,000,000&#10;&#10;Bisa multiple blok sekaligus," spellcheck="false" aria-label="Area tempel data rekening"></textarea>
+                    <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;">
+                        <button class="btn btn-amber" onclick="processDock()"><i class="fa-solid fa-arrow-right" style="font-size:12px;"></i> Konversi</button>
+                        <button class="btn btn-ghost" onclick="pasteDockClipboard()"><i class="fa-solid fa-clipboard" style="font-size:12px;"></i> Paste</button>
+                        <button class="btn btn-danger" onclick="clearDock()"><i class="fa-solid fa-xmark" style="font-size:12px;"></i> Clear</button>
+                    </div>
+                    <div class="glass-card-gold" style="margin-top:16px;padding:14px 16px;cursor:default;transform:none;">
+                        <div style="font-size:10px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:8px;">Cara Pakai</div>
+                        <div style="font-size:11px;color:var(--fg2);line-height:1.8;">
+                            <span style="color:var(--gold);">Tempel</span> data rekening → otomatis dikonversi<br>
+                            Bisa <span style="color:var(--gold);">multiple blok</span> sekaligus (pisah baris kosong)
+                        </div>
+                        <div style="font-size:10px;color:var(--muted);margin-top:8px;line-height:1.6;">
+                            Bank otomatis dibersihkan: "BCA ( BERSIH )" → "BCA"<br>
+                            Nominal otomatis dibersihkan: "Rp.25,000,000" → "25,000,000"
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card-gold" style="padding:20px;">
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+                        <label style="font-size:13px;font-weight:700;color:var(--fg2);display:flex;align-items:center;gap:8px;">
+                            <i class="fa-solid fa-table-columns" style="color:var(--gold);font-size:12px;"></i> HASIL DOCK
+                        </label>
+                        <div style="display:flex;align-items:center;gap:8px;">
+                            <span id="dockLineCount" class="badge badge-amber" style="display:none;">0</span>
+                            <button class="btn btn-ghost btn-sm" onclick="copyDockOutput()" id="copyDockBtn" style="display:none;"><i class="fa-regular fa-copy" style="font-size:11px;"></i> Salin</button>
+                        </div>
+                    </div>
+                    <div style="margin-bottom:8px;font-size:10px;color:var(--muted);font-weight:600;">Tab-separated, siap tempel ke spreadsheet</div>
+                    <div class="dock-output" id="dockOutputBox">
+                        <span style="color:var(--muted);font-size:12px;font-weight:400;">Hasil konversi akan muncul di sini...</span>
+                    </div>
+                    <div id="dockOutputActions" style="display:none;margin-top:12px;gap:8px;flex-wrap:wrap;">
+                        <button class="btn btn-ghost btn-sm" onclick="copyAllDock()"><i class="fa-solid fa-copy" style="font-size:10px;"></i> Salin Semua</button>
+                        <button class="btn btn-ghost btn-sm" onclick="copyLastDock()"><i class="fa-solid fa-grip-lines" style="font-size:10px;"></i> Salin 1 Baris Terakhir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top:28px;">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+                    <div style="display:flex;align-items:center;gap:10px;">
+                        <label style="font-size:13px;font-weight:700;color:var(--fg2);display:flex;align-items:center;gap:8px;">
+                            <i class="fa-solid fa-clock-rotate-left" style="color:var(--gold);font-size:12px;"></i> RIWAYAT DOCK
+                        </label>
+                        <span id="dockHistoryCount" class="badge badge-amber" style="display:none;">0</span>
+                    </div>
+                    <button class="btn btn-danger btn-sm" onclick="clearDockHistory()" id="clearDockHistoryBtn" style="display:none;"><i class="fa-solid fa-trash" style="font-size:10px;"></i> Hapus Semua</button>
+                </div>
+                <div id="dockHistoryList" style="display:flex;flex-direction:column;gap:8px;">
+                    <div style="text-align:center;padding:32px;color:var(--muted);font-size:13px;">
+                        <i class="fa-regular fa-folder-open" style="font-size:28px;display:block;margin-bottom:10px;opacity:0.3;"></i> Belum ada riwayat
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="shimmer-line" style="margin-top:36px;border-radius:1px;"></div>
+        <div style="text-align:center;margin-top:14px;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;">
+            <img
+                src="https://z-cdn-media.chatglm.cn/files/d6f4f54f-a86e-4990-a9e6-fb4775d0ff7c.png?auth_key=1882183480-47465a0a44164b24aac46a58ca5cce4a-0-43a632db2c6abae55ad85b42fcfe166c"
+                alt="TogelOn"
+                style="height:18px;width:auto;object-fit:contain;filter:drop-shadow(0 0 6px rgba(6,182,212,0.3));border-radius:3px;opacity:0.7;"
+            >
+            <span class="premium-badge"><i class="fa-solid fa-crown" style="font-size:7px;"></i> PREMIUM</span>
+            <span style="font-size:11px;color:var(--muted);font-weight:500;">Report Qris And Peminjaman v2.0</span>
+        </div>
+    </div>
+
+    <script>
+        // ===================================================================
+        //  KEAMANAN
+        // ===================================================================
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('keydown', e => {
+            if (e.key === 'F12') { e.preventDefault(); return false; }
+            if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i')) { e.preventDefault(); return false; }
+            if (e.ctrlKey && e.shiftKey && (e.key === 'J' || e.key === 'j')) { e.preventDefault(); return false; }
+            if (e.ctrlKey && e.shiftKey && (e.key === 'C' || e.key === 'c')) { e.preventDefault(); return false; }
+            if (e.ctrlKey && (e.key === 'U' || e.key === 'u')) { e.preventDefault(); return false; }
+            if (e.ctrlKey && (e.key === 'S' || e.key === 's')) { e.preventDefault(); return false; }
+        });
+        (function() {
+            const threshold = 160;
+            const check = function() {
+                const w = window.outerWidth - window.innerWidth > threshold;
+                const h = window.outerHeight - window.innerHeight > threshold;
+                if (w || h) {
+                    document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;background:#0a0f1a;color:#64748b;font-family:sans-serif;font-size:14px;text-align:center;padding:20px;">Akses ditolak</div>';
+                }
+            };
+            setInterval(check, 1000);
+        })();
+
+        // ===================================================================
+        //  TAB SWITCHING
+        // ===================================================================
+        function switchTab(tab) {
+            document.getElementById('tabReport').classList.toggle('active', tab === 'report');
+            document.getElementById('tabDock').classList.toggle('active', tab === 'dock');
+            document.getElementById('panelReport').classList.toggle('active', tab === 'report');
+            document.getElementById('panelDock').classList.toggle('active', tab === 'dock');
+        }
+
+        // ===== Toast =====
+        function showToast(message, type = 'success') {
+            const c = document.getElementById('toastContainer');
+            const t = document.createElement('div');
+            t.className = `toast toast-${type}`;
+            const icon = type === 'success' ? 'fa-circle-check' : 'fa-circle-exclamation';
+            t.innerHTML = `<i class="fa-solid ${icon}" style="font-size:14px;"></i>${escHtml(message)}`;
+            c.appendChild(t);
+            setTimeout(() => { t.classList.add('toast-exit'); setTimeout(() => t.remove(), 300); }, 2500);
+        }
+        function escHtml(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+        function fallbackCopy(t) { const a = document.createElement('textarea'); a.value = t; a.style.position = 'fixed'; a.style.left = '-9999px'; document.body.appendChild(a); a.select(); document.execCommand('copy'); document.body.removeChild(a); }
+
+        // ===================================================================
+        //  TAB 1: REPORT FORMAT
+        // ===================================================================
+        let reportHistory = [], sessionCount = 0, totalNominal = 0, currentOutput = '', currentResults = [];
+        const HEADER_LINES = ['Info : TogelOn', 'Perihal : Cek bukti QRIS P2MIH'];
+        const inputArea = document.getElementById('inputArea');
+        const outputBox = document.getElementById('outputBox');
+        const copyBtn = document.getElementById('copyBtn');
+        const outputActions = document.getElementById('outputActions');
+        const lineCount = document.getElementById('lineCount');
+        const historyList = document.getElementById('historyList');
+        const historyCountEl = document.getElementById('historyCount');
+        const clearHistoryBtn = document.getElementById('clearHistoryBtn');
+
+        function parseLine(line) {
+            const parts = line.split('\t').map(s => s.trim()).filter(s => s.length > 0);
+            let userId = '', nominal = '', reffId = '', rrn = '', bukti = '';
+            if (parts.length === 4) { userId = parts[0]; nominal = parts[1]; rrn = parts[2]; bukti = parts[3]; }
+            else if (parts.length === 5) { userId = parts[0]; nominal = parts[1]; reffId = parts[2]; rrn = parts[3]; bukti = parts[4]; }
+            else if (parts.length === 3) { userId = parts[0]; nominal = parts[1]; bukti = parts[2]; }
+            else if (parts.length >= 1) {
+                let urlIdx = -1, numIdx = -1;
+                parts.forEach((p, i) => { if (p.startsWith('http')) urlIdx = i; else if (/^[\d,.]+$/.test(p.replace(/Rp\.?\s*/,''))) numIdx = i; });
+                if (urlIdx !== -1) bukti = parts[urlIdx]; if (numIdx !== -1) nominal = parts[numIdx];
+                const rest = parts.filter((_, i) => i !== urlIdx && i !== numIdx);
+                userId = rest[0] || ''; rrn = rest[1] || ''; reffId = rest[2] || '';
+            }
+            let fmt = nominal.replace(/,/g, '.'); if (fmt && !fmt.startsWith('Rp')) fmt = 'Rp. ' + fmt;
+            const numVal = parseFloat(nominal.replace(/[^0-9]/g, '')) || 0;
+            if (!reffId) reffId = '-';
+            const text = `User ID  : ${userId}\nReff ID  : ${reffId}\nRRN      : ${rrn}\nBukti    : ${bukti}\nNominal  : ${fmt}`;
+            return { text, userId, nominal: fmt, numVal, rrn, bukti, reffId };
+        }
+
+        function processInput() {
+            const raw = inputArea.value.trim(); if (!raw) { showToast('Tidak ada data', 'error'); return; }
+            const lines = raw.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+            const results = []; let bn = 0;
+            lines.forEach(l => { const p = parseLine(l); results.push(p); bn += p.numVal; });
+            currentResults = results;
+            currentOutput = [HEADER_LINES.join('\n'), '', ...results.flatMap((r, i) => i > 0 ? ['', r.text] : [r.text])].join('\n');
+            sessionCount += results.length; totalNominal += bn;
+            renderReportOutput(results);
+            copyBtn.style.display = 'inline-flex'; outputActions.style.display = 'flex';
+            lineCount.style.display = 'inline-flex'; lineCount.textContent = `${results.length} baris`;
+            results.forEach(r => reportHistory.unshift({ ...r, time: new Date() }));
+            updateStats(results); renderHistory();
+            showToast(`${results.length} data berhasil diformat`, 'success');
+        }
+
+        function renderReportOutput(results) {
+            if (!results.length) return;
+            let h = '<div class="header-block"><span class="header-tag">Info</span>    : TogelOn\n<span class="header-tag">Perihal</span> : Cek bukti QRIS P2MIH</div>';
+            results.forEach(r => {
+                h += '<div class="entry-block">';
+                h += `<span class="label-tag">User ID</span>  : ${escHtml(r.userId)}\n<span class="label-tag">Reff ID</span>  : ${escHtml(r.reffId)}\n<span class="label-tag">RRN</span>      : ${escHtml(r.rrn)}\n<span class="label-tag">Bukti</span>    : <a href="${escHtml(r.bukti)}" target="_blank" rel="noopener" style="color:#38bdf8;text-decoration:underline;word-break:break-all;">${escHtml(r.bukti)}</a>\n<span class="label-tag">Nominal</span>  : ${escHtml(r.nominal)}</div>`;
+            });
+            outputBox.innerHTML = h; outputBox.classList.add('has-content');
+        }
+
+        function updateStats(r) {
+            document.getElementById('statTotal').textContent = reportHistory.length;
+            document.getElementById('statSession').textContent = sessionCount;
+            document.getElementById('statNominal').textContent = 'Rp. ' + totalNominal.toLocaleString('id-ID');
+            document.getElementById('statLast').textContent = (r[r.length-1]||{}).userId || '-';
+        }
+
+        function renderHistory() {
+            if (!reportHistory.length) {
+                historyList.innerHTML = '<div style="text-align:center;padding:32px;color:var(--muted);font-size:13px;"><i class="fa-regular fa-folder-open" style="font-size:28px;display:block;margin-bottom:10px;opacity:0.3;"></i>Belum ada riwayat</div>';
+                historyCountEl.style.display = 'none'; clearHistoryBtn.style.display = 'none'; return;
+            }
+            historyCountEl.style.display = 'inline-flex'; historyCountEl.textContent = reportHistory.length; clearHistoryBtn.style.display = 'inline-flex';
+            historyList.innerHTML = reportHistory.slice(0,50).map((item, idx) => {
+                const t = item.time.toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+                return `<div class="history-item" onclick="copyHistoryItem(${idx})" title="Klik untuk menyalin" role="button" tabindex="0"><div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;"><div style="display:flex;align-items:center;gap:10px;min-width:0;"><div style="width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,var(--accent2),var(--accent));display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="fa-solid fa-user" style="font-size:12px;color:#fff;"></i></div><div style="min-width:0;"><div class="mono" style="font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${escHtml(item.userId)}</div><div class="mono" style="font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${escHtml(item.rrn)}</div></div></div><div style="display:flex;align-items:center;gap:12px;flex-shrink:0;"><div class="mono" style="font-size:13px;font-weight:600;color:var(--accent);">${escHtml(item.nominal)}</div><div class="mono" style="font-size:10px;color:var(--muted);">${t}</div><i class="fa-regular fa-copy" style="font-size:11px;color:var(--muted);"></i></div></div></div>`;
+            }).join('');
+        }
+
+        function copyHistoryItem(idx) {
+            const i = reportHistory[idx]; if (!i) return;
+            const t = HEADER_LINES.join('\n')+'\n\n'+`User ID  : ${i.userId}\nReff ID  : ${i.reffId}\nRRN      : ${i.rrn}\nBukti    : ${i.bukti}\nNominal  : ${i.nominal}`;
+            navigator.clipboard.writeText(t).then(()=>showToast(`Disalin: ${i.userId}`,'success')).catch(()=>{fallbackCopy(t);showToast(`Disalin: ${i.userId}`,'success');});
+        }
+        function clearHistory() { reportHistory = []; renderHistory(); showToast('Riwayat dihapus','success'); }
+        function copyOutput() {
+            if (!currentOutput) return;
+            navigator.clipboard.writeText(currentOutput).then(()=>{showToast('Hasil disalin','success');animateBtn(copyBtn);}).catch(()=>{fallbackCopy(currentOutput);showToast('Hasil disalin','success');});
+        }
+        function copyAllOutput() { copyOutput(); }
+        function copyHeaderOnly() { const t=HEADER_LINES.join('\n'); navigator.clipboard.writeText(t).then(()=>showToast('Header disalin','success')).catch(()=>{fallbackCopy(t);showToast('Header disalin','success');}); }
+        function copySingleLine() {
+            if (!currentResults.length) return;
+            const t = HEADER_LINES.join('\n')+'\n\n'+currentResults[currentResults.length-1].text;
+            navigator.clipboard.writeText(t).then(()=>showToast('1 entry terakhir disalin','success')).catch(()=>{fallbackCopy(t);showToast('1 entry terakhir disalin','success');});
+        }
+        function animateBtn(btn) { const ic = btn.querySelector('i'); ic.className='fa-solid fa-check'; ic.style.color='#fff'; setTimeout(()=>{ic.className='fa-regular fa-copy';ic.style.color='';},1500); }
+        async function pasteFromClipboard() { try{inputArea.value=await navigator.clipboard.readText();inputArea.focus();setTimeout(()=>processInput(),100);}catch(e){showToast('Tidak bisa akses clipboard','error');inputArea.focus();} }
+        function clearInput() { inputArea.value=''; currentOutput=''; currentResults=[]; outputBox.innerHTML='<span style="color:var(--muted);font-size:12px;">Hasil akan muncul di sini setelah diproses...</span>'; outputBox.classList.remove('has-content'); copyBtn.style.display='none'; outputActions.style.display='none'; lineCount.style.display='none'; inputArea.focus(); }
+        inputArea.addEventListener('keydown',(e)=>{if((e.ctrlKey||e.metaKey)&&e.key==='Enter'){e.preventDefault();processInput();}});
+        inputArea.addEventListener('paste',()=>{setTimeout(()=>{if(inputArea.value.trim().length>0)processInput();},150);});
+
+        // ===================================================================
+        //  TAB 2: BANK TO DOCK
+        // ===================================================================
+        let dockHistory = [], currentDockOutput = '', currentDockResults = [];
+        const dockInput = document.getElementById('dockInput');
+        const dockOutputBox = document.getElementById('dockOutputBox');
+        const copyDockBtn = document.getElementById('copyDockBtn');
+        const dockLineCount = document.getElementById('dockLineCount');
+        const dockOutputActions = document.getElementById('dockOutputActions');
+
+        function cleanBank(raw) { return raw.replace(/\s*\(.*?\)\s*/g, '').trim(); }
+        function cleanNominal(raw) { return raw.replace(/Rp\.?\s*/gi, '').trim(); }
+
+        function parseBankBlock(block) {
+            const lines = block.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+            const data = { bank: '', nama: '', norek: '', nominal: '' };
+            lines.forEach(line => {
+                const low = line.toLowerCase();
+                if (low.startsWith('bank')) data.bank = line.substring(line.indexOf(':') + 1).trim();
+                else if (low.startsWith('nama rekening') || low.startsWith('nama')) data.nama = line.substring(line.indexOf(':') + 1).trim();
+                else if (low.startsWith('nomor rekening') || low.startsWith('norek') || low.startsWith('no rekening')) data.norek = line.substring(line.indexOf(':') + 1).trim();
+                else if (low.startsWith('nominal')) data.nominal = line.substring(line.indexOf(':') + 1).trim();
+            });
+            return data;
+        }
+
+        function processDock() {
+            const raw = dockInput.value.trim();
+            if (!raw) { showToast('Tidak ada data untuk dikonversi', 'error'); return; }
+            const blocks = raw.split(/\n\s*\n/).map(b => b.trim()).filter(b => b.length > 0);
+            const results = [];
+            blocks.forEach(block => {
+                const data = parseBankBlock(block);
+                const bank = cleanBank(data.bank), nama = data.nama, norek = data.norek, nominal = cleanNominal(data.nominal);
+                if (bank || norek || nama || nominal) results.push({ bank, nama, norek, nominal, line: `${bank}\t${norek}\t${nama}\t${nominal}` });
+            });
+            if (results.length === 0) { showToast('Tidak bisa memparse data', 'error'); return; }
+            currentDockResults = results;
+            currentDockOutput = results.map(r => r.line).join('\n');
+            dockOutputBox.textContent = currentDockOutput;
+            dockOutputBox.classList.add('has-content');
+            copyDockBtn.style.display = 'inline-flex'; dockOutputActions.style.display = 'flex';
+            dockLineCount.style.display = 'inline-flex'; dockLineCount.textContent = `${results.length} baris`;
+            results.forEach(r => dockHistory.unshift({ ...r, time: new Date() }));
+            renderDockHistory();
+            showToast(`${results.length} data berhasil dikonversi`, 'success');
+            navigator.clipboard.writeText(currentDockOutput).catch(() => fallbackCopy(currentDockOutput));
+        }
+
+        function copyDockOutput() {
+            if (!currentDockOutput) return;
+            navigator.clipboard.writeText(currentDockOutput).then(() => { showToast('Disalin ke clipboard', 'success'); animateBtn(copyDockBtn); }).catch(() => { fallbackCopy(currentDockOutput); showToast('Disalin ke clipboard', 'success'); });
+        }
+        function copyAllDock() { copyDockOutput(); }
+        function copyLastDock() {
+            if (!currentDockResults.length) return;
+            const last = currentDockResults[currentDockResults.length - 1].line;
+            navigator.clipboard.writeText(last).then(() => showToast('1 baris terakhir disalin', 'success')).catch(() => { fallbackCopy(last); showToast('1 baris terakhir disalin', 'success'); });
+        }
+        async function pasteDockClipboard() {
+            try { dockInput.value = await navigator.clipboard.readText(); dockInput.focus(); setTimeout(() => processDock(), 100); }
+            catch (e) { showToast('Tidak bisa akses clipboard', 'error'); dockInput.focus(); }
+        }
+        function clearDock() {
+            dockInput.value = ''; currentDockOutput = ''; currentDockResults = [];
+            dockOutputBox.innerHTML = '<span style="color:var(--muted);font-size:12px;font-weight:400;">Hasil konversi akan muncul di sini...</span>';
+            dockOutputBox.classList.remove('has-content');
+            copyDockBtn.style.display = 'none'; dockOutputActions.style.display = 'none'; dockLineCount.style.display = 'none';
+            dockInput.focus();
+        }
+
+        function renderDockHistory() {
+            const list = document.getElementById('dockHistoryList');
+            const badge = document.getElementById('dockHistoryCount');
+            const btn = document.getElementById('clearDockHistoryBtn');
+            if (!dockHistory.length) {
+                list.innerHTML = '<div style="text-align:center;padding:32px;color:var(--muted);font-size:13px;"><i class="fa-regular fa-folder-open" style="font-size:28px;display:block;margin-bottom:10px;opacity:0.3;"></i>Belum ada riwayat</div>';
+                badge.style.display = 'none'; btn.style.display = 'none'; return;
+            }
+            badge.style.display = 'inline-flex'; badge.textContent = dockHistory.length; btn.style.display = 'inline-flex';
+            list.innerHTML = dockHistory.slice(0,50).map((item, idx) => {
+                const t = item.time.toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+                return `<div class="dock-history-item" onclick="copyDockHistoryItem(${idx})" title="Klik untuk menyalin" role="button" tabindex="0"><div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;"><div style="display:flex;align-items:center;gap:12px;min-width:0;flex:1;"><div style="width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,#d97706,var(--gold));display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="fa-solid fa-building-columns" style="font-size:12px;color:#000;"></i></div><div style="min-width:0;"><div class="mono" style="font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${escHtml(item.bank)} — ${escHtml(item.nama)}</div><div class="mono" style="font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${escHtml(item.norek)} · ${escHtml(item.nominal)}</div></div></div><div style="display:flex;align-items:center;gap:10px;flex-shrink:0;"><span class="mono" style="font-size:10px;color:var(--muted);">${t}</span><i class="fa-regular fa-copy" style="font-size:11px;color:var(--muted);"></i></div></div></div>`;
+            }).join('');
+        }
+
+        function copyDockHistoryItem(idx) {
+            const i = dockHistory[idx]; if (!i) return;
+            navigator.clipboard.writeText(i.line).then(() => showToast('Disalin', 'success')).catch(() => { fallbackCopy(i.line); showToast('Disalin', 'success'); });
+        }
+        function clearDockHistory() { dockHistory = []; renderDockHistory(); showToast('Riwayat dock dihapus', 'success'); }
+
+        dockInput.addEventListener('paste', () => { setTimeout(() => { if (dockInput.value.trim().length > 0) processDock(); }, 150); });
+        dockInput.addEventListener('keydown', (e) => { if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') { e.preventDefault(); processDock(); } });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Enter' && (e.target.classList.contains('history-item') || e.target.classList.contains('dock-history-item'))) e.target.click(); });
+    </script>
+</body>
+</html>
