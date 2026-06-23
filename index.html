@@ -31,10 +31,13 @@
             --gold: #fbbf24;
             --gold-dim: rgba(251, 191, 36, 0.15);
             --gold-border: rgba(251, 191, 36, 0.3);
+            --cyan: #22d3ee;
+            --cyan2: #06b6d4;
+            --cyan-dim: rgba(6, 182, 212, 0.12);
+            --cyan-border: rgba(6, 182, 212, 0.25);
+            --cyan-glow: rgba(6, 182, 212, 0.15);
         }
-
         * { box-sizing: border-box; margin: 0; padding: 0; }
-
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             color: var(--fg);
@@ -47,149 +50,137 @@
             background-attachment: fixed;
             background-repeat: no-repeat;
         }
-
         body::before {
             content: '';
             position: fixed; inset: 0;
-            background: linear-gradient(
-                180deg,
-                rgba(10, 15, 26, 0.82) 0%,
-                rgba(10, 15, 26, 0.88) 40%,
-                rgba(10, 15, 26, 0.92) 100%
-            );
-            z-index: 0;
-            pointer-events: none;
+            background: linear-gradient(180deg, rgba(10,15,26,0.82) 0%, rgba(10,15,26,0.88) 40%, rgba(10,15,26,0.92) 100%);
+            z-index: 0; pointer-events: none;
         }
-
         body::after {
             content: '';
             position: fixed; inset: 0;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
             pointer-events: none; z-index: 0;
         }
-
-        .bg-glow {
-            position: fixed;
-            border-radius: 50%;
-            filter: blur(150px);
-            pointer-events: none;
-            z-index: 0;
-        }
+        .bg-glow { position: fixed; border-radius: 50%; filter: blur(150px); pointer-events: none; z-index: 0; }
         .bg-glow-1 { top: -150px; left: -100px; width: 500px; height: 500px; background: var(--accent2); opacity: 0.08; }
         .bg-glow-2 { bottom: -150px; right: -100px; width: 500px; height: 500px; background: #06b6d4; opacity: 0.06; }
         .bg-glow-3 { top: 40%; left: 50%; transform: translateX(-50%); width: 600px; height: 600px; background: var(--amber); opacity: 0.03; }
-
         .mono { font-family: 'JetBrains Mono', monospace; }
 
         .glass-card {
             background: var(--card);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
-            overflow: hidden;
+            backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--border); border-radius: 16px;
+            transition: all 0.35s cubic-bezier(0.16,1,0.3,1);
+            position: relative; overflow: hidden;
         }
         .glass-card::before {
-            content: '';
-            position: absolute; top: 0; left: 0; right: 0;
-            height: 1px;
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
             pointer-events: none;
         }
         .glass-card:hover {
             border-color: var(--border2);
-            box-shadow: 0 8px 40px rgba(99, 102, 241, 0.08), 0 0 0 1px var(--border2);
+            box-shadow: 0 8px 40px rgba(99,102,241,0.08), 0 0 0 1px var(--border2);
             transform: translateY(-2px);
         }
-
         .glass-card-gold {
-            background: rgba(15, 23, 42, 0.65);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid var(--gold-border);
-            border-radius: 16px;
-            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
-            overflow: hidden;
+            background: rgba(15,23,42,0.65);
+            backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--gold-border); border-radius: 16px;
+            transition: all 0.35s cubic-bezier(0.16,1,0.3,1);
+            position: relative; overflow: hidden;
         }
         .glass-card-gold::before {
-            content: '';
-            position: absolute; top: 0; left: 0; right: 0;
-            height: 1px;
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
             background: linear-gradient(90deg, transparent, rgba(251,191,36,0.15), transparent);
             pointer-events: none;
         }
         .glass-card-gold:hover {
-            border-color: rgba(251, 191, 36, 0.45);
+            border-color: rgba(251,191,36,0.45);
             box-shadow: 0 8px 40px var(--gold-dim), 0 0 0 1px rgba(251,191,36,0.4);
             transform: translateY(-2px);
         }
-
-        /* Logo styling */
+        .glass-card-cyan {
+            background: rgba(15,23,42,0.65);
+            backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--cyan-border); border-radius: 16px;
+            transition: all 0.35s cubic-bezier(0.16,1,0.3,1);
+            position: relative; overflow: hidden;
+        }
+        .glass-card-cyan::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(6,182,212,0.15), transparent);
+            pointer-events: none;
+        }
+        .glass-card-cyan:hover {
+            border-color: rgba(6,182,212,0.45);
+            box-shadow: 0 8px 40px var(--cyan-dim), 0 0 0 1px rgba(6,182,212,0.4);
+            transform: translateY(-2px);
+        }
         .logo-img {
-            height: 40px;
-            width: auto;
-            object-fit: contain;
-            filter: drop-shadow(0 0 12px rgba(6, 182, 212, 0.4));
+            height: 40px; width: auto; object-fit: contain;
+            filter: drop-shadow(0 0 12px rgba(6,182,212,0.4));
             border-radius: 6px;
         }
-
         .tab-nav {
             display: flex; gap: 4px;
-            background: rgba(15, 23, 42, 0.7);
+            background: rgba(15,23,42,0.7);
             backdrop-filter: blur(20px);
             border: 1px solid var(--border);
             border-radius: 14px; padding: 5px;
             position: relative;
         }
         .tab-nav::before {
-            content: '';
-            position: absolute; top: 0; left: 0; right: 0;
-            height: 1px;
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
             border-radius: 14px 14px 0 0;
         }
         .tab-btn {
-            flex: 1; padding: 11px 20px; border: none; border-radius: 10px;
+            flex: 1; padding: 11px 16px; border: none; border-radius: 10px;
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-weight: 700; font-size: 13px; cursor: pointer;
+            font-weight: 700; font-size: 12px; cursor: pointer;
             transition: all 0.3s; background: transparent; color: var(--muted);
-            display: flex; align-items: center; justify-content: center; gap: 8px;
-            position: relative;
+            display: flex; align-items: center; justify-content: center; gap: 7px;
+            position: relative; white-space: nowrap;
         }
         .tab-btn:hover { color: var(--fg2); background: var(--glass2); }
-        .tab-btn.active {
+        .tab-btn.active-purple {
             background: linear-gradient(135deg, var(--accent2), var(--accent));
             color: #fff;
             box-shadow: 0 4px 20px var(--accent-glow), inset 0 1px 0 rgba(255,255,255,0.1);
+        }
+        .tab-btn.active-gold {
+            background: linear-gradient(135deg, #d97706, var(--gold));
+            color: #000;
+            box-shadow: 0 4px 20px var(--gold-dim), inset 0 1px 0 rgba(255,255,255,0.15);
+        }
+        .tab-btn.active-cyan {
+            background: linear-gradient(135deg, #0891b2, var(--cyan));
+            color: #000;
+            box-shadow: 0 4px 20px var(--cyan-glow), inset 0 1px 0 rgba(255,255,255,0.15);
         }
         .tab-panel { display: none; }
         .tab-panel.active { display: block; animation: fadeUp 0.4s cubic-bezier(0.16,1,0.3,1) both; }
 
         textarea {
             font-family: 'JetBrains Mono', monospace;
-            background: rgba(5, 10, 20, 0.6);
+            background: rgba(5,10,20,0.6);
             border: 1.5px solid var(--border);
             color: var(--fg); resize: none; outline: none;
             transition: border-color 0.3s, box-shadow 0.3s;
             border-radius: 12px; padding: 16px; width: 100%;
             font-size: 13px; line-height: 1.7;
         }
-        textarea:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px var(--accent-glow2), 0 0 30px var(--accent-glow2);
-        }
-        textarea.amber-focus:focus {
-            border-color: var(--amber);
-            box-shadow: 0 0 0 3px var(--amber-dim), 0 0 30px var(--amber-dim);
-        }
+        textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow2), 0 0 30px var(--accent-glow2); }
+        textarea.amber-focus:focus { border-color: var(--amber); box-shadow: 0 0 0 3px var(--amber-dim), 0 0 30px var(--amber-dim); }
+        textarea.cyan-focus:focus { border-color: var(--cyan); box-shadow: 0 0 0 3px var(--cyan-dim), 0 0 30px var(--cyan-dim); }
         textarea::placeholder { color: var(--muted); }
 
         .output-box {
             font-family: 'JetBrains Mono', monospace;
-            background: rgba(5, 10, 20, 0.5);
+            background: rgba(5,10,20,0.5);
             border: 1.5px solid var(--border);
             border-radius: 12px; padding: 20px;
             font-size: 13px; line-height: 2.1;
@@ -199,21 +190,85 @@
         }
         .output-box.has-content { border-color: var(--border2); }
 
-        .dock-output {
-            font-family: 'JetBrains Mono', monospace;
-            background: rgba(5, 10, 20, 0.5);
+        /* ===== DOCK TABLE OUTPUT ===== */
+        .dock-table-wrap {
+            background: rgba(5,10,20,0.5);
             border: 1.5px solid var(--gold-border);
-            border-radius: 12px; padding: 18px 20px;
-            font-size: 14px; line-height: 1.8;
-            color: var(--gold); white-space: pre-wrap;
-            word-break: break-all; min-height: 60px;
-            position: relative; transition: border-color 0.3s;
-            font-weight: 600;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: border-color 0.3s, box-shadow 0.3s;
         }
-        .dock-output.has-content {
+        .dock-table-wrap.has-content {
             border-color: var(--gold);
             box-shadow: 0 0 25px var(--gold-dim);
         }
+        .dock-table-wrap table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .dock-table-wrap thead th {
+            background: linear-gradient(135deg, rgba(217,119,6,0.18), rgba(251,191,36,0.12));
+            color: var(--gold);
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--gold-border);
+            white-space: nowrap;
+        }
+        .dock-table-wrap tbody td {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--fg);
+            padding: 11px 16px;
+            border-bottom: 1px solid rgba(251,191,36,0.07);
+            vertical-align: middle;
+        }
+        .dock-table-wrap tbody tr:last-child td { border-bottom: none; }
+        .dock-table-wrap tbody tr {
+            transition: background 0.2s;
+        }
+        .dock-table-wrap tbody tr:hover {
+            background: rgba(251,191,36,0.04);
+        }
+        .dock-table-wrap tbody td:nth-child(1) {
+            color: var(--gold);
+            font-weight: 700;
+            white-space: nowrap;
+        }
+        .dock-table-wrap tbody td:nth-child(2) {
+            color: var(--fg2);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+        .dock-table-wrap tbody td:nth-child(4) {
+            color: var(--fg);
+            font-weight: 700;
+            text-align: right;
+            white-space: nowrap;
+        }
+        .dock-empty {
+            padding: 32px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .returnal-output {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(5,10,20,0.5);
+            border: 1.5px solid var(--cyan-border);
+            border-radius: 12px; padding: 20px;
+            font-size: 13px; line-height: 2.1;
+            color: var(--fg); white-space: pre-wrap;
+            word-break: break-all; min-height: 140px;
+            position: relative; transition: border-color 0.3s;
+        }
+        .returnal-output.has-content { border-color: var(--cyan); box-shadow: 0 0 25px var(--cyan-dim); }
 
         .btn {
             display: inline-flex; align-items: center; gap: 8px;
@@ -221,94 +276,70 @@
             font-family: 'Plus Jakarta Sans', sans-serif;
             font-weight: 700; font-size: 13px;
             border: none; cursor: pointer;
-            transition: all 0.25s; overflow: hidden;
-            position: relative;
+            transition: all 0.25s; overflow: hidden; position: relative;
         }
         .btn::after {
-            content: '';
-            position: absolute; inset: 0;
+            content: ''; position: absolute; inset: 0;
             background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, transparent 50%);
             pointer-events: none;
         }
         .btn:active { transform: scale(0.96); }
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent2), var(--accent));
-            color: #fff;
-            box-shadow: 0 2px 12px var(--accent-glow);
-        }
+        .btn-primary { background: linear-gradient(135deg, var(--accent2), var(--accent)); color: #fff; box-shadow: 0 2px 12px var(--accent-glow); }
         .btn-primary:hover { box-shadow: 0 4px 24px var(--accent-glow); transform: translateY(-1px); }
-        .btn-amber {
-            background: linear-gradient(135deg, #d97706, var(--gold));
-            color: #000;
-            box-shadow: 0 2px 12px var(--gold-dim);
-        }
+        .btn-amber { background: linear-gradient(135deg, #d97706, var(--gold)); color: #000; box-shadow: 0 2px 12px var(--gold-dim); }
         .btn-amber:hover { box-shadow: 0 4px 24px var(--gold-dim); transform: translateY(-1px); }
-        .btn-ghost {
-            background: var(--glass); color: var(--fg2);
-            border: 1.5px solid var(--border);
-        }
+        .btn-cyan { background: linear-gradient(135deg, #0891b2, var(--cyan)); color: #000; box-shadow: 0 2px 12px var(--cyan-dim); }
+        .btn-cyan:hover { box-shadow: 0 4px 24px var(--cyan-dim); transform: translateY(-1px); }
+        .btn-ghost { background: var(--glass); color: var(--fg2); border: 1.5px solid var(--border); }
         .btn-ghost::after { display: none; }
         .btn-ghost:hover { border-color: var(--border2); color: var(--fg); background: var(--glass2); }
-        .btn-danger {
-            background: var(--glass); color: var(--danger);
-            border: 1.5px solid rgba(244, 63, 94, 0.2);
-        }
+        .btn-danger { background: var(--glass); color: var(--danger); border: 1.5px solid rgba(244,63,94,0.2); }
         .btn-danger::after { display: none; }
-        .btn-danger:hover { background: rgba(244, 63, 94, 0.08); border-color: rgba(244, 63, 94, 0.4); }
+        .btn-danger:hover { background: rgba(244,63,94,0.08); border-color: rgba(244,63,94,0.4); }
         .btn-sm { padding: 6px 12px; font-size: 11px; border-radius: 8px; }
 
-        .toast-container {
-            position: fixed; top: 24px; right: 24px;
-            z-index: 9999; display: flex; flex-direction: column; gap: 8px;
-        }
+        .toast-container { position: fixed; top: 24px; right: 24px; z-index: 9999; display: flex; flex-direction: column; gap: 8px; }
         .toast {
-            padding: 12px 20px; border-radius: 12px;
-            font-size: 13px; font-weight: 600;
+            padding: 12px 20px; border-radius: 12px; font-size: 13px; font-weight: 600;
             display: flex; align-items: center; gap: 10px;
             animation: toastIn 0.4s cubic-bezier(0.16,1,0.3,1);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.5);
-            backdrop-filter: blur(12px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.5); backdrop-filter: blur(12px);
+            max-width: 360px;
         }
-        .toast-success { background: rgba(5, 46, 22, 0.9); color: #86efac; border: 1px solid rgba(34,197,94,0.3); }
-        .toast-error { background: rgba(76, 5, 25, 0.9); color: #fda4af; border: 1px solid rgba(244,63,94,0.3); }
+        .toast-success { background: rgba(5,46,22,0.92); color: #86efac; border: 1px solid rgba(34,197,94,0.3); }
+        .toast-error { background: rgba(76,5,25,0.92); color: #fda4af; border: 1px solid rgba(244,63,94,0.3); }
         .toast-exit { animation: toastOut 0.3s ease forwards; }
         @keyframes toastIn { from { opacity:0; transform: translateX(40px) scale(0.95); } to { opacity:1; transform: translateX(0) scale(1); } }
         @keyframes toastOut { to { opacity:0; transform: translateX(40px) scale(0.95); } }
 
         .history-item {
-            background: var(--card);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--border);
-            border-radius: 12px; padding: 12px 16px;
-            transition: all 0.25s; cursor: pointer;
-            position: relative; overflow: hidden;
+            background: var(--card); backdrop-filter: blur(12px);
+            border: 1px solid var(--border); border-radius: 12px; padding: 12px 16px;
+            transition: all 0.25s; cursor: pointer; position: relative; overflow: hidden;
         }
-        .history-item::before {
-            content: ''; position: absolute; left: 0; top: 0; bottom: 0;
-            width: 3px; background: var(--accent); opacity: 0; transition: opacity 0.2s;
-        }
+        .history-item::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--accent); opacity: 0; transition: opacity 0.2s; }
         .history-item:hover { border-color: var(--border2); background: var(--card2); }
         .history-item:hover::before { opacity: 1; }
-
         .dock-history-item {
-            background: var(--card);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--border);
-            border-radius: 12px; padding: 12px 16px;
-            transition: all 0.25s; cursor: pointer;
-            position: relative; overflow: hidden;
+            background: var(--card); backdrop-filter: blur(12px);
+            border: 1px solid var(--border); border-radius: 12px; padding: 12px 16px;
+            transition: all 0.25s; cursor: pointer; position: relative; overflow: hidden;
         }
-        .dock-history-item::before {
-            content: ''; position: absolute; left: 0; top: 0; bottom: 0;
-            width: 3px; background: var(--gold); opacity: 0; transition: opacity 0.2s;
-        }
+        .dock-history-item::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--gold); opacity: 0; transition: opacity 0.2s; }
         .dock-history-item:hover { border-color: var(--gold-border); background: var(--card2); }
         .dock-history-item:hover::before { opacity: 1; }
+        .returnal-history-item {
+            background: var(--card); backdrop-filter: blur(12px);
+            border: 1px solid var(--border); border-radius: 12px; padding: 12px 16px;
+            transition: all 0.25s; cursor: pointer; position: relative; overflow: hidden;
+        }
+        .returnal-history-item::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--cyan); opacity: 0; transition: opacity 0.2s; }
+        .returnal-history-item:hover { border-color: var(--cyan-border); background: var(--card2); }
+        .returnal-history-item:hover::before { opacity: 1; }
 
         ::-webkit-scrollbar { width: 5px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: rgba(99,102,241,0.2); border-radius: 3px; }
-        ::-webkit-scrollbar-thumb:hover { background: rgba(99,102,241,0.35); }
 
         .badge {
             display: inline-flex; align-items: center; justify-content: center;
@@ -317,68 +348,107 @@
         }
         .badge-accent { background: linear-gradient(135deg, var(--accent2), var(--accent)); color: #fff; }
         .badge-amber { background: linear-gradient(135deg, #d97706, var(--gold)); color: #000; }
+        .badge-cyan { background: linear-gradient(135deg, #0891b2, var(--cyan)); color: #000; }
         .badge-muted { background: var(--glass2); color: var(--fg2); border: 1px solid var(--border); }
 
         .premium-badge {
             display: inline-flex; align-items: center; gap: 5px;
             padding: 4px 10px; border-radius: 6px;
-            font-size: 10px; font-weight: 800;
-            text-transform: uppercase; letter-spacing: 1px;
+            font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;
             background: linear-gradient(135deg, rgba(251,191,36,0.15), rgba(245,158,11,0.1));
-            color: var(--gold);
-            border: 1px solid var(--gold-border);
+            color: var(--gold); border: 1px solid var(--gold-border);
         }
 
-        .pulse-dot {
-            width: 8px; height: 8px; border-radius: 50%;
-            background: var(--accent); position: relative;
-        }
-        .pulse-dot::after {
-            content: ''; position: absolute; inset: -3px;
-            border-radius: 50%; border: 2px solid var(--accent);
-            animation: pulse 2s ease infinite;
-        }
+        .pulse-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); position: relative; }
+        .pulse-dot::after { content: ''; position: absolute; inset: -3px; border-radius: 50%; border: 2px solid var(--accent); animation: pulse 2s ease infinite; }
         @keyframes pulse { 0%,100%{opacity:0;transform:scale(0.8)} 50%{opacity:0.5;transform:scale(1.2)} }
         .fade-up { animation: fadeUp 0.5s cubic-bezier(0.16,1,0.3,1) both; }
         @keyframes fadeUp { from { opacity:0; transform: translateY(12px); } to { opacity:1; transform: translateY(0); } }
 
         .grid-bg {
-            background-image:
-                linear-gradient(rgba(99,102,241,0.06) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(99,102,241,0.06) 1px, transparent 1px);
+            background-image: linear-gradient(rgba(99,102,241,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(99,102,241,0.06) 1px, transparent 1px);
             background-size: 40px 40px; opacity: 0.3;
             position: absolute; inset: 0; border-radius: 12px; pointer-events: none;
         }
         .label-tag { color: var(--accent); font-weight: 600; }
         .header-tag { color: var(--gold); font-weight: 600; }
+        .cyan-tag { color: var(--cyan); font-weight: 600; }
 
         .entry-block {
             padding: 14px 16px; margin-bottom: 10px;
-            background: rgba(99, 102, 241, 0.04);
+            background: rgba(99,102,241,0.04);
             border: 1px solid var(--border); border-radius: 10px; line-height: 2.1;
         }
         .entry-block:last-child { margin-bottom: 0; }
         .header-block {
             padding: 12px 16px; margin-bottom: 10px;
-            background: rgba(251, 191, 36, 0.05);
+            background: rgba(251,191,36,0.05);
             border: 1px solid var(--gold-border); border-radius: 10px; line-height: 2.1;
         }
-
-        @keyframes shimmer {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
+        .returnal-header-block {
+            padding: 12px 16px; margin-bottom: 10px;
+            background: rgba(6,182,212,0.05);
+            border: 1px solid var(--cyan-border); border-radius: 10px; line-height: 2.1;
         }
+        .returnal-entry-block {
+            padding: 14px 16px; margin-bottom: 10px;
+            background: rgba(6,182,212,0.04);
+            border: 1px solid var(--cyan-border); border-radius: 10px; line-height: 2.1;
+        }
+        .returnal-entry-block:last-child { margin-bottom: 0; }
+
+        @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
         .shimmer-line {
             height: 1px;
             background: linear-gradient(90deg, transparent, rgba(99,102,241,0.3), transparent);
-            background-size: 200% 100%;
-            animation: shimmer 3s ease infinite;
+            background-size: 200% 100%; animation: shimmer 3s ease infinite;
+        }
+
+        .auto-badge {
+            display: inline-flex; align-items: center; gap: 4px;
+            padding: 2px 8px; border-radius: 5px;
+            font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+            background: rgba(34,197,94,0.12); color: #86efac; border: 1px solid rgba(34,197,94,0.25);
+            animation: autoPulse 2s ease infinite;
+        }
+        @keyframes autoPulse { 0%,100%{opacity:1} 50%{opacity:0.6} }
+
+        .dock-stats-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+        .dock-stat-card {
+            background: rgba(251,191,36,0.04);
+            border: 1px solid var(--gold-border);
+            border-radius: 10px;
+            padding: 12px 14px;
+        }
+        .dock-stat-label {
+            font-size: 9px;
+            color: var(--muted);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+        .dock-stat-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--gold);
+            margin-top: 4px;
         }
 
         @media (max-width: 768px) {
             .main-grid { grid-template-columns: 1fr !important; }
             .stats-row { grid-template-columns: repeat(2, 1fr) !important; }
             .dock-grid { grid-template-columns: 1fr !important; }
+            .returnal-grid { grid-template-columns: 1fr !important; }
+            .tab-btn { font-size: 11px; padding: 10px 10px; gap: 5px; }
+            .dock-table-wrap { overflow-x: auto; }
+            .dock-table-wrap table { min-width: 500px; }
+            .dock-stats-row { grid-template-columns: 1fr !important; }
         }
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
@@ -393,17 +463,9 @@
 
     <div style="position:relative; z-index:1; max-width:1200px; margin:0 auto; padding:24px 20px 60px;">
 
-        <!-- Header -->
         <header class="fade-up" style="margin-bottom:28px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px;">
             <div style="display:flex; align-items:center; gap:14px;">
-                <!-- Logo TogelOn -->
-                <img
-                    src="https://z-cdn-media.chatglm.cn/files/d6f4f54f-a86e-4990-a9e6-fb4775d0ff7c.png?auth_key=1882183480-47465a0a44164b24aac46a58ca5cce4a-0-43a632db2c6abae55ad85b42fcfe166c"
-                    alt="TogelOn Logo"
-                    class="logo-img"
-                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                >
-                <!-- Fallback jika gambar gagal load -->
+                <img src="https://z-cdn-media.chatglm.cn/files/d6f4f54f-a86e-4990-a9e6-fb4775d0ff7c.png?auth_key=1882183480-47465a0a44164b24aac46a58ca5cce4a-0-43a632db2c6abae55ad85b42fcfe166c" alt="TogelOn Logo" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                 <div style="display:none; width:46px; height:46px; border-radius:12px; background:linear-gradient(135deg,var(--accent2),var(--accent)); align-items:center; justify-content:center; box-shadow:0 4px 20px var(--accent-glow);">
                     <i class="fa-solid fa-file-lines" style="font-size:19px;color:#fff;"></i>
                 </div>
@@ -416,6 +478,7 @@
                 </div>
             </div>
             <div style="display:flex;align-items:center;gap:10px;">
+                <span class="auto-badge"><i class="fa-solid fa-bolt" style="font-size:7px;"></i> AUTO</span>
                 <div class="pulse-dot"></div>
                 <span style="font-size:12px;color:var(--fg2);font-weight:600;">Ready</span>
             </div>
@@ -423,17 +486,19 @@
 
         <div class="shimmer-line fade-up" style="margin-bottom:24px;animation-delay:0.03s;border-radius:1px;"></div>
 
-        <!-- Tab Nav -->
         <div class="tab-nav fade-up" style="margin-bottom:24px; animation-delay:0.05s;">
-            <button class="tab-btn active" onclick="switchTab('report')" id="tabReport">
-                <i class="fa-solid fa-file-export" style="font-size:12px;"></i> Report Bukti Qris
+            <button class="tab-btn active-purple" onclick="switchTab('report', this)" id="tabReport">
+                <i class="fa-solid fa-file-export" style="font-size:11px;"></i> Report Qris
             </button>
-            <button class="tab-btn" onclick="switchTab('dock')" id="tabDock">
-                <i class="fa-solid fa-table-columns" style="font-size:12px;"></i> TEMPEL PEMINJAMAN
+            <button class="tab-btn" onclick="switchTab('dock', this)" id="tabDock">
+                <i class="fa-solid fa-table-columns" style="font-size:11px;"></i> Peminjaman
+            </button>
+            <button class="tab-btn" onclick="switchTab('returnal', this)" id="tabReturnal">
+                <i class="fa-solid fa-rotate-left" style="font-size:11px;"></i> Pengembalian DANA
             </button>
         </div>
 
-        <!-- ==================== TAB 1: REPORT FORMAT ==================== -->
+        <!-- ===== TAB 1: REPORT QRIS ===== -->
         <div class="tab-panel active" id="panelReport">
             <div class="stats-row fade-up" style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px;animation-delay:0.1s;">
                 <div class="glass-card" style="padding:18px 20px;cursor:default;transform:none;">
@@ -460,45 +525,35 @@
                         <label style="font-size:13px;font-weight:700;color:var(--fg2);display:flex;align-items:center;gap:8px;">
                             <i class="fa-solid fa-paste" style="color:var(--accent);font-size:12px;"></i> INPUT RAW DATA
                         </label>
-                        <span style="font-size:10px;color:var(--muted);font-weight:600;">Tab-separated</span>
+                        <span class="auto-badge"><i class="fa-solid fa-bolt" style="font-size:6px;"></i> AUTO</span>
                     </div>
-                    <textarea id="inputArea" rows="8" placeholder="Tempel data di sini...&#10;&#10;Contoh:&#10;Yadie12	100,000		1poh58e89004		https://sleekshot.app/v/xxx&#10;&#10;Bisa multiple baris sekaligus." spellcheck="false" aria-label="Area tempel data mentah"></textarea>
+                    <textarea id="inputArea" rows="8" placeholder="Tempel data di sini...&#10;&#10;Contoh:&#10;Yadie12	100,000		1poh58e89004		https://sleekshot.app/v/xxx" spellcheck="false" aria-label="Area tempel data mentah"></textarea>
                     <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;">
                         <button class="btn btn-primary" onclick="processInput()"><i class="fa-solid fa-bolt" style="font-size:12px;"></i> Proses</button>
-                        <button class="btn btn-ghost" onclick="pasteFromClipboard()"><i class="fa-solid fa-clipboard" style="font-size:12px;"></i> Paste</button>
-                        <button class="btn btn-danger" onclick="clearInput()"><i class="fa-solid fa-xmark" style="font-size:12px;"></i> Clear</button>
-                    </div>
-                    <div class="glass-card" style="margin-top:16px;padding:14px 16px;cursor:default;transform:none;">
-                        <div style="font-size:10px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:8px;">Format Mapping</div>
-                        <div class="mono" style="font-size:11px;color:var(--fg2);line-height:2;">
-                            <span style="color:var(--accent);">Field 1</span> → User ID<br>
-                            <span style="color:var(--accent);">Field 2</span> → Nominal<br>
-                            <span style="color:var(--accent);">Field 3</span> → RRN<br>
-                            <span style="color:var(--accent);">Field 4</span> → Bukti (URL)
-                        </div>
+                        <button class="btn btn-ghost" onclick="tryPaste('inputArea')"><i class="fa-solid fa-clipboard" style="font-size:12px;"></i> Paste</button>
+                        <button class="btn btn-danger" onclick="clearField('inputArea')"><i class="fa-solid fa-xmark" style="font-size:12px;"></i> Clear</button>
                     </div>
                 </div>
-
                 <div class="glass-card fade-up" style="padding:20px;animation-delay:0.2s;">
                     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
                         <label style="font-size:13px;font-weight:700;color:var(--fg2);display:flex;align-items:center;gap:8px;">
                             <i class="fa-solid fa-file-export" style="color:var(--accent);font-size:12px;"></i> HASIL FORMAT
                         </label>
                         <div style="display:flex;align-items:center;gap:8px;">
-                            <span id="lineCount" class="badge badge-muted" style="display:none;">0 baris</span>
-                            <button class="btn btn-ghost btn-sm" onclick="copyOutput()" id="copyBtn" style="display:none;"><i class="fa-regular fa-copy" style="font-size:11px;"></i> Salin</button>
+                            <span id="lineCount" class="badge badge-muted" style="display:none;">0</span>
+                            <button class="btn btn-ghost btn-sm" onclick="copyReportAll()" id="copyBtn" style="display:none;"><i class="fa-regular fa-copy" style="font-size:11px;"></i> Salin</button>
                         </div>
                     </div>
                     <div style="position:relative;">
                         <div class="grid-bg"></div>
                         <div class="output-box" id="outputBox" style="position:relative;z-index:1;">
-                            <span style="color:var(--muted);font-size:12px;">Hasil akan muncul di sini setelah diproses...</span>
+                            <span style="color:var(--muted);font-size:12px;">Hasil akan muncul otomatis saat data ditempel...</span>
                         </div>
                     </div>
                     <div id="outputActions" style="display:none;margin-top:12px;gap:8px;flex-wrap:wrap;">
-                        <button class="btn btn-ghost btn-sm" onclick="copyAllOutput()"><i class="fa-solid fa-copy" style="font-size:10px;"></i> Salin Semua</button>
-                        <button class="btn btn-ghost btn-sm" onclick="copyHeaderOnly()"><i class="fa-solid fa-heading" style="font-size:10px;"></i> Salin Header Saja</button>
-                        <button class="btn btn-ghost btn-sm" onclick="copySingleLine()"><i class="fa-solid fa-grip-lines" style="font-size:10px;"></i> Salin 1 Entry Terakhir</button>
+                        <button class="btn btn-ghost btn-sm" onclick="copyReportAll()"><i class="fa-solid fa-copy" style="font-size:10px;"></i> Salin Semua</button>
+                        <button class="btn btn-ghost btn-sm" onclick="copyReportHeader()"><i class="fa-solid fa-heading" style="font-size:10px;"></i> Salin Header Saja</button>
+                        <button class="btn btn-ghost btn-sm" onclick="copyReportLast()"><i class="fa-solid fa-grip-lines" style="font-size:10px;"></i> Salin 1 Entry Terakhir</button>
                     </div>
                 </div>
             </div>
@@ -511,62 +566,71 @@
                         </label>
                         <span id="historyCount" class="badge badge-accent" style="display:none;">0</span>
                     </div>
-                    <button class="btn btn-danger btn-sm" onclick="clearHistory()" id="clearHistoryBtn" style="display:none;"><i class="fa-solid fa-trash" style="font-size:10px;"></i> Hapus Semua</button>
+                    <button class="btn btn-danger btn-sm" onclick="clearHistory('report')" id="clearHistoryBtn" style="display:none;"><i class="fa-solid fa-trash" style="font-size:10px;"></i> Hapus Semua</button>
                 </div>
                 <div id="historyList" style="display:flex;flex-direction:column;gap:8px;">
-                    <div style="text-align:center;padding:32px;color:var(--muted);font-size:13px;">
-                        <i class="fa-regular fa-folder-open" style="font-size:28px;display:block;margin-bottom:10px;opacity:0.3;"></i> Belum ada riwayat
-                    </div>
+                    <div style="text-align:center;padding:32px;color:var(--muted);font-size:13px;"><i class="fa-regular fa-folder-open" style="font-size:28px;display:block;margin-bottom:10px;opacity:0.3;"></i>Belum ada riwayat</div>
                 </div>
             </div>
         </div>
 
-        <!-- ==================== TAB 2: BANK TO DOCK ==================== -->
+        <!-- ===== TAB 2: PEMINJAMAN ===== -->
         <div class="tab-panel" id="panelDock">
+            <!-- Statistik ringkas -->
+            <div class="dock-stats-row fade-up" style="animation-delay:0.1s;">
+                <div class="dock-stat-card">
+                    <div class="dock-stat-label">Total Rekening</div>
+                    <div class="dock-stat-value" id="dockStatCount">0</div>
+                </div>
+                <div class="dock-stat-card">
+                    <div class="dock-stat-label">Total Nominal</div>
+                    <div class="dock-stat-value" id="dockStatNominal">0</div>
+                </div>
+                <div class="dock-stat-card">
+                    <div class="dock-stat-label">Terakhir Diproses</div>
+                    <div class="dock-stat-value" id="dockStatLast" style="font-size:13px;color:var(--fg2);margin-top:8px;">-</div>
+                </div>
+            </div>
+
             <div class="dock-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
-                <div class="glass-card-gold" style="padding:20px;">
+                <div class="glass-card-gold fade-up" style="padding:20px;animation-delay:0.12s;">
                     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
                         <label style="font-size:13px;font-weight:700;color:var(--fg2);display:flex;align-items:center;gap:8px;">
                             <i class="fa-solid fa-building-columns" style="color:var(--gold);font-size:12px;"></i> INPUT DATA REKENING
                         </label>
-                        <span style="font-size:10px;color:var(--muted);font-weight:600;">Tempel langsung</span>
+                        <span class="auto-badge"><i class="fa-solid fa-bolt" style="font-size:6px;"></i> AUTO</span>
                     </div>
-                    <textarea id="dockInput" class="amber-focus" rows="10" placeholder="Tempel data rekening di sini...&#10;&#10;Contoh:&#10;Bank : BCA ( BERSIH )&#10;Nama Rekening : RAHMAT&#10;Nomor Rekening : 5850428672&#10;Nominal : Rp.25,000,000&#10;&#10;Bisa multiple blok sekaligus," spellcheck="false" aria-label="Area tempel data rekening"></textarea>
+                    <textarea id="dockInput" class="amber-focus" rows="10" placeholder="Tempel data rekening di sini...&#10;&#10;Contoh:&#10;Bank : BCA ( BERSIH )&#10;Nama Rekening : RAHMAT&#10;Nomor Rekening : 5850428672&#10;Nominal : Rp.25,000,000" spellcheck="false" aria-label="Area tempel data rekening"></textarea>
                     <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;">
                         <button class="btn btn-amber" onclick="processDock()"><i class="fa-solid fa-arrow-right" style="font-size:12px;"></i> Konversi</button>
-                        <button class="btn btn-ghost" onclick="pasteDockClipboard()"><i class="fa-solid fa-clipboard" style="font-size:12px;"></i> Paste</button>
-                        <button class="btn btn-danger" onclick="clearDock()"><i class="fa-solid fa-xmark" style="font-size:12px;"></i> Clear</button>
-                    </div>
-                    <div class="glass-card-gold" style="margin-top:16px;padding:14px 16px;cursor:default;transform:none;">
-                        <div style="font-size:10px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:8px;">Cara Pakai</div>
-                        <div style="font-size:11px;color:var(--fg2);line-height:1.8;">
-                            <span style="color:var(--gold);">Tempel</span> data rekening → otomatis dikonversi<br>
-                            Bisa <span style="color:var(--gold);">multiple blok</span> sekaligus (pisah baris kosong)
-                        </div>
-                        <div style="font-size:10px;color:var(--muted);margin-top:8px;line-height:1.6;">
-                            Bank otomatis dibersihkan: "BCA ( BERSIH )" → "BCA"<br>
-                            Nominal otomatis dibersihkan: "Rp.25,000,000" → "25,000,000"
-                        </div>
+                        <button class="btn btn-ghost" onclick="tryPaste('dockInput')"><i class="fa-solid fa-clipboard" style="font-size:12px;"></i> Paste</button>
+                        <button class="btn btn-danger" onclick="clearField('dockInput')"><i class="fa-solid fa-xmark" style="font-size:12px;"></i> Clear</button>
                     </div>
                 </div>
-
-                <div class="glass-card-gold" style="padding:20px;">
+                <div class="glass-card-gold fade-up" style="padding:20px;animation-delay:0.15s;">
                     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
                         <label style="font-size:13px;font-weight:700;color:var(--fg2);display:flex;align-items:center;gap:8px;">
                             <i class="fa-solid fa-table-columns" style="color:var(--gold);font-size:12px;"></i> HASIL DOCK
                         </label>
                         <div style="display:flex;align-items:center;gap:8px;">
                             <span id="dockLineCount" class="badge badge-amber" style="display:none;">0</span>
-                            <button class="btn btn-ghost btn-sm" onclick="copyDockOutput()" id="copyDockBtn" style="display:none;"><i class="fa-regular fa-copy" style="font-size:11px;"></i> Salin</button>
+                            <button class="btn btn-ghost btn-sm" onclick="copyDockAll()" id="copyDockBtn" style="display:none;"><i class="fa-regular fa-copy" style="font-size:11px;"></i> Salin</button>
                         </div>
                     </div>
-                    <div style="margin-bottom:8px;font-size:10px;color:var(--muted);font-weight:600;">Tab-separated, siap tempel ke spreadsheet</div>
-                    <div class="dock-output" id="dockOutputBox">
-                        <span style="color:var(--muted);font-size:12px;font-weight:400;">Hasil konversi akan muncul di sini...</span>
+                    <div style="margin-bottom:10px;font-size:10px;color:var(--muted);font-weight:600;">Tab-separated, siap tempel ke spreadsheet</div>
+
+                    <!-- Tabel hasil dock -->
+                    <div class="dock-table-wrap" id="dockTableWrap">
+                        <div class="dock-empty">
+                            <i class="fa-regular fa-table" style="font-size:24px;display:block;margin-bottom:8px;opacity:0.3;"></i>
+                            Hasil konversi akan muncul otomatis...
+                        </div>
                     </div>
+
                     <div id="dockOutputActions" style="display:none;margin-top:12px;gap:8px;flex-wrap:wrap;">
-                        <button class="btn btn-ghost btn-sm" onclick="copyAllDock()"><i class="fa-solid fa-copy" style="font-size:10px;"></i> Salin Semua</button>
-                        <button class="btn btn-ghost btn-sm" onclick="copyLastDock()"><i class="fa-solid fa-grip-lines" style="font-size:10px;"></i> Salin 1 Baris Terakhir</button>
+                        <button class="btn btn-ghost btn-sm" onclick="copyDockAll()"><i class="fa-solid fa-copy" style="font-size:10px;"></i> Salin Semua</button>
+                        <button class="btn btn-ghost btn-sm" onclick="copyDockHeaderOnly()"><i class="fa-solid fa-heading" style="font-size:10px;"></i> Salin Header Saja</button>
+                        <button class="btn btn-ghost btn-sm" onclick="copyDockLast()"><i class="fa-solid fa-grip-lines" style="font-size:10px;"></i> Salin 1 Baris Terakhir</button>
                     </div>
                 </div>
             </div>
@@ -575,278 +639,613 @@
                 <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
                     <div style="display:flex;align-items:center;gap:10px;">
                         <label style="font-size:13px;font-weight:700;color:var(--fg2);display:flex;align-items:center;gap:8px;">
-                            <i class="fa-solid fa-clock-rotate-left" style="color:var(--gold);font-size:12px;"></i> RIWAYAT DOCK
+                            <i class="fa-solid fa-clock-rotate-left" style="color:var(--gold);font-size:12px;"></i> RIWAYAT
                         </label>
                         <span id="dockHistoryCount" class="badge badge-amber" style="display:none;">0</span>
                     </div>
-                    <button class="btn btn-danger btn-sm" onclick="clearDockHistory()" id="clearDockHistoryBtn" style="display:none;"><i class="fa-solid fa-trash" style="font-size:10px;"></i> Hapus Semua</button>
+                    <button class="btn btn-danger btn-sm" onclick="clearHistory('dock')" id="clearDockHistoryBtn" style="display:none;"><i class="fa-solid fa-trash" style="font-size:10px;"></i> Hapus Semua</button>
                 </div>
                 <div id="dockHistoryList" style="display:flex;flex-direction:column;gap:8px;">
-                    <div style="text-align:center;padding:32px;color:var(--muted);font-size:13px;">
-                        <i class="fa-regular fa-folder-open" style="font-size:28px;display:block;margin-bottom:10px;opacity:0.3;"></i> Belum ada riwayat
-                    </div>
+                    <div style="text-align:center;padding:32px;color:var(--muted);font-size:13px;"><i class="fa-regular fa-folder-open" style="font-size:28px;display:block;margin-bottom:10px;opacity:0.3;"></i>Belum ada riwayat</div>
                 </div>
             </div>
         </div>
 
-        <!-- Footer -->
+        <!-- ===== TAB 3: PENGEMBALIAN DANA ===== -->
+        <div class="tab-panel" id="panelReturnal">
+            <div class="returnal-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+                <div class="glass-card-cyan" style="padding:20px;">
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+                        <label style="font-size:13px;font-weight:700;color:var(--fg2);display:flex;align-items:center;gap:8px;">
+                            <i class="fa-solid fa-rotate-left" style="color:var(--cyan);font-size:12px;"></i> INPUT DATA PENGEMBALIAN
+                        </label>
+                        <span class="auto-badge"><i class="fa-solid fa-bolt" style="font-size:6px;"></i> AUTO</span>
+                    </div>
+                    <textarea id="returnalInput" class="cyan-focus" rows="10" placeholder="Tempel data di sini...&#10;&#10;Contoh:&#10;DANAMON	Priskila Dewi Rahayu Ningsih	903705373169		37,503,754&#10;&#10;Bisa multiple baris sekaligus." spellcheck="false" aria-label="Area tempel data pengembalian"></textarea>
+                    <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;">
+                        <button class="btn btn-cyan" onclick="processReturnal()"><i class="fa-solid fa-arrow-right" style="font-size:12px;"></i> Konversi</button>
+                        <button class="btn btn-ghost" onclick="tryPaste('returnalInput')"><i class="fa-solid fa-clipboard" style="font-size:12px;"></i> Paste</button>
+                        <button class="btn btn-danger" onclick="clearField('returnalInput')"><i class="fa-solid fa-xmark" style="font-size:12px;"></i> Clear</button>
+                    </div>
+                    <div class="glass-card-cyan" style="margin-top:16px;padding:14px 16px;cursor:default;transform:none;">
+                        <div style="font-size:10px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:8px;">Format Mapping</div>
+                        <div class="mono" style="font-size:11px;color:var(--fg2);line-height:2;">
+                            <span style="color:var(--cyan);">Field 1</span> → Bank<br>
+                            <span style="color:var(--cyan);">Field 2</span> → Nama Rekening<br>
+                            <span style="color:var(--cyan);">Field 3</span> → Nomor Rekening<br>
+                            <span style="color:var(--cyan);">Field 4</span> → (kosongkan/diabaikan)<br>
+                            <span style="color:var(--cyan);">Field 5</span> → Nominal
+                        </div>
+                    </div>
+                </div>
+                <div class="glass-card-cyan" style="padding:20px;">
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+                        <label style="font-size:13px;font-weight:700;color:var(--fg2);display:flex;align-items:center;gap:8px;">
+                            <i class="fa-solid fa-file-export" style="color:var(--cyan);font-size:12px;"></i> HASIL FORMAT
+                        </label>
+                        <div style="display:flex;align-items:center;gap:8px;">
+                            <span id="returnalLineCount" class="badge badge-cyan" style="display:none;">0</span>
+                            <button class="btn btn-ghost btn-sm" onclick="copyReturnalAll()" id="copyReturnalBtn" style="display:none;"><i class="fa-regular fa-copy" style="font-size:11px;"></i> Salin</button>
+                        </div>
+                    </div>
+                    <div class="returnal-output" id="returnalOutputBox">
+                        <span style="color:var(--muted);font-size:12px;">Hasil akan muncul otomatis saat data ditempel...</span>
+                    </div>
+                    <div id="returnalOutputActions" style="display:none;margin-top:12px;gap:8px;flex-wrap:wrap;">
+                        <button class="btn btn-ghost btn-sm" onclick="copyReturnalAll()"><i class="fa-solid fa-copy" style="font-size:10px;"></i> Salin Semua</button>
+                        <button class="btn btn-ghost btn-sm" onclick="copyReturnalHeader()"><i class="fa-solid fa-heading" style="font-size:10px;"></i> Salin Header Saja</button>
+                        <button class="btn btn-ghost btn-sm" onclick="copyReturnalLast()"><i class="fa-solid fa-grip-lines" style="font-size:10px;"></i> Salin 1 Entry Terakhir</button>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top:28px;">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+                    <div style="display:flex;align-items:center;gap:10px;">
+                        <label style="font-size:13px;font-weight:700;color:var(--fg2);display:flex;align-items:center;gap:8px;">
+                            <i class="fa-solid fa-clock-rotate-left" style="color:var(--cyan);font-size:12px;"></i> RIWAYAT
+                        </label>
+                        <span id="returnalHistoryCount" class="badge badge-cyan" style="display:none;">0</span>
+                    </div>
+                    <button class="btn btn-danger btn-sm" onclick="clearHistory('returnal')" id="clearReturnalHistoryBtn" style="display:none;"><i class="fa-solid fa-trash" style="font-size:10px;"></i> Hapus Semua</button>
+                </div>
+                <div id="returnalHistoryList" style="display:flex;flex-direction:column;gap:8px;">
+                    <div style="text-align:center;padding:32px;color:var(--muted);font-size:13px;"><i class="fa-regular fa-folder-open" style="font-size:28px;display:block;margin-bottom:10px;opacity:0.3;"></i>Belum ada riwayat</div>
+                </div>
+            </div>
+        </div>
+
         <div class="shimmer-line" style="margin-top:36px;border-radius:1px;"></div>
         <div style="text-align:center;margin-top:14px;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;">
-            <img
-                src="https://z-cdn-media.chatglm.cn/files/d6f4f54f-a86e-4990-a9e6-fb4775d0ff7c.png?auth_key=1882183480-47465a0a44164b24aac46a58ca5cce4a-0-43a632db2c6abae55ad85b42fcfe166c"
-                alt="TogelOn"
-                style="height:18px;width:auto;object-fit:contain;filter:drop-shadow(0 0 6px rgba(6,182,212,0.3));border-radius:3px;opacity:0.7;"
-            >
+            <img src="https://z-cdn-media.chatglm.cn/files/d6f4f54f-a86e-4990-a9e6-fb4775d0ff7c.png?auth_key=1882183480-47465a0a44164b24aac46a58ca5cce4a-0-43a632db2c6abae55ad85b42fcfe166c" alt="TogelOn" style="height:18px;width:auto;object-fit:contain;filter:drop-shadow(0 0 6px rgba(6,182,212,0.3));border-radius:3px;opacity:0.7;">
             <span class="premium-badge"><i class="fa-solid fa-crown" style="font-size:7px;"></i> PREMIUM</span>
-            <span style="font-size:11px;color:var(--muted);font-weight:500;">Report Qris And Peminjaman v2.0</span>
+            <span style="font-size:11px;color:var(--muted);font-weight:500;">Report Qris And Peminjaman v3.2</span>
         </div>
     </div>
 
     <script>
-        // ===================================================================
-        //  KEAMANAN
-        // ===================================================================
-        document.addEventListener('contextmenu', e => e.preventDefault());
-        document.addEventListener('keydown', e => {
-            if (e.key === 'F12') { e.preventDefault(); return false; }
-            if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i')) { e.preventDefault(); return false; }
-            if (e.ctrlKey && e.shiftKey && (e.key === 'J' || e.key === 'j')) { e.preventDefault(); return false; }
-            if (e.ctrlKey && e.shiftKey && (e.key === 'C' || e.key === 'c')) { e.preventDefault(); return false; }
-            if (e.ctrlKey && (e.key === 'U' || e.key === 'u')) { e.preventDefault(); return false; }
-            if (e.ctrlKey && (e.key === 'S' || e.key === 's')) { e.preventDefault(); return false; }
-        });
-        (function() {
-            const threshold = 160;
-            const check = function() {
-                const w = window.outerWidth - window.innerWidth > threshold;
-                const h = window.outerHeight - window.innerHeight > threshold;
-                if (w || h) {
-                    document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;background:#0a0f1a;color:#64748b;font-family:sans-serif;font-size:14px;text-align:center;padding:20px;">Akses ditolak</div>';
-                }
-            };
-            setInterval(check, 1000);
-        })();
+    (function() {
+        'use strict';
 
-        // ===================================================================
-        //  TAB SWITCHING
-        // ===================================================================
-        function switchTab(tab) {
-            document.getElementById('tabReport').classList.toggle('active', tab === 'report');
-            document.getElementById('tabDock').classList.toggle('active', tab === 'dock');
-            document.getElementById('panelReport').classList.toggle('active', tab === 'report');
-            document.getElementById('panelDock').classList.toggle('active', tab === 'dock');
+        // ============================================================
+        //  COPY — 100% kerja tanpa Clipboard API
+        // ============================================================
+        function doCopy(text, label) {
+            label = label || 'Data';
+            var ta = document.createElement('textarea');
+            ta.value = text;
+            ta.setAttribute('readonly', '');
+            ta.style.cssText = 'position:fixed;left:-9999px;top:-9999px;opacity:0;width:1px;height:1px;';
+            document.body.appendChild(ta);
+            ta.select();
+            ta.setSelectionRange(0, text.length);
+            var ok = false;
+            try { ok = document.execCommand('copy'); } catch(e) { ok = false; }
+            document.body.removeChild(ta);
+            if (ok) showToast(label + ' berhasil disalin', 'success');
+            else showToast('Gagal menyalin — coba blok teks manual lalu Ctrl+C', 'error');
+            return ok;
         }
 
-        // ===== Toast =====
-        function showToast(message, type = 'success') {
-            const c = document.getElementById('toastContainer');
-            const t = document.createElement('div');
-            t.className = `toast toast-${type}`;
-            const icon = type === 'success' ? 'fa-circle-check' : 'fa-circle-exclamation';
-            t.innerHTML = `<i class="fa-solid ${icon}" style="font-size:14px;"></i>${escHtml(message)}`;
+        // ============================================================
+        //  PASTE — aman dengan fallback
+        // ============================================================
+        function tryPaste(inputId) {
+            var el = document.getElementById(inputId);
+            el.focus();
+            if (navigator.clipboard && navigator.clipboard.readText) {
+                navigator.clipboard.readText().then(function(txt) {
+                    el.value = txt;
+                    el.dispatchEvent(new Event('input'));
+                }).catch(function() {
+                    showToast('Clipboard diblokir — gunakan Ctrl+V manual', 'error');
+                });
+            } else {
+                showToast('Gunakan Ctrl+V untuk menempel data', 'error');
+            }
+        }
+        window.tryPaste = tryPaste;
+
+        // ============================================================
+        //  UTILITAS
+        // ============================================================
+        function escHtml(s) {
+            var d = document.createElement('div');
+            d.textContent = s;
+            return d.innerHTML;
+        }
+        function showToast(message, type) {
+            type = type || 'success';
+            var c = document.getElementById('toastContainer');
+            var t = document.createElement('div');
+            t.className = 'toast toast-' + type;
+            var icon = type === 'success' ? 'fa-circle-check' : 'fa-circle-exclamation';
+            t.innerHTML = '<i class="fa-solid ' + icon + '" style="font-size:14px;flex-shrink:0;"></i><span>' + escHtml(message) + '</span>';
             c.appendChild(t);
-            setTimeout(() => { t.classList.add('toast-exit'); setTimeout(() => t.remove(), 300); }, 2500);
+            setTimeout(function() {
+                t.classList.add('toast-exit');
+                setTimeout(function() { t.remove(); }, 300);
+            }, 3000);
         }
-        function escHtml(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
-        function fallbackCopy(t) { const a = document.createElement('textarea'); a.value = t; a.style.position = 'fixed'; a.style.left = '-9999px'; document.body.appendChild(a); a.select(); document.execCommand('copy'); document.body.removeChild(a); }
+        function formatTime(d) {
+            return String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0') + ':' + String(d.getSeconds()).padStart(2,'0');
+        }
 
-        // ===================================================================
-        //  TAB 1: REPORT FORMAT
-        // ===================================================================
-        let reportHistory = [], sessionCount = 0, totalNominal = 0, currentOutput = '', currentResults = [];
-        const HEADER_LINES = ['Info : TogelOn', 'Perihal : Cek bukti QRIS P2MIH'];
-        const inputArea = document.getElementById('inputArea');
-        const outputBox = document.getElementById('outputBox');
-        const copyBtn = document.getElementById('copyBtn');
-        const outputActions = document.getElementById('outputActions');
-        const lineCount = document.getElementById('lineCount');
-        const historyList = document.getElementById('historyList');
-        const historyCountEl = document.getElementById('historyCount');
-        const clearHistoryBtn = document.getElementById('clearHistoryBtn');
+        // Hapus prefix Rp/Rp./Rp dari nominal
+        function stripRp(val) {
+            return val.replace(/^Rp\.?\s*/i, '').trim();
+        }
+
+        // Smart split
+        function smartSplit(line) {
+            var p = line.split('\t');
+            if (p.length > 1) return p.map(function(s){return s.trim();}).filter(function(s){return s.length>0;});
+            p = line.split(/\s{2,}/);
+            if (p.length > 1) return p.map(function(s){return s.trim();}).filter(function(s){return s.length>0;});
+            p = line.split(/\s+/);
+            return p.map(function(s){return s.trim();}).filter(function(s){return s.length>0;});
+        }
+
+        // ============================================================
+        //  TAB SWITCHING
+        // ============================================================
+        var tabBtnIds = { report: 'tabReport', dock: 'tabDock', returnal: 'tabReturnal' };
+        var tabPanelIds = { report: 'panelReport', dock: 'panelDock', returnal: 'panelReturnal' };
+        var activeCls = { report: 'active-purple', dock: 'active-gold', returnal: 'active-cyan' };
+
+        window.switchTab = function(tab, btnEl) {
+            Object.keys(tabBtnIds).forEach(function(k) {
+                document.getElementById(tabBtnIds[k]).classList.remove('active-purple','active-gold','active-cyan');
+                document.getElementById(tabPanelIds[k]).classList.remove('active');
+            });
+            btnEl.classList.add(activeCls[tab]);
+            document.getElementById(tabPanelIds[tab]).classList.add('active');
+        };
+
+        // ============================================================
+        //  TAB 1: REPORT QRIS
+        // ============================================================
+        var reportHistory = [];
+        var sessionCount = 0;
+        var totalNominal = 0;
+        var currentOutput = '';
+        var currentResults = [];
+        var HEADER_LINES = ['Info : TogelOn', 'Perihal : Cek bukti QRIS P2MIH'];
 
         function parseLine(line) {
-            const parts = line.split('\t').map(s => s.trim()).filter(s => s.length > 0);
-            let userId = '', nominal = '', reffId = '', rrn = '', bukti = '';
-            if (parts.length === 4) { userId = parts[0]; nominal = parts[1]; rrn = parts[2]; bukti = parts[3]; }
-            else if (parts.length === 5) { userId = parts[0]; nominal = parts[1]; reffId = parts[2]; rrn = parts[3]; bukti = parts[4]; }
-            else if (parts.length === 3) { userId = parts[0]; nominal = parts[1]; bukti = parts[2]; }
-            else if (parts.length >= 1) {
-                let urlIdx = -1, numIdx = -1;
-                parts.forEach((p, i) => { if (p.startsWith('http')) urlIdx = i; else if (/^[\d,.]+$/.test(p.replace(/Rp\.?\s*/,''))) numIdx = i; });
-                if (urlIdx !== -1) bukti = parts[urlIdx]; if (numIdx !== -1) nominal = parts[numIdx];
-                const rest = parts.filter((_, i) => i !== urlIdx && i !== numIdx);
-                userId = rest[0] || ''; rrn = rest[1] || ''; reffId = rest[2] || '';
+            var parts = smartSplit(line);
+            var userId = '', nominal = '', reffId = '', rrn = '', bukti = '';
+            if (parts.length >= 5) {
+                userId = parts[0]; nominal = parts[1]; reffId = parts[2]; rrn = parts[3]; bukti = parts[4];
+            } else if (parts.length === 4) {
+                userId = parts[0]; nominal = parts[1]; rrn = parts[2]; bukti = parts[3];
+            } else if (parts.length === 3) {
+                userId = parts[0]; nominal = parts[1]; bukti = parts[2];
+            } else if (parts.length >= 1) {
+                var urlIdx = -1, numIdx = -1, digitIdx = -1;
+                parts.forEach(function(p, i) {
+                    if (urlIdx === -1 && /^https?:\/\//i.test(p)) urlIdx = i;
+                    else if (numIdx === -1 && /[\d,\.]+/.test(p) && /[,\.]/.test(p) && !/^\d{4,}$/.test(p.replace(/[,\.]/g,''))) numIdx = i;
+                    else if (digitIdx === -1 && /^[a-z0-9]{8,}$/i.test(p)) digitIdx = i;
+                });
+                if (urlIdx !== -1) bukti = parts[urlIdx];
+                if (numIdx !== -1) nominal = parts[numIdx];
+                if (digitIdx !== -1) rrn = parts[digitIdx];
+                var rest = [];
+                parts.forEach(function(p, i) { if (i !== urlIdx && i !== numIdx && i !== digitIdx) rest.push(p); });
+                userId = rest[0] || '';
+                reffId = rest[1] || '';
+                if (!rrn && rest[2]) rrn = rest[2];
             }
-            let fmt = nominal.replace(/,/g, '.'); if (fmt && !fmt.startsWith('Rp')) fmt = 'Rp. ' + fmt;
-            const numVal = parseFloat(nominal.replace(/[^0-9]/g, '')) || 0;
+            var fmt = nominal.replace(/,/g, '.');
+            if (fmt && !fmt.startsWith('Rp')) fmt = 'Rp. ' + fmt;
+            var numVal = parseFloat(nominal.replace(/[^0-9]/g, '')) || 0;
             if (!reffId) reffId = '-';
-            const text = `User ID  : ${userId}\nReff ID  : ${reffId}\nRRN      : ${rrn}\nBukti    : ${bukti}\nNominal  : ${fmt}`;
-            return { text, userId, nominal: fmt, numVal, rrn, bukti, reffId };
+            var text = 'User ID  : ' + userId + '\nReff ID  : ' + reffId + '\nRRN      : ' + rrn + '\nBukti    : ' + bukti + '\nNominal  : ' + fmt;
+            return { text: text, userId: userId, nominal: fmt, numVal: numVal, rrn: rrn, bukti: bukti, reffId: reffId };
         }
 
         function processInput() {
-            const raw = inputArea.value.trim(); if (!raw) { showToast('Tidak ada data', 'error'); return; }
-            const lines = raw.split('\n').map(l => l.trim()).filter(l => l.length > 0);
-            const results = []; let bn = 0;
-            lines.forEach(l => { const p = parseLine(l); results.push(p); bn += p.numVal; });
+            var raw = document.getElementById('inputArea').value.trim();
+            if (!raw) {
+                document.getElementById('outputBox').innerHTML = '<span style="color:var(--muted);font-size:12px;">Hasil akan muncul otomatis saat data ditempel...</span>';
+                document.getElementById('outputBox').classList.remove('has-content');
+                document.getElementById('copyBtn').style.display = 'none';
+                document.getElementById('outputActions').style.display = 'none';
+                document.getElementById('lineCount').style.display = 'none';
+                return;
+            }
+            var lines = raw.split('\n').map(function(l){return l.trim();}).filter(function(l){return l.length>0;});
+            var results = [];
+            var bn = 0;
+            lines.forEach(function(l) {
+                var p = parseLine(l);
+                results.push(p);
+                bn += p.numVal;
+            });
             currentResults = results;
-            currentOutput = [HEADER_LINES.join('\n'), '', ...results.flatMap((r, i) => i > 0 ? ['', r.text] : [r.text])].join('\n');
-            sessionCount += results.length; totalNominal += bn;
+            var outParts = [HEADER_LINES.join('\n'), ''];
+            results.forEach(function(r, i) {
+                if (i > 0) outParts.push('');
+                outParts.push(r.text);
+            });
+            currentOutput = outParts.join('\n');
+            sessionCount += results.length;
+            totalNominal += bn;
             renderReportOutput(results);
-            copyBtn.style.display = 'inline-flex'; outputActions.style.display = 'flex';
-            lineCount.style.display = 'inline-flex'; lineCount.textContent = `${results.length} baris`;
-            results.forEach(r => reportHistory.unshift({ ...r, time: new Date() }));
-            updateStats(results); renderHistory();
-            showToast(`${results.length} data berhasil diformat`, 'success');
+            document.getElementById('copyBtn').style.display = 'inline-flex';
+            document.getElementById('outputActions').style.display = 'flex';
+            var lc = document.getElementById('lineCount');
+            lc.style.display = 'inline-flex';
+            lc.textContent = '' + results.length;
+            results.forEach(function(r) {
+                reportHistory.unshift({ text: r.text, userId: r.userId, nominal: r.nominal, numVal: r.numVal, time: new Date() });
+            });
+            document.getElementById('statTotal').textContent = reportHistory.length;
+            document.getElementById('statSession').textContent = sessionCount;
+            document.getElementById('statNominal').textContent = 'Rp. ' + totalNominal.toLocaleString('id-ID');
+            document.getElementById('statLast').textContent = (results[results.length-1] || {}).userId || '-';
+            renderHistoryList('report');
         }
 
         function renderReportOutput(results) {
             if (!results.length) return;
-            let h = '<div class="header-block"><span class="header-tag">Info</span>    : TogelOn\n<span class="header-tag">Perihal</span> : Cek bukti QRIS P2MIH</div>';
-            results.forEach(r => {
-                h += '<div class="entry-block">';
-                h += `<span class="label-tag">User ID</span>  : ${escHtml(r.userId)}\n<span class="label-tag">Reff ID</span>  : ${escHtml(r.reffId)}\n<span class="label-tag">RRN</span>      : ${escHtml(r.rrn)}\n<span class="label-tag">Bukti</span>    : <a href="${escHtml(r.bukti)}" target="_blank" rel="noopener" style="color:#38bdf8;text-decoration:underline;word-break:break-all;">${escHtml(r.bukti)}</a>\n<span class="label-tag">Nominal</span>  : ${escHtml(r.nominal)}</div>`;
+            var h = '<div class="header-block"><span class="header-tag">Info</span>    : TogelOn\n<span class="header-tag">Perihal</span> : Cek bukti QRIS P2MIH</div>';
+            results.forEach(function(r, i) {
+                if (i > 0) h += '<div style="height:6px;"></div>';
+                h += '<div class="entry-block"><span class="label-tag">User ID</span>  : ' + escHtml(r.userId) + '\n<span class="label-tag">Reff ID</span>  : ' + escHtml(r.reffId) + '\n<span class="label-tag">RRN</span>      : ' + escHtml(r.rrn) + '\n<span class="label-tag">Bukti</span>    : ' + escHtml(r.bukti) + '\n<span class="label-tag">Nominal</span>  : ' + escHtml(r.nominal) + '</div>';
             });
-            outputBox.innerHTML = h; outputBox.classList.add('has-content');
+            var box = document.getElementById('outputBox');
+            box.innerHTML = h;
+            box.classList.add('has-content');
         }
 
-        function updateStats(r) {
-            document.getElementById('statTotal').textContent = reportHistory.length;
-            document.getElementById('statSession').textContent = sessionCount;
-            document.getElementById('statNominal').textContent = 'Rp. ' + totalNominal.toLocaleString('id-ID');
-            document.getElementById('statLast').textContent = (r[r.length-1]||{}).userId || '-';
-        }
+        window.copyReportAll = function() { if (currentOutput) doCopy(currentOutput, 'Semua data'); };
+        window.copyReportHeader = function() { doCopy(HEADER_LINES.join('\n'), 'Header'); };
+        window.copyReportLast = function() {
+            if (currentResults.length) doCopy(currentResults[currentResults.length-1].text, '1 entry terakhir');
+        };
 
-        function renderHistory() {
-            if (!reportHistory.length) {
-                historyList.innerHTML = '<div style="text-align:center;padding:32px;color:var(--muted);font-size:13px;"><i class="fa-regular fa-folder-open" style="font-size:28px;display:block;margin-bottom:10px;opacity:0.3;"></i>Belum ada riwayat</div>';
-                historyCountEl.style.display = 'none'; clearHistoryBtn.style.display = 'none'; return;
-            }
-            historyCountEl.style.display = 'inline-flex'; historyCountEl.textContent = reportHistory.length; clearHistoryBtn.style.display = 'inline-flex';
-            historyList.innerHTML = reportHistory.slice(0,50).map((item, idx) => {
-                const t = item.time.toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
-                return `<div class="history-item" onclick="copyHistoryItem(${idx})" title="Klik untuk menyalin" role="button" tabindex="0"><div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;"><div style="display:flex;align-items:center;gap:10px;min-width:0;"><div style="width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,var(--accent2),var(--accent));display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="fa-solid fa-user" style="font-size:12px;color:#fff;"></i></div><div style="min-width:0;"><div class="mono" style="font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${escHtml(item.userId)}</div><div class="mono" style="font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${escHtml(item.rrn)}</div></div></div><div style="display:flex;align-items:center;gap:12px;flex-shrink:0;"><div class="mono" style="font-size:13px;font-weight:600;color:var(--accent);">${escHtml(item.nominal)}</div><div class="mono" style="font-size:10px;color:var(--muted);">${t}</div><i class="fa-regular fa-copy" style="font-size:11px;color:var(--muted);"></i></div></div></div>`;
-            }).join('');
-        }
-
-        function copyHistoryItem(idx) {
-            const i = reportHistory[idx]; if (!i) return;
-            const t = HEADER_LINES.join('\n')+'\n\n'+`User ID  : ${i.userId}\nReff ID  : ${i.reffId}\nRRN      : ${i.rrn}\nBukti    : ${i.bukti}\nNominal  : ${i.nominal}`;
-            navigator.clipboard.writeText(t).then(()=>showToast(`Disalin: ${i.userId}`,'success')).catch(()=>{fallbackCopy(t);showToast(`Disalin: ${i.userId}`,'success');});
-        }
-        function clearHistory() { reportHistory = []; renderHistory(); showToast('Riwayat dihapus','success'); }
-        function copyOutput() {
-            if (!currentOutput) return;
-            navigator.clipboard.writeText(currentOutput).then(()=>{showToast('Hasil disalin','success');animateBtn(copyBtn);}).catch(()=>{fallbackCopy(currentOutput);showToast('Hasil disalin','success');});
-        }
-        function copyAllOutput() { copyOutput(); }
-        function copyHeaderOnly() { const t=HEADER_LINES.join('\n'); navigator.clipboard.writeText(t).then(()=>showToast('Header disalin','success')).catch(()=>{fallbackCopy(t);showToast('Header disalin','success');}); }
-        function copySingleLine() {
-            if (!currentResults.length) return;
-            const t = HEADER_LINES.join('\n')+'\n\n'+currentResults[currentResults.length-1].text;
-            navigator.clipboard.writeText(t).then(()=>showToast('1 entry terakhir disalin','success')).catch(()=>{fallbackCopy(t);showToast('1 entry terakhir disalin','success');});
-        }
-        function animateBtn(btn) { const ic = btn.querySelector('i'); ic.className='fa-solid fa-check'; ic.style.color='#fff'; setTimeout(()=>{ic.className='fa-regular fa-copy';ic.style.color='';},1500); }
-        async function pasteFromClipboard() { try{inputArea.value=await navigator.clipboard.readText();inputArea.focus();setTimeout(()=>processInput(),100);}catch(e){showToast('Tidak bisa akses clipboard','error');inputArea.focus();} }
-        function clearInput() { inputArea.value=''; currentOutput=''; currentResults=[]; outputBox.innerHTML='<span style="color:var(--muted);font-size:12px;">Hasil akan muncul di sini setelah diproses...</span>'; outputBox.classList.remove('has-content'); copyBtn.style.display='none'; outputActions.style.display='none'; lineCount.style.display='none'; inputArea.focus(); }
-        inputArea.addEventListener('keydown',(e)=>{if((e.ctrlKey||e.metaKey)&&e.key==='Enter'){e.preventDefault();processInput();}});
-        inputArea.addEventListener('paste',()=>{setTimeout(()=>{if(inputArea.value.trim().length>0)processInput();},150);});
-
-        // ===================================================================
-        //  TAB 2: BANK TO DOCK
-        // ===================================================================
-        let dockHistory = [], currentDockOutput = '', currentDockResults = [];
-        const dockInput = document.getElementById('dockInput');
-        const dockOutputBox = document.getElementById('dockOutputBox');
-        const copyDockBtn = document.getElementById('copyDockBtn');
-        const dockLineCount = document.getElementById('dockLineCount');
-        const dockOutputActions = document.getElementById('dockOutputActions');
-
-        function cleanBank(raw) { return raw.replace(/\s*\(.*?\)\s*/g, '').trim(); }
-        function cleanNominal(raw) { return raw.replace(/Rp\.?\s*/gi, '').trim(); }
-
-        function parseBankBlock(block) {
-            const lines = block.split('\n').map(l => l.trim()).filter(l => l.length > 0);
-            const data = { bank: '', nama: '', norek: '', nominal: '' };
-            lines.forEach(line => {
-                const low = line.toLowerCase();
-                if (low.startsWith('bank')) data.bank = line.substring(line.indexOf(':') + 1).trim();
-                else if (low.startsWith('nama rekening') || low.startsWith('nama')) data.nama = line.substring(line.indexOf(':') + 1).trim();
-                else if (low.startsWith('nomor rekening') || low.startsWith('norek') || low.startsWith('no rekening')) data.norek = line.substring(line.indexOf(':') + 1).trim();
-                else if (low.startsWith('nominal')) data.nominal = line.substring(line.indexOf(':') + 1).trim();
-            });
-            return data;
-        }
+        // ============================================================
+        //  TAB 2: PEMINJAMAN (DOCK) — FORMAT BARU
+        // ============================================================
+        var dockHistory = [];
+        var currentDockOutput = '';   // Plain text untuk clipboard
+        var currentDockLines = [];    // Array of {bank, norek, nama, nominal}
+        var DOCK_HEADER = 'NAMA BANK\tNOMOR REKENING\tNAMA REKENING\tNominal';
 
         function processDock() {
-            const raw = dockInput.value.trim();
-            if (!raw) { showToast('Tidak ada data untuk dikonversi', 'error'); return; }
-            const blocks = raw.split(/\n\s*\n/).map(b => b.trim()).filter(b => b.length > 0);
-            const results = [];
-            blocks.forEach(block => {
-                const data = parseBankBlock(block);
-                const bank = cleanBank(data.bank), nama = data.nama, norek = data.norek, nominal = cleanNominal(data.nominal);
-                if (bank || norek || nama || nominal) results.push({ bank, nama, norek, nominal, line: `${bank}\t${norek}\t${nama}\t${nominal}` });
-            });
-            if (results.length === 0) { showToast('Tidak bisa memparse data', 'error'); return; }
-            currentDockResults = results;
-            currentDockOutput = results.map(r => r.line).join('\n');
-            dockOutputBox.textContent = currentDockOutput;
-            dockOutputBox.classList.add('has-content');
-            copyDockBtn.style.display = 'inline-flex'; dockOutputActions.style.display = 'flex';
-            dockLineCount.style.display = 'inline-flex'; dockLineCount.textContent = `${results.length} baris`;
-            results.forEach(r => dockHistory.unshift({ ...r, time: new Date() }));
-            renderDockHistory();
-            showToast(`${results.length} data berhasil dikonversi`, 'success');
-            navigator.clipboard.writeText(currentDockOutput).catch(() => fallbackCopy(currentDockOutput));
-        }
-
-        function copyDockOutput() {
-            if (!currentDockOutput) return;
-            navigator.clipboard.writeText(currentDockOutput).then(() => { showToast('Disalin ke clipboard', 'success'); animateBtn(copyDockBtn); }).catch(() => { fallbackCopy(currentDockOutput); showToast('Disalin ke clipboard', 'success'); });
-        }
-        function copyAllDock() { copyDockOutput(); }
-        function copyLastDock() {
-            if (!currentDockResults.length) return;
-            const last = currentDockResults[currentDockResults.length - 1].line;
-            navigator.clipboard.writeText(last).then(() => showToast('1 baris terakhir disalin', 'success')).catch(() => { fallbackCopy(last); showToast('1 baris terakhir disalin', 'success'); });
-        }
-        async function pasteDockClipboard() {
-            try { dockInput.value = await navigator.clipboard.readText(); dockInput.focus(); setTimeout(() => processDock(), 100); }
-            catch (e) { showToast('Tidak bisa akses clipboard', 'error'); dockInput.focus(); }
-        }
-        function clearDock() {
-            dockInput.value = ''; currentDockOutput = ''; currentDockResults = [];
-            dockOutputBox.innerHTML = '<span style="color:var(--muted);font-size:12px;font-weight:400;">Hasil konversi akan muncul di sini...</span>';
-            dockOutputBox.classList.remove('has-content');
-            copyDockBtn.style.display = 'none'; dockOutputActions.style.display = 'none'; dockLineCount.style.display = 'none';
-            dockInput.focus();
-        }
-
-        function renderDockHistory() {
-            const list = document.getElementById('dockHistoryList');
-            const badge = document.getElementById('dockHistoryCount');
-            const btn = document.getElementById('clearDockHistoryBtn');
-            if (!dockHistory.length) {
-                list.innerHTML = '<div style="text-align:center;padding:32px;color:var(--muted);font-size:13px;"><i class="fa-regular fa-folder-open" style="font-size:28px;display:block;margin-bottom:10px;opacity:0.3;"></i>Belum ada riwayat</div>';
-                badge.style.display = 'none'; btn.style.display = 'none'; return;
+            var raw = document.getElementById('dockInput').value.trim();
+            if (!raw) {
+                document.getElementById('dockTableWrap').innerHTML = '<div class="dock-empty"><i class="fa-regular fa-table" style="font-size:24px;display:block;margin-bottom:8px;opacity:0.3;"></i>Hasil konversi akan muncul otomatis...</div>';
+                document.getElementById('dockTableWrap').classList.remove('has-content');
+                document.getElementById('copyDockBtn').style.display = 'none';
+                document.getElementById('dockOutputActions').style.display = 'none';
+                document.getElementById('dockLineCount').style.display = 'none';
+                document.getElementById('dockStatCount').textContent = '0';
+                document.getElementById('dockStatNominal').textContent = '0';
+                document.getElementById('dockStatLast').textContent = '-';
+                return;
             }
-            badge.style.display = 'inline-flex'; badge.textContent = dockHistory.length; btn.style.display = 'inline-flex';
-            list.innerHTML = dockHistory.slice(0,50).map((item, idx) => {
-                const t = item.time.toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
-                return `<div class="dock-history-item" onclick="copyDockHistoryItem(${idx})" title="Klik untuk menyalin" role="button" tabindex="0"><div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;"><div style="display:flex;align-items:center;gap:12px;min-width:0;flex:1;"><div style="width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,#d97706,var(--gold));display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="fa-solid fa-building-columns" style="font-size:12px;color:#000;"></i></div><div style="min-width:0;"><div class="mono" style="font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${escHtml(item.bank)} — ${escHtml(item.nama)}</div><div class="mono" style="font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${escHtml(item.norek)} · ${escHtml(item.nominal)}</div></div></div><div style="display:flex;align-items:center;gap:10px;flex-shrink:0;"><span class="mono" style="font-size:10px;color:var(--muted);">${t}</span><i class="fa-regular fa-copy" style="font-size:11px;color:var(--muted);"></i></div></div></div>`;
-            }).join('');
+
+            // Parse blok key-value
+            var blocks = raw.split(/\n\s*\n|\n-{3,}\n/).map(function(b){return b.trim();}).filter(function(b){return b.length>0;});
+            var rows = [];
+            var totalNum = 0;
+
+            blocks.forEach(function(block) {
+                var bank = '', nama = '', norek = '', nominal = '';
+                block.split('\n').forEach(function(bl) {
+                    var idx = bl.indexOf(':');
+                    if (idx === -1) return;
+                    var key = bl.substring(0, idx).trim().toLowerCase();
+                    var val = bl.substring(idx + 1).trim();
+                    if (key.indexOf('bank') !== -1) bank = val.replace(/\(.*?\)/g, '').trim();
+                    else if (key.indexOf('nama') !== -1) nama = val;
+                    else if (key.indexOf('nomor') !== -1 || key.indexOf('norek') !== -1 || key.indexOf('no rek') !== -1 || key.indexOf('no ') !== -1) norek = val;
+                    else if (key.indexOf('nominal') !== -1) nominal = stripRp(val);
+                });
+                if (bank || nama || norek || nominal) {
+                    var numVal = parseFloat(nominal.replace(/[^0-9]/g, '')) || 0;
+                    totalNum += numVal;
+                    rows.push({ bank: bank, norek: norek, nama: nama, nominal: nominal, numVal: numVal });
+                    dockHistory.unshift({ bank: bank, norek: norek, nama: nama, nominal: nominal, text: [bank, norek, nama, nominal].join('\t'), time: new Date() });
+                }
+            });
+
+            if (!rows.length) {
+                showToast('Format tidak dikenali. Pastikan ada "Bank :", "Nama Rekening :", "Nomor Rekening :", "Nominal :"', 'error');
+                return;
+            }
+
+            currentDockLines = rows;
+
+            // Build plain text: header + data rows (tab-separated)
+            var plainLines = [DOCK_HEADER];
+            rows.forEach(function(r) {
+                plainLines.push([r.bank, r.norek, r.nama, r.nominal].join('\t'));
+            });
+            currentDockOutput = plainLines.join('\n');
+
+            // Render tabel visual
+            renderDockTable(rows);
+
+            // Update stats
+            document.getElementById('dockStatCount').textContent = rows.length;
+            document.getElementById('dockStatNominal').textContent = totalNum.toLocaleString('id-ID');
+            document.getElementById('dockStatLast').textContent = (rows[rows.length-1] || {}).bank + ' / ' + (rows[rows.length-1] || {}).nama;
+
+            document.getElementById('copyDockBtn').style.display = 'inline-flex';
+            document.getElementById('dockOutputActions').style.display = 'flex';
+            var lc = document.getElementById('dockLineCount');
+            lc.style.display = 'inline-flex';
+            lc.textContent = '' + rows.length;
+            renderHistoryList('dock');
         }
 
-        function copyDockHistoryItem(idx) {
-            const i = dockHistory[idx]; if (!i) return;
-            navigator.clipboard.writeText(i.line).then(() => showToast('Disalin', 'success')).catch(() => { fallbackCopy(i.line); showToast('Disalin', 'success'); });
+        function renderDockTable(rows) {
+            var wrap = document.getElementById('dockTableWrap');
+            var h = '<table><thead><tr>';
+            h += '<th>NAMA BANK</th>';
+            h += '<th>NOMOR REKENING</th>';
+            h += '<th>NAMA REKENING</th>';
+            h += '<th style="text-align:right;">Nominal</th>';
+            h += '</tr></thead><tbody>';
+            rows.forEach(function(r) {
+                h += '<tr>';
+                h += '<td>' + escHtml(r.bank) + '</td>';
+                h += '<td>' + escHtml(r.norek) + '</td>';
+                h += '<td>' + escHtml(r.nama) + '</td>';
+                h += '<td style="text-align:right;">' + escHtml(r.nominal) + '</td>';
+                h += '</tr>';
+            });
+            h += '</tbody></table>';
+            wrap.innerHTML = h;
+            wrap.classList.add('has-content');
         }
-        function clearDockHistory() { dockHistory = []; renderDockHistory(); showToast('Riwayat dock dihapus', 'success'); }
 
-        dockInput.addEventListener('paste', () => { setTimeout(() => { if (dockInput.value.trim().length > 0) processDock(); }, 150); });
-        dockInput.addEventListener('keydown', (e) => { if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') { e.preventDefault(); processDock(); } });
-        document.addEventListener('keydown', (e) => { if (e.key === 'Enter' && (e.target.classList.contains('history-item') || e.target.classList.contains('dock-history-item'))) e.target.click(); });
+        window.copyDockAll = function() {
+            if (currentDockOutput) doCopy(currentDockOutput, 'Semua data rekening');
+        };
+        window.copyDockHeaderOnly = function() {
+            doCopy(DOCK_HEADER, 'Header kolom');
+        };
+        window.copyDockLast = function() {
+            if (currentDockLines.length) {
+                var last = currentDockLines[currentDockLines.length - 1];
+                var line = [last.bank, last.norek, last.nama, last.nominal].join('\t');
+                doCopy(line, '1 baris terakhir');
+            }
+        };
+
+        // ============================================================
+        //  TAB 3: PENGEMBALIAN DANA (RETURNAL)
+        // ============================================================
+        var returnalHistory = [];
+        var currentReturnalOutput = '';
+        var currentReturnalResults = [];
+        var RETURNAL_HEADER = 'Info : TogelOn\nPerihal : Pengembalian Dana';
+
+        function processReturnal() {
+            var raw = document.getElementById('returnalInput').value.trim();
+            if (!raw) {
+                document.getElementById('returnalOutputBox').innerHTML = '<span style="color:var(--muted);font-size:12px;">Hasil akan muncul otomatis saat data ditempel...</span>';
+                document.getElementById('returnalOutputBox').classList.remove('has-content');
+                document.getElementById('copyReturnalBtn').style.display = 'none';
+                document.getElementById('returnalOutputActions').style.display = 'none';
+                document.getElementById('returnalLineCount').style.display = 'none';
+                return;
+            }
+            var lines = raw.split('\n').map(function(l){return l.trim();}).filter(function(l){return l.length>0;});
+            var results = [];
+            lines.forEach(function(line) {
+                var parts = smartSplit(line);
+                var bank = '', nama = '', norek = '', nominal = '';
+                if (parts.length >= 5) {
+                    bank = parts[0]; nama = parts[1]; norek = parts[2]; nominal = parts[4];
+                } else if (parts.length === 4) {
+                    var digits = [], withComma = [], texts = [];
+                    parts.forEach(function(p) {
+                        if (/^\d{6,}$/.test(p)) digits.push(p);
+                        else if (/[\d,\.]+/.test(p) && /[,\.]/.test(p)) withComma.push(p);
+                        else texts.push(p);
+                    });
+                    if (digits.length && texts.length) {
+                        bank = texts[0] || '';
+                        nama = texts[1] || '';
+                        norek = digits[0];
+                        nominal = withComma[0] || digits[1] || '';
+                    } else {
+                        bank = parts[0]; nama = parts[1]; norek = parts[2]; nominal = parts[3];
+                    }
+                } else if (parts.length === 3) {
+                    var d3 = [], t3 = [];
+                    parts.forEach(function(p) {
+                        if (/^\d{6,}$/.test(p)) d3.push(p);
+                        else t3.push(p);
+                    });
+                    if (d3.length === 1 && t3.length === 2) {
+                        bank = t3[0]; nama = t3[1]; norek = d3[0];
+                    } else {
+                        bank = parts[0]; nama = parts[1]; norek = parts[2];
+                    }
+                } else if (parts.length === 2) {
+                    if (/^\d{6,}$/.test(parts[1])) { bank = parts[0]; norek = parts[1]; }
+                    else { bank = parts[0]; nama = parts[1]; }
+                } else if (parts.length === 1) {
+                    var m = parts[0].match(/^(.+?)\s+(\d{6,})\s+([\d,\.]+)$/);
+                    if (m) { bank = m[1]; norek = m[2]; nominal = m[3]; }
+                    else bank = parts[0];
+                }
+                var fmt = nominal.replace(/,/g, '.');
+                if (fmt && !fmt.startsWith('Rp')) fmt = 'Rp. ' + fmt;
+                var numVal = parseFloat(nominal.replace(/[^0-9]/g, '')) || 0;
+                var text = 'Bank          : ' + bank + '\nNama Rekening : ' + nama + '\nNomor Rekening: ' + norek + '\nNominal       : ' + fmt;
+                results.push({ text: text, bank: bank, nama: nama, norek: norek, nominal: fmt, numVal: numVal });
+                returnalHistory.unshift({ text: text, bank: bank, nama: nama, norek: norek, nominal: fmt, numVal: numVal, time: new Date() });
+            });
+            if (!results.length) {
+                showToast('Format tidak dikenali. Gunakan tab atau spasi antar field.', 'error');
+                return;
+            }
+            currentReturnalResults = results;
+            var outParts = [RETURNAL_HEADER, ''];
+            results.forEach(function(r, i) {
+                if (i > 0) outParts.push('');
+                outParts.push(r.text);
+            });
+            currentReturnalOutput = outParts.join('\n');
+            renderReturnalOutput(results);
+            document.getElementById('copyReturnalBtn').style.display = 'inline-flex';
+            document.getElementById('returnalOutputActions').style.display = 'flex';
+            var lc = document.getElementById('returnalLineCount');
+            lc.style.display = 'inline-flex';
+            lc.textContent = '' + results.length;
+            renderHistoryList('returnal');
+        }
+
+        function renderReturnalOutput(results) {
+            if (!results.length) return;
+            var h = '<div class="returnal-header-block"><span class="cyan-tag">Info</span>    : TogelOn\n<span class="cyan-tag">Perihal</span> : Perihal : Pengembalian DANA ( Direct QRIS MINERA - DANATOTO ke setoran KAS ADM )</div>';
+            results.forEach(function(r, i) {
+                if (i > 0) h += '<div style="height:6px;"></div>';
+                h += '<div class="returnal-entry-block"><span class="cyan-tag">Bank</span>          : ' + escHtml(r.bank) + '\n<span class="cyan-tag">Nama Rekening</span> : ' + escHtml(r.nama) + '\n<span class="cyan-tag">Nomor Rekening</span>: ' + escHtml(r.norek) + '\n<span class="cyan-tag">Nominal</span>       : ' + escHtml(r.nominal) + '</div>';
+            });
+            var box = document.getElementById('returnalOutputBox');
+            box.innerHTML = h;
+            box.classList.add('has-content');
+        }
+
+        window.copyReturnalAll = function() { if (currentReturnalOutput) doCopy(currentReturnalOutput, 'Data pengembalian'); };
+        window.copyReturnalHeader = function() { doCopy(RETURNAL_HEADER, 'Header'); };
+        window.copyReturnalLast = function() {
+            if (currentReturnalResults.length) doCopy(currentReturnalResults[currentReturnalResults.length-1].text, '1 entry terakhir');
+        };
+
+        // ============================================================
+        //  CLEAR FIELD
+        // ============================================================
+        window.clearField = function(id) {
+            var el = document.getElementById(id);
+            el.value = '';
+            el.focus();
+            el.dispatchEvent(new Event('input'));
+        };
+
+        // ============================================================
+        //  RIWAYAT
+        // ============================================================
+        function renderHistoryList(type) {
+            var listEl, historyArr, itemClass, countEl, clearBtn;
+            if (type === 'report') {
+                listEl = document.getElementById('historyList');
+                historyArr = reportHistory;
+                itemClass = 'history-item';
+                countEl = document.getElementById('historyCount');
+                clearBtn = document.getElementById('clearHistoryBtn');
+            } else if (type === 'dock') {
+                listEl = document.getElementById('dockHistoryList');
+                historyArr = dockHistory;
+                itemClass = 'dock-history-item';
+                countEl = document.getElementById('dockHistoryCount');
+                clearBtn = document.getElementById('clearDockHistoryBtn');
+            } else {
+                listEl = document.getElementById('returnalHistoryList');
+                historyArr = returnalHistory;
+                itemClass = 'returnal-history-item';
+                countEl = document.getElementById('returnalHistoryCount');
+                clearBtn = document.getElementById('clearReturnalHistoryBtn');
+            }
+            if (!historyArr.length) {
+                listEl.innerHTML = '<div style="text-align:center;padding:32px;color:var(--muted);font-size:13px;"><i class="fa-regular fa-folder-open" style="font-size:28px;display:block;margin-bottom:10px;opacity:0.3;"></i>Belum ada riwayat</div>';
+                countEl.style.display = 'none';
+                clearBtn.style.display = 'none';
+                return;
+            }
+            countEl.style.display = 'inline-flex';
+            countEl.textContent = '' + historyArr.length;
+            clearBtn.style.display = 'inline-flex';
+            var shown = historyArr.slice(0, 20);
+            var h = '';
+            shown.forEach(function(item, idx) {
+                var timeStr = formatTime(item.time);
+                var label = '';
+                if (type === 'report') label = item.userId + ' — ' + item.nominal;
+                else if (type === 'dock') label = item.bank + ' / ' + item.nama + ' — ' + item.nominal;
+                else label = item.bank + ' / ' + item.nama + ' — ' + item.nominal;
+                h += '<div class="' + itemClass + '" data-type="' + type + '" data-idx="' + idx + '">';
+                h += '<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">';
+                h += '<div style="flex:1;min-width:0;"><div class="mono" style="font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + escHtml(label) + '</div></div>';
+                h += '<div style="font-size:10px;color:var(--muted);font-weight:600;white-space:nowrap;">' + timeStr + '</div>';
+                h += '</div></div>';
+            });
+            if (historyArr.length > 20) {
+                h += '<div style="text-align:center;padding:10px;color:var(--muted);font-size:11px;">...dan ' + (historyArr.length - 20) + ' lainnya</div>';
+            }
+            listEl.innerHTML = h;
+            listEl.querySelectorAll('[data-type]').forEach(function(el) {
+                el.addEventListener('click', function() {
+                    var t = this.getAttribute('data-type');
+                    var i = parseInt(this.getAttribute('data-idx'));
+                    var arr = t === 'report' ? reportHistory : t === 'dock' ? dockHistory : returnalHistory;
+                    if (arr[i]) doCopy(arr[i].text, 'Riwayat');
+                });
+            });
+        }
+
+        window.clearHistory = function(type) {
+            if (type === 'report') { reportHistory = []; renderHistoryList('report'); }
+            else if (type === 'dock') { dockHistory = []; renderHistoryList('dock'); }
+            else { returnalHistory = []; renderHistoryList('returnal'); }
+            showToast('Riwayat dihapus', 'success');
+        };
+
+        // ============================================================
+        //  EXPOSE
+        // ============================================================
+        window.processInput = processInput;
+        window.processDock = processDock;
+        window.processReturnal = processReturnal;
+
+        // ============================================================
+        //  AUTO-PROCESS DENGAN DEBOUNCE
+        // ============================================================
+        var debounceTimers = {};
+        function debounce(key, fn, delay) {
+            if (debounceTimers[key]) clearTimeout(debounceTimers[key]);
+            debounceTimers[key] = setTimeout(fn, delay);
+        }
+
+        document.getElementById('inputArea').addEventListener('input', function() {
+            debounce('report', processInput, 400);
+        });
+        document.getElementById('dockInput').addEventListener('input', function() {
+            debounce('dock', processDock, 400);
+        });
+        document.getElementById('returnalInput').addEventListener('input', function() {
+            debounce('returnal', processReturnal, 400);
+        });
+
+    })();
     </script>
 </body>
 </html>
