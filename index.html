@@ -190,85 +190,137 @@
         }
         .output-box.has-content { border-color: var(--border2); }
 
-        /* ===== DOCK TABLE OUTPUT ===== */
+        /* ===== DOCK TABLE ===== */
         .dock-table-wrap {
             background: rgba(5,10,20,0.5);
             border: 1.5px solid var(--gold-border);
-            border-radius: 12px;
-            overflow: hidden;
+            border-radius: 12px; overflow: hidden;
             transition: border-color 0.3s, box-shadow 0.3s;
         }
-        .dock-table-wrap.has-content {
-            border-color: var(--gold);
-            box-shadow: 0 0 25px var(--gold-dim);
-        }
-        .dock-table-wrap table {
-            width: 100%;
-            border-collapse: collapse;
-            font-family: 'JetBrains Mono', monospace;
-        }
+        .dock-table-wrap.has-content { border-color: var(--gold); box-shadow: 0 0 25px var(--gold-dim); }
+        .dock-table-wrap table { width: 100%; border-collapse: collapse; font-family: 'JetBrains Mono', monospace; }
         .dock-table-wrap thead th {
             background: linear-gradient(135deg, rgba(217,119,6,0.18), rgba(251,191,36,0.12));
-            color: var(--gold);
-            font-size: 10px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            padding: 12px 16px;
-            text-align: left;
-            border-bottom: 1px solid var(--gold-border);
-            white-space: nowrap;
+            color: var(--gold); font-size: 10px; font-weight: 800; text-transform: uppercase;
+            letter-spacing: 1px; padding: 12px 16px; text-align: left;
+            border-bottom: 1px solid var(--gold-border); white-space: nowrap;
         }
         .dock-table-wrap tbody td {
-            font-size: 13px;
-            font-weight: 500;
-            color: var(--fg);
-            padding: 11px 16px;
-            border-bottom: 1px solid rgba(251,191,36,0.07);
-            vertical-align: middle;
+            font-size: 13px; font-weight: 500; color: var(--fg);
+            padding: 11px 16px; border-bottom: 1px solid rgba(251,191,36,0.07); vertical-align: middle;
         }
         .dock-table-wrap tbody tr:last-child td { border-bottom: none; }
-        .dock-table-wrap tbody tr {
-            transition: background 0.2s;
+        .dock-table-wrap tbody tr { transition: background 0.2s; }
+        .dock-table-wrap tbody tr:hover { background: rgba(251,191,36,0.04); }
+        .dock-table-wrap tbody td:nth-child(1) { color: var(--gold); font-weight: 700; white-space: nowrap; }
+        .dock-table-wrap tbody td:nth-child(2) { color: var(--fg2); font-weight: 600; letter-spacing: 0.5px; white-space: nowrap; }
+        .dock-table-wrap tbody td:nth-child(4) { color: var(--fg); font-weight: 700; text-align: right; white-space: nowrap; }
+        .dock-empty { padding: 32px; text-align: center; color: var(--muted); font-size: 12px; }
+
+        /* ===== RETURNAL TABLE (CYAN PREMIUM) ===== */
+        .returnal-stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
+        .returnal-stat-card {
+            background: linear-gradient(135deg, rgba(6,182,212,0.06), rgba(34,211,238,0.03));
+            border: 1px solid var(--cyan-border); border-radius: 14px; padding: 16px 18px;
+            position: relative; overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
         }
-        .dock-table-wrap tbody tr:hover {
-            background: rgba(251,191,36,0.04);
+        .returnal-stat-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(34,211,238,0.2), transparent);
         }
-        .dock-table-wrap tbody td:nth-child(1) {
-            color: var(--gold);
-            font-weight: 700;
-            white-space: nowrap;
+        .returnal-stat-card:hover {
+            border-color: rgba(6,182,212,0.45);
+            box-shadow: 0 4px 24px var(--cyan-dim);
+            transform: translateY(-2px);
         }
-        .dock-table-wrap tbody td:nth-child(2) {
-            color: var(--fg2);
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            white-space: nowrap;
+        .returnal-stat-icon {
+            width: 32px; height: 32px; border-radius: 8px;
+            background: var(--cyan-dim); border: 1px solid var(--cyan-border);
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 10px;
         }
-        .dock-table-wrap tbody td:nth-child(4) {
-            color: var(--fg);
-            font-weight: 700;
-            text-align: right;
-            white-space: nowrap;
-        }
-        .dock-empty {
-            padding: 32px;
-            text-align: center;
-            color: var(--muted);
-            font-size: 12px;
+        .returnal-stat-icon i { color: var(--cyan); font-size: 13px; }
+        .returnal-stat-label { font-size: 10px; color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; }
+        .returnal-stat-value {
+            font-family: 'JetBrains Mono', monospace; font-size: 20px;
+            font-weight: 800; color: var(--cyan); margin-top: 4px; line-height: 1.2;
         }
 
-        .returnal-output {
-            font-family: 'JetBrains Mono', monospace;
+        .returnal-table-wrap {
             background: rgba(5,10,20,0.5);
             border: 1.5px solid var(--cyan-border);
-            border-radius: 12px; padding: 20px;
-            font-size: 13px; line-height: 2.1;
-            color: var(--fg); white-space: pre-wrap;
-            word-break: break-all; min-height: 140px;
-            position: relative; transition: border-color 0.3s;
+            border-radius: 12px; overflow: hidden;
+            transition: border-color 0.3s, box-shadow 0.3s;
         }
-        .returnal-output.has-content { border-color: var(--cyan); box-shadow: 0 0 25px var(--cyan-dim); }
+        .returnal-table-wrap.has-content {
+            border-color: var(--cyan);
+            box-shadow: 0 0 30px var(--cyan-dim), inset 0 1px 0 rgba(34,211,238,0.08);
+        }
+        .returnal-table-wrap table { width: 100%; border-collapse: collapse; font-family: 'JetBrains Mono', monospace; }
+        .returnal-table-wrap thead th {
+            background: linear-gradient(135deg, rgba(8,145,178,0.22), rgba(34,211,238,0.1));
+            color: var(--cyan); font-size: 10px; font-weight: 800; text-transform: uppercase;
+            letter-spacing: 1.2px; padding: 14px 16px; text-align: left;
+            border-bottom: 1.5px solid var(--cyan-border); white-space: nowrap;
+            position: sticky; top: 0; z-index: 2;
+        }
+        .returnal-table-wrap thead th:first-child { padding-left: 20px; }
+        .returnal-table-wrap tbody td {
+            font-size: 13px; font-weight: 500; color: var(--fg);
+            padding: 13px 16px; border-bottom: 1px solid rgba(6,182,212,0.06); vertical-align: middle;
+        }
+        .returnal-table-wrap tbody td:first-child { padding-left: 20px; }
+        .returnal-table-wrap tbody tr { transition: background 0.2s; }
+        .returnal-table-wrap tbody tr:hover { background: rgba(6,182,212,0.05); }
+        .returnal-table-wrap tbody tr:nth-child(even) { background: rgba(6,182,212,0.015); }
+        .returnal-table-wrap tbody tr:nth-child(even):hover { background: rgba(6,182,212,0.06); }
+        .returnal-table-wrap tbody td.col-no {
+            color: var(--cyan); font-weight: 700; font-size: 11px;
+            width: 40px; text-align: center; white-space: nowrap;
+        }
+        .returnal-table-wrap tbody td.col-bank {
+            color: var(--cyan); font-weight: 800; white-space: nowrap;
+            text-transform: uppercase; letter-spacing: 0.8px; font-size: 12px;
+        }
+        .returnal-table-wrap tbody td.col-name {
+            color: var(--fg2); font-weight: 600; letter-spacing: 0.3px; white-space: nowrap;
+            max-width: 220px; overflow: hidden; text-overflow: ellipsis;
+        }
+        .returnal-table-wrap tbody td.col-rek {
+            color: var(--fg); font-weight: 600; white-space: nowrap; letter-spacing: 0.5px;
+        }
+        .returnal-table-wrap tbody td.col-nominal {
+            color: var(--fg); font-weight: 800; text-align: right; white-space: nowrap;
+            font-size: 13px;
+        }
+        .returnal-total-row td {
+            background: linear-gradient(135deg, rgba(8,145,178,0.15), rgba(34,211,238,0.08)) !important;
+            border-top: 1.5px solid var(--cyan-border) !important;
+            border-bottom: none !important;
+            padding: 14px 16px !important;
+        }
+        .returnal-total-row td:first-child { padding-left: 20px !important; }
+        .returnal-total-row .total-label {
+            font-size: 11px; font-weight: 800; text-transform: uppercase;
+            letter-spacing: 1px; color: var(--cyan);
+        }
+        .returnal-total-row .total-value {
+            font-size: 15px; font-weight: 900; color: var(--cyan);
+            text-align: right;
+        }
+        .returnal-empty {
+            padding: 40px 32px; text-align: center; color: var(--muted); font-size: 13px;
+        }
+        .returnal-empty i { font-size: 32px; display: block; margin-bottom: 12px; opacity: 0.2; }
+
+        .format-badge {
+            display: inline-flex; align-items: center; gap: 5px;
+            padding: 3px 10px; border-radius: 6px;
+            font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px;
+            background: var(--cyan-dim); color: var(--cyan); border: 1px solid var(--cyan-border);
+            animation: fadeUp 0.3s ease both;
+        }
 
         .btn {
             display: inline-flex; align-items: center; gap: 8px;
@@ -303,8 +355,7 @@
             padding: 12px 20px; border-radius: 12px; font-size: 13px; font-weight: 600;
             display: flex; align-items: center; gap: 10px;
             animation: toastIn 0.4s cubic-bezier(0.16,1,0.3,1);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.5); backdrop-filter: blur(12px);
-            max-width: 360px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.5); backdrop-filter: blur(12px); max-width: 360px;
         }
         .toast-success { background: rgba(5,46,22,0.92); color: #86efac; border: 1px solid rgba(34,197,94,0.3); }
         .toast-error { background: rgba(76,5,25,0.92); color: #fda4af; border: 1px solid rgba(244,63,94,0.3); }
@@ -341,11 +392,7 @@
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: rgba(99,102,241,0.2); border-radius: 3px; }
 
-        .badge {
-            display: inline-flex; align-items: center; justify-content: center;
-            min-width: 22px; height: 22px; border-radius: 6px;
-            font-size: 11px; font-weight: 800; padding: 0 6px;
-        }
+        .badge { display: inline-flex; align-items: center; justify-content: center; min-width: 22px; height: 22px; border-radius: 6px; font-size: 11px; font-weight: 800; padding: 0 6px; }
         .badge-accent { background: linear-gradient(135deg, var(--accent2), var(--accent)); color: #fff; }
         .badge-amber { background: linear-gradient(135deg, #d97706, var(--gold)); color: #000; }
         .badge-cyan { background: linear-gradient(135deg, #0891b2, var(--cyan)); color: #000; }
@@ -370,39 +417,12 @@
             background-size: 40px 40px; opacity: 0.3;
             position: absolute; inset: 0; border-radius: 12px; pointer-events: none;
         }
-        .label-tag { color: var(--accent); font-weight: 600; }
-        .header-tag { color: var(--gold); font-weight: 600; }
-        .cyan-tag { color: var(--cyan); font-weight: 600; }
-
-        .entry-block {
-            padding: 14px 16px; margin-bottom: 10px;
-            background: rgba(99,102,241,0.04);
-            border: 1px solid var(--border); border-radius: 10px; line-height: 2.1;
-        }
+        .entry-block { padding: 14px 16px; margin-bottom: 10px; background: rgba(99,102,241,0.04); border: 1px solid var(--border); border-radius: 10px; line-height: 2.1; }
         .entry-block:last-child { margin-bottom: 0; }
-        .header-block {
-            padding: 12px 16px; margin-bottom: 10px;
-            background: rgba(251,191,36,0.05);
-            border: 1px solid var(--gold-border); border-radius: 10px; line-height: 2.1;
-        }
-        .returnal-header-block {
-            padding: 12px 16px; margin-bottom: 10px;
-            background: rgba(6,182,212,0.05);
-            border: 1px solid var(--cyan-border); border-radius: 10px; line-height: 2.1;
-        }
-        .returnal-entry-block {
-            padding: 14px 16px; margin-bottom: 10px;
-            background: rgba(6,182,212,0.04);
-            border: 1px solid var(--cyan-border); border-radius: 10px; line-height: 2.1;
-        }
-        .returnal-entry-block:last-child { margin-bottom: 0; }
+        .header-block { padding: 12px 16px; margin-bottom: 10px; background: rgba(251,191,36,0.05); border: 1px solid var(--gold-border); border-radius: 10px; line-height: 2.1; }
 
         @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
-        .shimmer-line {
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(99,102,241,0.3), transparent);
-            background-size: 200% 100%; animation: shimmer 3s ease infinite;
-        }
+        .shimmer-line { height: 1px; background: linear-gradient(90deg, transparent, rgba(99,102,241,0.3), transparent); background-size: 200% 100%; animation: shimmer 3s ease infinite; }
 
         .auto-badge {
             display: inline-flex; align-items: center; gap: 4px;
@@ -413,32 +433,13 @@
         }
         @keyframes autoPulse { 0%,100%{opacity:1} 50%{opacity:0.6} }
 
-        .dock-stats-row {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-bottom: 16px;
-        }
-        .dock-stat-card {
-            background: rgba(251,191,36,0.04);
-            border: 1px solid var(--gold-border);
-            border-radius: 10px;
-            padding: 12px 14px;
-        }
-        .dock-stat-label {
-            font-size: 9px;
-            color: var(--muted);
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-        }
-        .dock-stat-value {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 18px;
-            font-weight: 800;
-            color: var(--gold);
-            margin-top: 4px;
-        }
+        .dock-stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
+        .dock-stat-card { background: rgba(251,191,36,0.04); border: 1px solid var(--gold-border); border-radius: 10px; padding: 12px 14px; }
+        .dock-stat-label { font-size: 9px; color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; }
+        .dock-stat-value { font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 800; color: var(--gold); margin-top: 4px; }
+
+        @keyframes rowSlideIn { from { opacity:0; transform: translateX(-12px); } to { opacity:1; transform: translateX(0); } }
+        .row-animate { animation: rowSlideIn 0.35s cubic-bezier(0.16,1,0.3,1) both; }
 
         @media (max-width: 768px) {
             .main-grid { grid-template-columns: 1fr !important; }
@@ -446,9 +447,9 @@
             .dock-grid { grid-template-columns: 1fr !important; }
             .returnal-grid { grid-template-columns: 1fr !important; }
             .tab-btn { font-size: 11px; padding: 10px 10px; gap: 5px; }
-            .dock-table-wrap { overflow-x: auto; }
-            .dock-table-wrap table { min-width: 500px; }
-            .dock-stats-row { grid-template-columns: 1fr !important; }
+            .dock-table-wrap, .returnal-table-wrap { overflow-x: auto; }
+            .dock-table-wrap table, .returnal-table-wrap table { min-width: 580px; }
+            .dock-stats-row, .returnal-stats-row { grid-template-columns: 1fr !important; }
         }
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
@@ -462,7 +463,6 @@
     <div class="toast-container" id="toastContainer"></div>
 
     <div style="position:relative; z-index:1; max-width:1200px; margin:0 auto; padding:24px 20px 60px;">
-
         <header class="fade-up" style="margin-bottom:28px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px;">
             <div style="display:flex; align-items:center; gap:14px;">
                 <img src="https://z-cdn-media.chatglm.cn/files/d6f4f54f-a86e-4990-a9e6-fb4775d0ff7c.png?auth_key=1882183480-47465a0a44164b24aac46a58ca5cce4a-0-43a632db2c6abae55ad85b42fcfe166c" alt="TogelOn Logo" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
@@ -494,7 +494,8 @@
                 <i class="fa-solid fa-table-columns" style="font-size:11px;"></i> Peminjaman
             </button>
             <button class="tab-btn" onclick="switchTab('returnal', this)" id="tabReturnal">
-                <i class="fa-solid fa-rotate-left" style="font-size:11px;"></i> Pengembalian DANA
+                <i class="fa-solid fa-rotate-left" style="font-size:11px;"></i> Pengembalian Dana Kas Adm
+
             </button>
         </div>
 
@@ -518,7 +519,6 @@
                     <div id="statLast" class="mono" style="font-size:13px;font-weight:600;color:var(--fg2);margin-top:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">-</div>
                 </div>
             </div>
-
             <div class="main-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
                 <div class="glass-card fade-up" style="padding:20px;animation-delay:0.15s;">
                     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
@@ -557,7 +557,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="fade-up" style="animation-delay:0.25s;margin-top:28px;">
                 <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
                     <div style="display:flex;align-items:center;gap:10px;">
@@ -576,7 +575,6 @@
 
         <!-- ===== TAB 2: PEMINJAMAN ===== -->
         <div class="tab-panel" id="panelDock">
-            <!-- Statistik ringkas -->
             <div class="dock-stats-row fade-up" style="animation-delay:0.1s;">
                 <div class="dock-stat-card">
                     <div class="dock-stat-label">Total Rekening</div>
@@ -591,7 +589,6 @@
                     <div class="dock-stat-value" id="dockStatLast" style="font-size:13px;color:var(--fg2);margin-top:8px;">-</div>
                 </div>
             </div>
-
             <div class="dock-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
                 <div class="glass-card-gold fade-up" style="padding:20px;animation-delay:0.12s;">
                     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
@@ -617,16 +614,9 @@
                             <button class="btn btn-ghost btn-sm" onclick="copyDockAll()" id="copyDockBtn" style="display:none;"><i class="fa-regular fa-copy" style="font-size:11px;"></i> Salin</button>
                         </div>
                     </div>
-                    <div style="margin-bottom:10px;font-size:10px;color:var(--muted);font-weight:600;">Tab-separated, siap tempel ke spreadsheet</div>
-
-                    <!-- Tabel hasil dock -->
                     <div class="dock-table-wrap" id="dockTableWrap">
-                        <div class="dock-empty">
-                            <i class="fa-regular fa-table" style="font-size:24px;display:block;margin-bottom:8px;opacity:0.3;"></i>
-                            Hasil konversi akan muncul otomatis...
-                        </div>
+                        <div class="dock-empty"><i class="fa-regular fa-table" style="font-size:24px;display:block;margin-bottom:8px;opacity:0.3;"></i>Hasil konversi akan muncul otomatis...</div>
                     </div>
-
                     <div id="dockOutputActions" style="display:none;margin-top:12px;gap:8px;flex-wrap:wrap;">
                         <button class="btn btn-ghost btn-sm" onclick="copyDockAll()"><i class="fa-solid fa-copy" style="font-size:10px;"></i> Salin Semua</button>
                         <button class="btn btn-ghost btn-sm" onclick="copyDockHeaderOnly()"><i class="fa-solid fa-heading" style="font-size:10px;"></i> Salin Header Saja</button>
@@ -634,7 +624,6 @@
                     </div>
                 </div>
             </div>
-
             <div style="margin-top:28px;">
                 <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
                     <div style="display:flex;align-items:center;gap:10px;">
@@ -651,53 +640,85 @@
             </div>
         </div>
 
-        <!-- ===== TAB 3: PENGEMBALIAN DANA ===== -->
+        <!-- ===== TAB 3: PENGEMBALIAN DANA (PREMIUM) ===== -->
         <div class="tab-panel" id="panelReturnal">
+            <!-- Stats Cards -->
+            <div class="returnal-stats-row fade-up" style="animation-delay:0.08s;">
+                <div class="returnal-stat-card">
+                    <div class="returnal-stat-icon"><i class="fa-solid fa-receipt"></i></div>
+                    <div class="returnal-stat-label">Total Transaksi</div>
+                    <div class="returnal-stat-value" id="returnalStatCount">0</div>
+                </div>
+                <div class="returnal-stat-card">
+                    <div class="returnal-stat-icon"><i class="fa-solid fa-coins"></i></div>
+                    <div class="returnal-stat-label">Total Nominal</div>
+                    <div class="returnal-stat-value" id="returnalStatNominal" style="font-size:16px;">Rp. 0</div>
+                </div>
+                <div class="returnal-stat-card">
+                    <div class="returnal-stat-icon"><i class="fa-solid fa-clock"></i></div>
+                    <div class="returnal-stat-label">Terakhir Diproses</div>
+                    <div class="returnal-stat-value" id="returnalStatLast" style="font-size:12px;color:var(--fg2);margin-top:8px;">-</div>
+                </div>
+            </div>
+
             <div class="returnal-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
-                <div class="glass-card-cyan" style="padding:20px;">
+                <!-- Input -->
+                <div class="glass-card-cyan fade-up" style="padding:20px;animation-delay:0.12s;">
                     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
                         <label style="font-size:13px;font-weight:700;color:var(--fg2);display:flex;align-items:center;gap:8px;">
-                            <i class="fa-solid fa-rotate-left" style="color:var(--cyan);font-size:12px;"></i> INPUT DATA PENGEMBALIAN
+                            <i class="fa-solid fa-rotate-left" style="color:var(--cyan);font-size:12px;"></i> INPUT PENGEMBALIAN
                         </label>
                         <span class="auto-badge"><i class="fa-solid fa-bolt" style="font-size:6px;"></i> AUTO</span>
                     </div>
-                    <textarea id="returnalInput" class="cyan-focus" rows="10" placeholder="Tempel data di sini...&#10;&#10;Contoh:&#10;DANAMON	Priskila Dewi Rahayu Ningsih	903705373169		37,503,754&#10;&#10;Bisa multiple baris sekaligus." spellcheck="false" aria-label="Area tempel data pengembalian"></textarea>
+                    <textarea id="returnalInput" class="cyan-focus" rows="10" placeholder="Tempel data di sini...&#10;&#10;Format 1 (Tab-separated):&#10;DANAMON	Priskila Dewi	903705373169		37,503,754&#10;&#10;Format 2 (Labeled):&#10;Bank : DANAMON&#10;Nama Rekening : Priskila Dewi&#10;Nomor Rekening : 903705373169&#10;Nominal : Rp. 37,503,754&#10;&#10;Bisa multiple baris sekaligus." spellcheck="false" aria-label="Area tempel data pengembalian"></textarea>
                     <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;">
                         <button class="btn btn-cyan" onclick="processReturnal()"><i class="fa-solid fa-arrow-right" style="font-size:12px;"></i> Konversi</button>
                         <button class="btn btn-ghost" onclick="tryPaste('returnalInput')"><i class="fa-solid fa-clipboard" style="font-size:12px;"></i> Paste</button>
                         <button class="btn btn-danger" onclick="clearField('returnalInput')"><i class="fa-solid fa-xmark" style="font-size:12px;"></i> Clear</button>
                     </div>
+                    <!-- Format Mapping -->
                     <div class="glass-card-cyan" style="margin-top:16px;padding:14px 16px;cursor:default;transform:none;">
                         <div style="font-size:10px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:8px;">Format Mapping</div>
                         <div class="mono" style="font-size:11px;color:var(--fg2);line-height:2;">
                             <span style="color:var(--cyan);">Field 1</span> → Bank<br>
                             <span style="color:var(--cyan);">Field 2</span> → Nama Rekening<br>
                             <span style="color:var(--cyan);">Field 3</span> → Nomor Rekening<br>
-                            <span style="color:var(--cyan);">Field 4</span> → (kosongkan/diabaikan)<br>
+                            <span style="color:var(--cyan);">Field 4</span> → (diabaikan jika kosong)<br>
                             <span style="color:var(--cyan);">Field 5</span> → Nominal
                         </div>
                     </div>
                 </div>
-                <div class="glass-card-cyan" style="padding:20px;">
+
+                <!-- Output Tabel -->
+                <div class="glass-card-cyan fade-up" style="padding:20px;animation-delay:0.15s;">
                     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
                         <label style="font-size:13px;font-weight:700;color:var(--fg2);display:flex;align-items:center;gap:8px;">
-                            <i class="fa-solid fa-file-export" style="color:var(--cyan);font-size:12px;"></i> HASIL FORMAT
+                            <i class="fa-solid fa-table-list" style="color:var(--cyan);font-size:12px;"></i> HASIL FORMAT
                         </label>
                         <div style="display:flex;align-items:center;gap:8px;">
+                            <span id="returnalFormatBadge" class="format-badge" style="display:none;"><i class="fa-solid fa-barcode" style="font-size:7px;"></i> <span id="returnalFormatText"></span></span>
                             <span id="returnalLineCount" class="badge badge-cyan" style="display:none;">0</span>
                             <button class="btn btn-ghost btn-sm" onclick="copyReturnalAll()" id="copyReturnalBtn" style="display:none;"><i class="fa-regular fa-copy" style="font-size:11px;"></i> Salin</button>
                         </div>
                     </div>
-                    <div class="returnal-output" id="returnalOutputBox">
-                        <span style="color:var(--muted);font-size:12px;">Hasil akan muncul otomatis saat data ditempel...</span>
+                    <div style="margin-bottom:8px;font-size:10px;color:var(--muted);font-weight:600;">Tab-separated — siap tempel ke spreadsheet tanpa terpisah</div>
+
+                    <div class="returnal-table-wrap" id="returnalTableWrap">
+                        <div class="returnal-empty">
+                            <i class="fa-regular fa-table"></i>
+                            Hasil konversi akan muncul otomatis...
+                        </div>
                     </div>
+
                     <div id="returnalOutputActions" style="display:none;margin-top:12px;gap:8px;flex-wrap:wrap;">
                         <button class="btn btn-ghost btn-sm" onclick="copyReturnalAll()"><i class="fa-solid fa-copy" style="font-size:10px;"></i> Salin Semua</button>
                         <button class="btn btn-ghost btn-sm" onclick="copyReturnalHeader()"><i class="fa-solid fa-heading" style="font-size:10px;"></i> Salin Header Saja</button>
-                        <button class="btn btn-ghost btn-sm" onclick="copyReturnalLast()"><i class="fa-solid fa-grip-lines" style="font-size:10px;"></i> Salin 1 Entry Terakhir</button>
+                        <button class="btn btn-ghost btn-sm" onclick="copyReturnalLast()"><i class="fa-solid fa-grip-lines" style="font-size:10px;"></i> Salin 1 Baris Terakhir</button>
                     </div>
                 </div>
             </div>
+
+            <!-- Riwayat -->
             <div style="margin-top:28px;">
                 <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
                     <div style="display:flex;align-items:center;gap:10px;">
@@ -726,9 +747,20 @@
     (function() {
         'use strict';
 
-        // ============================================================
-        //  COPY — 100% kerja tanpa Clipboard API
-        // ============================================================
+        /* ============================================================
+           DATA STORE
+        ============================================================ */
+        var reportHistory = [];
+        var dockHistory = [];
+        var returnalHistory = [];
+        var currentReturnalData = [];
+        var currentDockData = [];
+        var currentReportLines = [];
+        var reportTotalProcessed = 0;
+
+        /* ============================================================
+           COPY — 100% kerja tanpa Clipboard API
+        ============================================================ */
         function doCopy(text, label) {
             label = label || 'Data';
             var ta = document.createElement('textarea');
@@ -745,10 +777,11 @@
             else showToast('Gagal menyalin — coba blok teks manual lalu Ctrl+C', 'error');
             return ok;
         }
+        window.doCopy = doCopy;
 
-        // ============================================================
-        //  PASTE — aman dengan fallback
-        // ============================================================
+        /* ============================================================
+           PASTE
+        ============================================================ */
         function tryPaste(inputId) {
             var el = document.getElementById(inputId);
             el.focus();
@@ -765,14 +798,11 @@
         }
         window.tryPaste = tryPaste;
 
-        // ============================================================
-        //  UTILITAS
-        // ============================================================
-        function escHtml(s) {
-            var d = document.createElement('div');
-            d.textContent = s;
-            return d.innerHTML;
-        }
+        /* ============================================================
+           UTILITAS
+        ============================================================ */
+        function escHtml(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
         function showToast(message, type) {
             type = type || 'success';
             var c = document.getElementById('toastContainer');
@@ -781,33 +811,39 @@
             var icon = type === 'success' ? 'fa-circle-check' : 'fa-circle-exclamation';
             t.innerHTML = '<i class="fa-solid ' + icon + '" style="font-size:14px;flex-shrink:0;"></i><span>' + escHtml(message) + '</span>';
             c.appendChild(t);
-            setTimeout(function() {
-                t.classList.add('toast-exit');
-                setTimeout(function() { t.remove(); }, 300);
-            }, 3000);
+            setTimeout(function() { t.classList.add('toast-exit'); setTimeout(function() { t.remove(); }, 300); }, 3000);
         }
+
         function formatTime(d) {
             return String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0') + ':' + String(d.getSeconds()).padStart(2,'0');
         }
 
-        // Hapus prefix Rp/Rp./Rp dari nominal
-        function stripRp(val) {
-            return val.replace(/^Rp\.?\s*/i, '').trim();
+        function stripRp(val) { return val.replace(/^Rp\.?\s*/i, '').trim(); }
+
+        /* Parse nominal — handle Rp., koma, titik, plain number */
+        function parseNominal(val) {
+            if (!val) return 0;
+            var clean = val.replace(/^Rp\.?\s*/i, '').trim();
+            if (clean.indexOf('.') !== -1 && clean.indexOf(',') === -1) {
+                clean = clean.replace(/\./g, '');
+            } else if (clean.indexOf(',') !== -1 && clean.indexOf('.') === -1) {
+                clean = clean.replace(/,/g, '');
+            } else if (clean.indexOf(',') !== -1 && clean.indexOf('.') !== -1) {
+                clean = clean.replace(/\./g, '').replace(',', '.');
+            }
+            var num = parseFloat(clean);
+            return isNaN(num) ? 0 : Math.round(num);
         }
 
-        // Smart split
-        function smartSplit(line) {
-            var p = line.split('\t');
-            if (p.length > 1) return p.map(function(s){return s.trim();}).filter(function(s){return s.length>0;});
-            p = line.split(/\s{2,}/);
-            if (p.length > 1) return p.map(function(s){return s.trim();}).filter(function(s){return s.length>0;});
-            p = line.split(/\s+/);
-            return p.map(function(s){return s.trim();}).filter(function(s){return s.length>0;});
+        /* Format nominal ke tampilan Rupiah */
+        function formatNominalDisplay(num) {
+            if (num === 0) return 'Rp. 0';
+            return 'Rp. ' + num.toLocaleString('id-ID');
         }
 
-        // ============================================================
-        //  TAB SWITCHING
-        // ============================================================
+        /* ============================================================
+           TAB SWITCHING
+        ============================================================ */
         var tabBtnIds = { report: 'tabReport', dock: 'tabDock', returnal: 'tabReturnal' };
         var tabPanelIds = { report: 'panelReport', dock: 'panelDock', returnal: 'panelReturnal' };
         var activeCls = { report: 'active-purple', dock: 'active-gold', returnal: 'active-cyan' };
@@ -821,428 +857,458 @@
             document.getElementById(tabPanelIds[tab]).classList.add('active');
         };
 
-        // ============================================================
-        //  TAB 1: REPORT QRIS
-        // ============================================================
-        var reportHistory = [];
-        var sessionCount = 0;
-        var totalNominal = 0;
-        var currentOutput = '';
-        var currentResults = [];
-        var HEADER_LINES = ['Info : TogelOn', 'Perihal : Cek bukti QRIS P2MIH'];
-
-        function parseLine(line) {
-            var parts = smartSplit(line);
-            var userId = '', nominal = '', reffId = '', rrn = '', bukti = '';
-            if (parts.length >= 5) {
-                userId = parts[0]; nominal = parts[1]; reffId = parts[2]; rrn = parts[3]; bukti = parts[4];
-            } else if (parts.length === 4) {
-                userId = parts[0]; nominal = parts[1]; rrn = parts[2]; bukti = parts[3];
-            } else if (parts.length === 3) {
-                userId = parts[0]; nominal = parts[1]; bukti = parts[2];
-            } else if (parts.length >= 1) {
-                var urlIdx = -1, numIdx = -1, digitIdx = -1;
-                parts.forEach(function(p, i) {
-                    if (urlIdx === -1 && /^https?:\/\//i.test(p)) urlIdx = i;
-                    else if (numIdx === -1 && /[\d,\.]+/.test(p) && /[,\.]/.test(p) && !/^\d{4,}$/.test(p.replace(/[,\.]/g,''))) numIdx = i;
-                    else if (digitIdx === -1 && /^[a-z0-9]{8,}$/i.test(p)) digitIdx = i;
-                });
-                if (urlIdx !== -1) bukti = parts[urlIdx];
-                if (numIdx !== -1) nominal = parts[numIdx];
-                if (digitIdx !== -1) rrn = parts[digitIdx];
-                var rest = [];
-                parts.forEach(function(p, i) { if (i !== urlIdx && i !== numIdx && i !== digitIdx) rest.push(p); });
-                userId = rest[0] || '';
-                reffId = rest[1] || '';
-                if (!rrn && rest[2]) rrn = rest[2];
-            }
-            var fmt = nominal.replace(/,/g, '.');
-            if (fmt && !fmt.startsWith('Rp')) fmt = 'Rp. ' + fmt;
-            var numVal = parseFloat(nominal.replace(/[^0-9]/g, '')) || 0;
-            if (!reffId) reffId = '-';
-            var text = 'User ID  : ' + userId + '\nReff ID  : ' + reffId + '\nRRN      : ' + rrn + '\nBukti    : ' + bukti + '\nNominal  : ' + fmt;
-            return { text: text, userId: userId, nominal: fmt, numVal: numVal, rrn: rrn, bukti: bukti, reffId: reffId };
-        }
-
-        function processInput() {
-            var raw = document.getElementById('inputArea').value.trim();
-            if (!raw) {
-                document.getElementById('outputBox').innerHTML = '<span style="color:var(--muted);font-size:12px;">Hasil akan muncul otomatis saat data ditempel...</span>';
-                document.getElementById('outputBox').classList.remove('has-content');
-                document.getElementById('copyBtn').style.display = 'none';
-                document.getElementById('outputActions').style.display = 'none';
-                document.getElementById('lineCount').style.display = 'none';
-                return;
-            }
-            var lines = raw.split('\n').map(function(l){return l.trim();}).filter(function(l){return l.length>0;});
-            var results = [];
-            var bn = 0;
-            lines.forEach(function(l) {
-                var p = parseLine(l);
-                results.push(p);
-                bn += p.numVal;
-            });
-            currentResults = results;
-            var outParts = [HEADER_LINES.join('\n'), ''];
-            results.forEach(function(r, i) {
-                if (i > 0) outParts.push('');
-                outParts.push(r.text);
-            });
-            currentOutput = outParts.join('\n');
-            sessionCount += results.length;
-            totalNominal += bn;
-            renderReportOutput(results);
-            document.getElementById('copyBtn').style.display = 'inline-flex';
-            document.getElementById('outputActions').style.display = 'flex';
-            var lc = document.getElementById('lineCount');
-            lc.style.display = 'inline-flex';
-            lc.textContent = '' + results.length;
-            results.forEach(function(r) {
-                reportHistory.unshift({ text: r.text, userId: r.userId, nominal: r.nominal, numVal: r.numVal, time: new Date() });
-            });
-            document.getElementById('statTotal').textContent = reportHistory.length;
-            document.getElementById('statSession').textContent = sessionCount;
-            document.getElementById('statNominal').textContent = 'Rp. ' + totalNominal.toLocaleString('id-ID');
-            document.getElementById('statLast').textContent = (results[results.length-1] || {}).userId || '-';
-            renderHistoryList('report');
-        }
-
-        function renderReportOutput(results) {
-            if (!results.length) return;
-            var h = '<div class="header-block"><span class="header-tag">Info</span>    : TogelOn\n<span class="header-tag">Perihal</span> : Cek bukti QRIS P2MIH</div>';
-            results.forEach(function(r, i) {
-                if (i > 0) h += '<div style="height:6px;"></div>';
-                h += '<div class="entry-block"><span class="label-tag">User ID</span>  : ' + escHtml(r.userId) + '\n<span class="label-tag">Reff ID</span>  : ' + escHtml(r.reffId) + '\n<span class="label-tag">RRN</span>      : ' + escHtml(r.rrn) + '\n<span class="label-tag">Bukti</span>    : ' + escHtml(r.bukti) + '\n<span class="label-tag">Nominal</span>  : ' + escHtml(r.nominal) + '</div>';
-            });
-            var box = document.getElementById('outputBox');
-            box.innerHTML = h;
-            box.classList.add('has-content');
-        }
-
-        window.copyReportAll = function() { if (currentOutput) doCopy(currentOutput, 'Semua data'); };
-        window.copyReportHeader = function() { doCopy(HEADER_LINES.join('\n'), 'Header'); };
-        window.copyReportLast = function() {
-            if (currentResults.length) doCopy(currentResults[currentResults.length-1].text, '1 entry terakhir');
-        };
-
-        // ============================================================
-        //  TAB 2: PEMINJAMAN (DOCK) — FORMAT BARU
-        // ============================================================
-        var dockHistory = [];
-        var currentDockOutput = '';   // Plain text untuk clipboard
-        var currentDockLines = [];    // Array of {bank, norek, nama, nominal}
-        var DOCK_HEADER = 'NAMA BANK\tNOMOR REKENING\tNAMA REKENING\tNominal';
-
-        function processDock() {
-            var raw = document.getElementById('dockInput').value.trim();
-            if (!raw) {
-                document.getElementById('dockTableWrap').innerHTML = '<div class="dock-empty"><i class="fa-regular fa-table" style="font-size:24px;display:block;margin-bottom:8px;opacity:0.3;"></i>Hasil konversi akan muncul otomatis...</div>';
-                document.getElementById('dockTableWrap').classList.remove('has-content');
-                document.getElementById('copyDockBtn').style.display = 'none';
-                document.getElementById('dockOutputActions').style.display = 'none';
-                document.getElementById('dockLineCount').style.display = 'none';
-                document.getElementById('dockStatCount').textContent = '0';
-                document.getElementById('dockStatNominal').textContent = '0';
-                document.getElementById('dockStatLast').textContent = '-';
-                return;
-            }
-
-            // Parse blok key-value
-            var blocks = raw.split(/\n\s*\n|\n-{3,}\n/).map(function(b){return b.trim();}).filter(function(b){return b.length>0;});
-            var rows = [];
-            var totalNum = 0;
-
-            blocks.forEach(function(block) {
-                var bank = '', nama = '', norek = '', nominal = '';
-                block.split('\n').forEach(function(bl) {
-                    var idx = bl.indexOf(':');
-                    if (idx === -1) return;
-                    var key = bl.substring(0, idx).trim().toLowerCase();
-                    var val = bl.substring(idx + 1).trim();
-                    if (key.indexOf('bank') !== -1) bank = val.replace(/\(.*?\)/g, '').trim();
-                    else if (key.indexOf('nama') !== -1) nama = val;
-                    else if (key.indexOf('nomor') !== -1 || key.indexOf('norek') !== -1 || key.indexOf('no rek') !== -1 || key.indexOf('no ') !== -1) norek = val;
-                    else if (key.indexOf('nominal') !== -1) nominal = stripRp(val);
-                });
-                if (bank || nama || norek || nominal) {
-                    var numVal = parseFloat(nominal.replace(/[^0-9]/g, '')) || 0;
-                    totalNum += numVal;
-                    rows.push({ bank: bank, norek: norek, nama: nama, nominal: nominal, numVal: numVal });
-                    dockHistory.unshift({ bank: bank, norek: norek, nama: nama, nominal: nominal, text: [bank, norek, nama, nominal].join('\t'), time: new Date() });
-                }
-            });
-
-            if (!rows.length) {
-                showToast('Format tidak dikenali. Pastikan ada "Bank :", "Nama Rekening :", "Nomor Rekening :", "Nominal :"', 'error');
-                return;
-            }
-
-            currentDockLines = rows;
-
-            // Build plain text: header + data rows (tab-separated)
-            var plainLines = [DOCK_HEADER];
-            rows.forEach(function(r) {
-                plainLines.push([r.bank, r.norek, r.nama, r.nominal].join('\t'));
-            });
-            currentDockOutput = plainLines.join('\n');
-
-            // Render tabel visual
-            renderDockTable(rows);
-
-            // Update stats
-            document.getElementById('dockStatCount').textContent = rows.length;
-            document.getElementById('dockStatNominal').textContent = totalNum.toLocaleString('id-ID');
-            document.getElementById('dockStatLast').textContent = (rows[rows.length-1] || {}).bank + ' / ' + (rows[rows.length-1] || {}).nama;
-
-            document.getElementById('copyDockBtn').style.display = 'inline-flex';
-            document.getElementById('dockOutputActions').style.display = 'flex';
-            var lc = document.getElementById('dockLineCount');
-            lc.style.display = 'inline-flex';
-            lc.textContent = '' + rows.length;
-            renderHistoryList('dock');
-        }
-
-        function renderDockTable(rows) {
-            var wrap = document.getElementById('dockTableWrap');
-            var h = '<table><thead><tr>';
-            h += '<th>NAMA BANK</th>';
-            h += '<th>NOMOR REKENING</th>';
-            h += '<th>NAMA REKENING</th>';
-            h += '<th style="text-align:right;">Nominal</th>';
-            h += '</tr></thead><tbody>';
-            rows.forEach(function(r) {
-                h += '<tr>';
-                h += '<td>' + escHtml(r.bank) + '</td>';
-                h += '<td>' + escHtml(r.norek) + '</td>';
-                h += '<td>' + escHtml(r.nama) + '</td>';
-                h += '<td style="text-align:right;">' + escHtml(r.nominal) + '</td>';
-                h += '</tr>';
-            });
-            h += '</tbody></table>';
-            wrap.innerHTML = h;
-            wrap.classList.add('has-content');
-        }
-
-        window.copyDockAll = function() {
-            if (currentDockOutput) doCopy(currentDockOutput, 'Semua data rekening');
-        };
-        window.copyDockHeaderOnly = function() {
-            doCopy(DOCK_HEADER, 'Header kolom');
-        };
-        window.copyDockLast = function() {
-            if (currentDockLines.length) {
-                var last = currentDockLines[currentDockLines.length - 1];
-                var line = [last.bank, last.norek, last.nama, last.nominal].join('\t');
-                doCopy(line, '1 baris terakhir');
-            }
-        };
-
-        // ============================================================
-        //  TAB 3: PENGEMBALIAN DANA (RETURNAL)
-        // ============================================================
-        var returnalHistory = [];
-        var currentReturnalOutput = '';
-        var currentReturnalResults = [];
-        var RETURNAL_HEADER = 'Info : TogelOn\nPerihal : Perihal : Pengembalian DANA ( Direct QRIS MINERA -  ke setoran KAS ADM ) \nDari situs : \n';
-
-        function processReturnal() {
-            var raw = document.getElementById('returnalInput').value.trim();
-            if (!raw) {
-                document.getElementById('returnalOutputBox').innerHTML = '<span style="color:var(--muted);font-size:12px;">Hasil akan muncul otomatis saat data ditempel...</span>';
-                document.getElementById('returnalOutputBox').classList.remove('has-content');
-                document.getElementById('copyReturnalBtn').style.display = 'none';
-                document.getElementById('returnalOutputActions').style.display = 'none';
-                document.getElementById('returnalLineCount').style.display = 'none';
-                return;
-            }
-            var lines = raw.split('\n').map(function(l){return l.trim();}).filter(function(l){return l.length>0;});
-            var results = [];
-            lines.forEach(function(line) {
-                var parts = smartSplit(line);
-                var bank = '', nama = '', norek = '', nominal = '';
-                if (parts.length >= 5) {
-                    bank = parts[0]; nama = parts[1]; norek = parts[2]; nominal = parts[4];
-                } else if (parts.length === 4) {
-                    var digits = [], withComma = [], texts = [];
-                    parts.forEach(function(p) {
-                        if (/^\d{6,}$/.test(p)) digits.push(p);
-                        else if (/[\d,\.]+/.test(p) && /[,\.]/.test(p)) withComma.push(p);
-                        else texts.push(p);
-                    });
-                    if (digits.length && texts.length) {
-                        bank = texts[0] || '';
-                        nama = texts[1] || '';
-                        norek = digits[0];
-                        nominal = withComma[0] || digits[1] || '';
-                    } else {
-                        bank = parts[0]; nama = parts[1]; norek = parts[2]; nominal = parts[3];
-                    }
-                } else if (parts.length === 3) {
-                    var d3 = [], t3 = [];
-                    parts.forEach(function(p) {
-                        if (/^\d{6,}$/.test(p)) d3.push(p);
-                        else t3.push(p);
-                    });
-                    if (d3.length === 1 && t3.length === 2) {
-                        bank = t3[0]; nama = t3[1]; norek = d3[0];
-                    } else {
-                        bank = parts[0]; nama = parts[1]; norek = parts[2];
-                    }
-                } else if (parts.length === 2) {
-                    if (/^\d{6,}$/.test(parts[1])) { bank = parts[0]; norek = parts[1]; }
-                    else { bank = parts[0]; nama = parts[1]; }
-                } else if (parts.length === 1) {
-                    var m = parts[0].match(/^(.+?)\s+(\d{6,})\s+([\d,\.]+)$/);
-                    if (m) { bank = m[1]; norek = m[2]; nominal = m[3]; }
-                    else bank = parts[0];
-                }
-                var fmt = nominal.replace(/,/g, '.');
-                if (fmt && !fmt.startsWith('Rp')) fmt = 'Rp. ' + fmt;
-                var numVal = parseFloat(nominal.replace(/[^0-9]/g, '')) || 0;
-                var text = 'Bank          : ' + bank + '\nNama Rekening : ' + nama + '\nNomor Rekening: ' + norek + '\nNominal       : ' + fmt;
-                results.push({ text: text, bank: bank, nama: nama, norek: norek, nominal: fmt, numVal: numVal });
-                returnalHistory.unshift({ text: text, bank: bank, nama: nama, norek: norek, nominal: fmt, numVal: numVal, time: new Date() });
-            });
-            if (!results.length) {
-                showToast('Format tidak dikenali. Gunakan tab atau spasi antar field.', 'error');
-                return;
-            }
-            currentReturnalResults = results;
-            var outParts = [RETURNAL_HEADER, ''];
-            results.forEach(function(r, i) {
-                if (i > 0) outParts.push('');
-                outParts.push(r.text);
-            });
-            currentReturnalOutput = outParts.join('\n');
-            renderReturnalOutput(results);
-            document.getElementById('copyReturnalBtn').style.display = 'inline-flex';
-            document.getElementById('returnalOutputActions').style.display = 'flex';
-            var lc = document.getElementById('returnalLineCount');
-            lc.style.display = 'inline-flex';
-            lc.textContent = '' + results.length;
-            renderHistoryList('returnal');
-        }
-
-        function renderReturnalOutput(results) {
-            if (!results.length) return;
-            var h = '<div class="returnal-header-block"><span class="cyan-tag">Info</span>    : TogelOn\n<span class="cyan-tag">Perihal</span> : Perihal : Pengembalian DANA ( Direct QRIS MINERA - DANATOTO ke setoran KAS ADM )</div>';
-            results.forEach(function(r, i) {
-                if (i > 0) h += '<div style="height:6px;"></div>';
-                h += '<div class="returnal-entry-block"><span class="cyan-tag">Bank</span>          : ' + escHtml(r.bank) + '\n<span class="cyan-tag">Nama Rekening</span> : ' + escHtml(r.nama) + '\n<span class="cyan-tag">Nomor Rekening</span>: ' + escHtml(r.norek) + '\n<span class="cyan-tag">Nominal</span>       : ' + escHtml(r.nominal) + '</div>';
-            });
-            var box = document.getElementById('returnalOutputBox');
-            box.innerHTML = h;
-            box.classList.add('has-content');
-        }
-
-        window.copyReturnalAll = function() { if (currentReturnalOutput) doCopy(currentReturnalOutput, 'Data pengembalian'); };
-        window.copyReturnalHeader = function() { doCopy(RETURNAL_HEADER, 'Header'); };
-        window.copyReturnalLast = function() {
-            if (currentReturnalResults.length) doCopy(currentReturnalResults[currentReturnalResults.length-1].text, '1 entry terakhir');
-        };
-
-        // ============================================================
-        //  CLEAR FIELD
-        // ============================================================
+        /* ============================================================
+           CLEAR
+        ============================================================ */
         window.clearField = function(id) {
             var el = document.getElementById(id);
             el.value = '';
-            el.focus();
             el.dispatchEvent(new Event('input'));
+            if (id === 'inputArea') { document.getElementById('outputBox').innerHTML = '<span style="color:var(--muted);font-size:12px;">Hasil akan muncul otomatis saat data ditempel...</span>'; document.getElementById('outputBox').classList.remove('has-content'); document.getElementById('copyBtn').style.display='none'; document.getElementById('outputActions').style.display='none'; document.getElementById('lineCount').style.display='none'; currentReportLines = []; }
+            if (id === 'dockInput') { document.getElementById('dockTableWrap').innerHTML = '<div class="dock-empty"><i class="fa-regular fa-table" style="font-size:24px;display:block;margin-bottom:8px;opacity:0.3;"></i>Hasil konversi akan muncul otomatis...</div>'; document.getElementById('dockTableWrap').classList.remove('has-content'); document.getElementById('copyDockBtn').style.display='none'; document.getElementById('dockOutputActions').style.display='none'; document.getElementById('dockLineCount').style.display='none'; currentDockData = []; }
+            if (id === 'returnalInput') { document.getElementById('returnalTableWrap').innerHTML = '<div class="returnal-empty"><i class="fa-regular fa-table"></i>Hasil konversi akan muncul otomatis...</div>'; document.getElementById('returnalTableWrap').classList.remove('has-content'); document.getElementById('copyReturnalBtn').style.display='none'; document.getElementById('returnalOutputActions').style.display='none'; document.getElementById('returnalLineCount').style.display='none'; document.getElementById('returnalFormatBadge').style.display='none'; currentReturnalData = []; }
+            showToast('Input dibersihkan', 'success');
         };
 
-        // ============================================================
-        //  RIWAYAT
-        // ============================================================
-        function renderHistoryList(type) {
-            var listEl, historyArr, itemClass, countEl, clearBtn;
-            if (type === 'report') {
-                listEl = document.getElementById('historyList');
-                historyArr = reportHistory;
-                itemClass = 'history-item';
-                countEl = document.getElementById('historyCount');
-                clearBtn = document.getElementById('clearHistoryBtn');
-            } else if (type === 'dock') {
-                listEl = document.getElementById('dockHistoryList');
-                historyArr = dockHistory;
-                itemClass = 'dock-history-item';
-                countEl = document.getElementById('dockHistoryCount');
-                clearBtn = document.getElementById('clearDockHistoryBtn');
-            } else {
-                listEl = document.getElementById('returnalHistoryList');
-                historyArr = returnalHistory;
-                itemClass = 'returnal-history-item';
-                countEl = document.getElementById('returnalHistoryCount');
-                clearBtn = document.getElementById('clearReturnalHistoryBtn');
-            }
-            if (!historyArr.length) {
-                listEl.innerHTML = '<div style="text-align:center;padding:32px;color:var(--muted);font-size:13px;"><i class="fa-regular fa-folder-open" style="font-size:28px;display:block;margin-bottom:10px;opacity:0.3;"></i>Belum ada riwayat</div>';
-                countEl.style.display = 'none';
-                clearBtn.style.display = 'none';
-                return;
-            }
-            countEl.style.display = 'inline-flex';
-            countEl.textContent = '' + historyArr.length;
-            clearBtn.style.display = 'inline-flex';
-            var shown = historyArr.slice(0, 20);
-            var h = '';
-            shown.forEach(function(item, idx) {
-                var timeStr = formatTime(item.time);
-                var label = '';
-                if (type === 'report') label = item.userId + ' — ' + item.nominal;
-                else if (type === 'dock') label = item.bank + ' / ' + item.nama + ' — ' + item.nominal;
-                else label = item.bank + ' / ' + item.nama + ' — ' + item.nominal;
-                h += '<div class="' + itemClass + '" data-type="' + type + '" data-idx="' + idx + '">';
-                h += '<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">';
-                h += '<div style="flex:1;min-width:0;"><div class="mono" style="font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + escHtml(label) + '</div></div>';
-                h += '<div style="font-size:10px;color:var(--muted);font-weight:600;white-space:nowrap;">' + timeStr + '</div>';
-                h += '</div></div>';
-            });
-            if (historyArr.length > 20) {
-                h += '<div style="text-align:center;padding:10px;color:var(--muted);font-size:11px;">...dan ' + (historyArr.length - 20) + ' lainnya</div>';
-            }
-            listEl.innerHTML = h;
-            listEl.querySelectorAll('[data-type]').forEach(function(el) {
-                el.addEventListener('click', function() {
-                    var t = this.getAttribute('data-type');
-                    var i = parseInt(this.getAttribute('data-idx'));
-                    var arr = t === 'report' ? reportHistory : t === 'dock' ? dockHistory : returnalHistory;
-                    if (arr[i]) doCopy(arr[i].text, 'Riwayat');
-                });
-            });
+        /* ============================================================
+           TAB 1 — REPORT QRIS
+        ============================================================ */
+        function smartSplit(line) {
+            var p = line.split('\t');
+            if (p.length > 1) return p.map(function(s){return s.trim();}).filter(function(s){return s.length>0;});
+            p = line.split(/\s{2,}/);
+            if (p.length > 1) return p.map(function(s){return s.trim();}).filter(function(s){return s.length>0;});
+            p = line.split(/\s+/);
+            return p.map(function(s){return s.trim();}).filter(function(s){return s.length>0;});
         }
 
+        window.processInput = function() {
+            var raw = document.getElementById('inputArea').value.trim();
+            if (!raw) { showToast('Tidak ada data untuk diproses', 'error'); return; }
+            var lines = raw.split('\n').filter(function(l){return l.trim().length>0;});
+            var result = [];
+            var totalNom = 0;
+            lines.forEach(function(line) {
+                var f = smartSplit(line);
+                if (f.length >= 2) {
+                    var user = f[0] || '-';
+                    var nominal = stripRp(f[1] || '0');
+                    var id = f[3] || f[2] || '-';
+                    var link = '-';
+                    for (var i = 2; i < f.length; i++) {
+                        if (/^https?:\/\//i.test(f[i])) { link = f[i]; break; }
+                    }
+                    result.push({ user: user, nominal: nominal, id: id, link: link });
+                    totalNom += parseNominal(nominal);
+                }
+            });
+            if (result.length === 0) { showToast('Tidak ada data valid ditemukan', 'error'); return; }
+            currentReportLines = result;
+            var html = '';
+            result.forEach(function(r, i) {
+                html += '<div class="entry-block row-animate" style="animation-delay:' + (i*0.05) + 's">';
+                html += '<span class="label-tag">Username:</span> ' + escHtml(r.user) + '\n';
+                html += '<span class="label-tag">Nominal:</span> ' + escHtml(r.nominal) + '\n';
+                html += '<span class="label-tag">ID:</span> ' + escHtml(r.id) + '\n';
+                html += '<span class="label-tag">Link:</span> ' + escHtml(r.link);
+                html += '</div>';
+            });
+            var box = document.getElementById('outputBox');
+            box.innerHTML = html;
+            box.classList.add('has-content');
+            document.getElementById('copyBtn').style.display = 'inline-flex';
+            document.getElementById('outputActions').style.display = 'flex';
+            var lc = document.getElementById('lineCount');
+            lc.style.display = 'inline-flex'; lc.textContent = result.length;
+            reportTotalProcessed += result.length;
+            document.getElementById('statTotal').textContent = reportTotalProcessed;
+            document.getElementById('statSession').textContent = result.length;
+            document.getElementById('statNominal').textContent = formatNominalDisplay(totalNom);
+            document.getElementById('statLast').textContent = result[result.length-1].user;
+            reportHistory.unshift({ time: formatTime(new Date()), count: result.length, total: totalNom, last: result[result.length-1].user, data: result });
+            renderReportHistory();
+            showToast(result.length + ' entry berhasil diproses', 'success');
+        };
+
+        function getReportText(includeHeader, lastOnly) {
+            if (currentReportLines.length === 0) return '';
+            var txt = '';
+            if (includeHeader) txt += 'Username\tNominal\tID\tLink\n';
+            var arr = lastOnly ? [currentReportLines[currentReportLines.length-1]] : currentReportLines;
+            arr.forEach(function(r) { txt += r.user + '\t' + r.nominal + '\t' + r.id + '\t' + r.link + '\n'; });
+            return txt.trimEnd();
+        }
+        window.copyReportAll = function() { if (currentReportLines.length) doCopy(getReportText(true, false), 'Semua entry'); };
+        window.copyReportHeader = function() { doCopy('Username\tNominal\tID\tLink', 'Header'); };
+        window.copyReportLast = function() { if (currentReportLines.length) doCopy(getReportText(false, true), '1 entry terakhir'); };
+
+        function renderReportHistory() {
+            var el = document.getElementById('historyList');
+            var btn = document.getElementById('clearHistoryBtn');
+            var cnt = document.getElementById('historyCount');
+            if (reportHistory.length === 0) { el.innerHTML = '<div style="text-align:center;padding:32px;color:var(--muted);font-size:13px;"><i class="fa-regular fa-folder-open" style="font-size:28px;display:block;margin-bottom:10px;opacity:0.3;"></i>Belum ada riwayat</div>'; btn.style.display='none'; cnt.style.display='none'; return; }
+            btn.style.display='inline-flex'; cnt.style.display='inline-flex'; cnt.textContent = reportHistory.length;
+            el.innerHTML = reportHistory.map(function(h,i) {
+                return '<div class="history-item" onclick="loadReportHistory(' + i + ')">' +
+                    '<div style="display:flex;align-items:center;justify-content:space-between;">' +
+                    '<div style="display:flex;align-items:center;gap:8px;"><span class="mono" style="font-size:11px;color:var(--muted);">' + escHtml(h.time) + '</span><span style="font-size:12px;font-weight:600;color:var(--fg);">' + h.count + ' entry</span></div>' +
+                    '<span class="mono" style="font-size:11px;color:var(--accent);">' + formatNominalDisplay(h.total) + '</span></div>' +
+                    '<div style="font-size:11px;color:var(--muted);margin-top:4px;">Terakhir: ' + escHtml(h.last) + '</div></div>';
+            }).join('');
+        }
+        window.loadReportHistory = function(idx) {
+            var h = reportHistory[idx]; if (!h) return;
+            currentReportLines = h.data;
+            var html = '';
+            h.data.forEach(function(r,i) {
+                html += '<div class="entry-block row-animate" style="animation-delay:' + (i*0.05) + 's">';
+                html += '<span class="label-tag">Username:</span> ' + escHtml(r.user) + '\n';
+                html += '<span class="label-tag">Nominal:</span> ' + escHtml(r.nominal) + '\n';
+                html += '<span class="label-tag">ID:</span> ' + escHtml(r.id) + '\n';
+                html += '<span class="label-tag">Link:</span> ' + escHtml(r.link);
+                html += '</div>';
+            });
+            document.getElementById('outputBox').innerHTML = html;
+            document.getElementById('outputBox').classList.add('has-content');
+            document.getElementById('copyBtn').style.display='inline-flex';
+            document.getElementById('outputActions').style.display='flex';
+            var lc = document.getElementById('lineCount'); lc.style.display='inline-flex'; lc.textContent = h.count;
+            showToast('Riwayat dimuat', 'success');
+        };
+
+        /* ============================================================
+           TAB 2 — PEMINJAMAN (DOCK)
+        ============================================================ */
+        window.processDock = function() {
+            var raw = document.getElementById('dockInput').value.trim();
+            if (!raw) { showToast('Tidak ada data untuk diproses', 'error'); return; }
+            var lines = raw.split('\n').filter(function(l){return l.trim().length>0;});
+            var isLabeled = lines.some(function(l){ return /^(Bank|Nama Rekening|Nomor Rekening|Nominal)\s*:/i.test(l.trim()); });
+            var entries = [];
+            if (isLabeled) {
+                var cur = {};
+                lines.forEach(function(line) {
+                    var m;
+                    if ((m = line.match(/^Bank\s*:\s*(.+)/i))) { if (cur.bank) entries.push(cur); cur = { bank: m[1].trim(), name:'', norek:'', nominal:0 }; }
+                    else if ((m = line.match(/^Nama Rekening\s*:\s*(.+)/i))) cur.name = m[1].trim();
+                    else if ((m = line.match(/^Nomor Rekening\s*:\s*(.+)/i))) cur.norek = m[1].trim();
+                    else if ((m = line.match(/^Nominal\s*:\s*(.+)/i))) cur.nominal = parseNominal(m[1].trim());
+                });
+                if (cur.bank) entries.push(cur);
+            } else {
+                lines.forEach(function(line) {
+                    var f = line.split('\t').map(function(s){return s.trim();});
+                    if (f.length >= 3) {
+                        entries.push({ bank: f[0]||'', name: f[1]||'', norek: f[2]||'', nominal: parseNominal(f[3]||f[4]||'0') });
+                    }
+                });
+            }
+            entries = entries.filter(function(e){return e.bank && e.norek;});
+            if (entries.length === 0) { showToast('Tidak ada data rekening valid', 'error'); return; }
+            currentDockData = entries;
+            var totalNom = entries.reduce(function(s,e){return s+e.nominal;},0);
+            var html = '<table><thead><tr><th>No</th><th>Bank</th><th>Nama Rekening</th><th>No. Rekening</th><th style="text-align:right;">Nominal</th></tr></thead><tbody>';
+            entries.forEach(function(e,i) {
+                html += '<tr class="row-animate" style="animation-delay:' + (i*0.04) + 's" data-bank="' + escHtml(e.bank) + '" data-name="' + escHtml(e.name) + '" data-rek="' + escHtml(e.norek) + '" data-nom="' + e.nominal + '">';
+                html += '<td>' + (i+1) + '</td><td>' + escHtml(e.bank) + '</td><td>' + escHtml(e.name) + '</td><td>' + escHtml(e.norek) + '</td><td style="text-align:right;">' + formatNominalDisplay(e.nominal) + '</td></tr>';
+            });
+            html += '<tr class="returnal-total-row"><td colspan="4"><span class="total-label">Total</span></td><td class="total-value">' + formatNominalDisplay(totalNom) + '</td></tr>';
+            html += '</tbody></table>';
+            var wrap = document.getElementById('dockTableWrap');
+            wrap.innerHTML = html; wrap.classList.add('has-content');
+            document.getElementById('copyDockBtn').style.display='inline-flex';
+            document.getElementById('dockOutputActions').style.display='flex';
+            var lc = document.getElementById('dockLineCount'); lc.style.display='inline-flex'; lc.textContent = entries.length;
+            document.getElementById('dockStatCount').textContent = entries.length;
+            document.getElementById('dockStatNominal').textContent = formatNominalDisplay(totalNom);
+            document.getElementById('dockStatLast').textContent = entries[entries.length-1].bank;
+            dockHistory.unshift({ time: formatTime(new Date()), count: entries.length, total: totalNom, last: entries[entries.length-1].bank, data: entries });
+            renderDockHistory();
+            showToast(entries.length + ' rekening berhasil dikonversi', 'success');
+        };
+
+        function getDockText(includeHeader, lastOnly) {
+            if (currentDockData.length === 0) return '';
+            var txt = '';
+            if (includeHeader) txt += 'Bank\tNama Rekening\tNo. Rekening\tNominal\n';
+            var arr = lastOnly ? [currentDockData[currentDockData.length-1]] : currentDockData;
+            arr.forEach(function(e) { txt += e.bank + '\t' + e.name + '\t' + e.norek + '\t' + formatNominalDisplay(e.nominal) + '\n'; });
+            return txt.trimEnd();
+        }
+        window.copyDockAll = function() { if (currentDockData.length) doCopy(getDockText(true,false), 'Semua data dock'); };
+        window.copyDockHeaderOnly = function() { doCopy('Bank\tNama Rekening\tNo. Rekening\tNominal', 'Header dock'); };
+        window.copyDockLast = function() { if (currentDockData.length) doCopy(getDockText(false,true), '1 baris terakhir'); };
+
+        function renderDockHistory() {
+            var el = document.getElementById('dockHistoryList');
+            var btn = document.getElementById('clearDockHistoryBtn');
+            var cnt = document.getElementById('dockHistoryCount');
+            if (dockHistory.length === 0) { el.innerHTML = '<div style="text-align:center;padding:32px;color:var(--muted);font-size:13px;"><i class="fa-regular fa-folder-open" style="font-size:28px;display:block;margin-bottom:10px;opacity:0.3;"></i>Belum ada riwayat</div>'; btn.style.display='none'; cnt.style.display='none'; return; }
+            btn.style.display='inline-flex'; cnt.style.display='inline-flex'; cnt.textContent = dockHistory.length;
+            el.innerHTML = dockHistory.map(function(h,i) {
+                return '<div class="dock-history-item" onclick="loadDockHistory(' + i + ')">' +
+                    '<div style="display:flex;align-items:center;justify-content:space-between;">' +
+                    '<div style="display:flex;align-items:center;gap:8px;"><span class="mono" style="font-size:11px;color:var(--muted);">' + escHtml(h.time) + '</span><span style="font-size:12px;font-weight:600;color:var(--fg);">' + h.count + ' rekening</span></div>' +
+                    '<span class="mono" style="font-size:11px;color:var(--gold);">' + formatNominalDisplay(h.total) + '</span></div>' +
+                    '<div style="font-size:11px;color:var(--muted);margin-top:4px;">Terakhir: ' + escHtml(h.last) + '</div></div>';
+            }).join('');
+        }
+        window.loadDockHistory = function(idx) {
+            var h = dockHistory[idx]; if (!h) return;
+            currentDockData = h.data;
+            var totalNom = h.data.reduce(function(s,e){return s+e.nominal;},0);
+            var html = '<table><thead><tr><th>No</th><th>Bank</th><th>Nama Rekening</th><th>No. Rekening</th><th style="text-align:right;">Nominal</th></tr></thead><tbody>';
+            h.data.forEach(function(e,i) {
+                html += '<tr class="row-animate" style="animation-delay:' + (i*0.04) + 's"><td>' + (i+1) + '</td><td>' + escHtml(e.bank) + '</td><td>' + escHtml(e.name) + '</td><td>' + escHtml(e.norek) + '</td><td style="text-align:right;">' + formatNominalDisplay(e.nominal) + '</td></tr>';
+            });
+            html += '<tr class="returnal-total-row"><td colspan="4"><span class="total-label">Total</span></td><td class="total-value">' + formatNominalDisplay(totalNom) + '</td></tr>';
+            html += '</tbody></table>';
+            document.getElementById('dockTableWrap').innerHTML = html;
+            document.getElementById('dockTableWrap').classList.add('has-content');
+            document.getElementById('copyDockBtn').style.display='inline-flex';
+            document.getElementById('dockOutputActions').style.display='flex';
+            var lc = document.getElementById('dockLineCount'); lc.style.display='inline-flex'; lc.textContent = h.count;
+            showToast('Riwayat dock dimuat', 'success');
+        };
+
+        /* ============================================================
+           TAB 3 — PENGEMBALIAN DANA (PREMIUM)
+        ============================================================ */
+        function parseReturnalInput(text) {
+            text = text.trim();
+            if (!text) return { entries: [], format: '' };
+            var lines = text.split('\n').filter(function(l) { return l.trim().length > 0; });
+            /* Deteksi format: labeled atau tab-separated */
+            var isLabeled = lines.some(function(l) { return /^(Bank|Nama Rekening|Nomor Rekening|Nominal)\s*:/i.test(l.trim()); });
+
+            if (isLabeled) {
+                return { entries: parseReturnalLabeled(lines), format: 'LABELED' };
+            } else {
+                return { entries: parseReturnalTab(lines), format: 'TAB' };
+            }
+        }
+
+        function parseReturnalLabeled(lines) {
+            var entries = [];
+            var cur = {};
+            lines.forEach(function(line) {
+                var m;
+                if ((m = line.match(/^Bank\s*:\s*(.+)/i))) {
+                    if (cur.bank) entries.push(cur);
+                    cur = { bank: m[1].trim(), name: '', norek: '', nominal: 0 };
+                } else if ((m = line.match(/^Nama Rekening\s*:\s*(.+)/i))) {
+                    cur.name = m[1].trim();
+                } else if ((m = line.match(/^Nomor Rekening\s*:\s*(.+)/i))) {
+                    cur.norek = m[1].trim();
+                } else if ((m = line.match(/^Nominal\s*:\s*(.+)/i))) {
+                    cur.nominal = parseNominal(m[1].trim());
+                }
+            });
+            if (cur.bank) entries.push(cur);
+            return entries.filter(function(e) { return e.bank && e.norek; });
+        }
+
+        function parseReturnalTab(lines) {
+            var entries = [];
+            lines.forEach(function(line) {
+                var f = line.split('\t').map(function(s) { return s.trim(); });
+                if (f.length >= 3) {
+                    var bank = f[0] || '';
+                    var name = f[1] || '';
+                    var norek = f[2] || '';
+                    /* Field 3 bisa kosong, cek field 4 atau 3 untuk nominal */
+                    var nominal = 0;
+                    if (f.length >= 5 && f[4]) {
+                        nominal = parseNominal(f[4]);
+                    } else if (f.length >= 4 && f[3]) {
+                        nominal = parseNominal(f[3]);
+                    }
+                    if (bank && norek) {
+                        entries.push({ bank: bank, name: name, norek: norek, nominal: nominal });
+                    }
+                }
+            });
+            return entries;
+        }
+
+        window.processReturnal = function() {
+            var raw = document.getElementById('returnalInput').value.trim();
+            if (!raw) { showToast('Tidak ada data untuk diproses', 'error'); return; }
+
+            var parsed = parseReturnalInput(raw);
+            var entries = parsed.entries;
+            var formatType = parsed.format;
+
+            if (entries.length === 0) { showToast('Tidak ada data pengembalian valid ditemukan', 'error'); return; }
+
+            currentReturnalData = entries;
+            var totalNom = entries.reduce(function(s, e) { return s + e.nominal; }, 0);
+
+            /* Render tabel */
+            var html = '<table><thead><tr>';
+            html += '<th style="text-align:center;width:44px;">No</th>';
+            html += '<th>Bank</th>';
+            html += '<th>Nama Rekening</th>';
+            html += '<th>No. Rekening</th>';
+            html += '<th style="text-align:right;">Nominal</th>';
+            html += '</tr></thead><tbody>';
+
+            entries.forEach(function(e, i) {
+                html += '<tr class="row-animate" style="animation-delay:' + (i * 0.04) + 's"';
+                html += ' data-bank="' + escHtml(e.bank) + '" data-name="' + escHtml(e.name) + '" data-rek="' + escHtml(e.norek) + '" data-nom="' + e.nominal + '">';
+                html += '<td class="col-no">' + (i + 1) + '</td>';
+                html += '<td class="col-bank">' + escHtml(e.bank) + '</td>';
+                html += '<td class="col-name">' + escHtml(e.name) + '</td>';
+                html += '<td class="col-rek">' + escHtml(e.norek) + '</td>';
+                html += '<td class="col-nominal">' + formatNominalDisplay(e.nominal) + '</td>';
+                html += '</tr>';
+            });
+
+            /* Baris total */
+            html += '<tr class="returnal-total-row">';
+            html += '<td colspan="4"><span class="total-label"><i class="fa-solid fa-sigma" style="font-size:10px;margin-right:4px;"></i> Total Pengembalian</span></td>';
+            html += '<td class="total-value">' + formatNominalDisplay(totalNom) + '</td>';
+            html += '</tr>';
+
+            html += '</tbody></table>';
+
+            var wrap = document.getElementById('returnalTableWrap');
+            wrap.innerHTML = html;
+            wrap.classList.add('has-content');
+
+            /* Tampilkan badge format */
+            var fmtBadge = document.getElementById('returnalFormatBadge');
+            var fmtText = document.getElementById('returnalFormatText');
+            fmtBadge.style.display = 'inline-flex';
+            fmtText.textContent = formatType === 'LABELED' ? 'FORMAT LABELED' : 'FORMAT TAB';
+
+            /* Tombol & counter */
+            document.getElementById('copyReturnalBtn').style.display = 'inline-flex';
+            document.getElementById('returnalOutputActions').style.display = 'flex';
+            var lc = document.getElementById('returnalLineCount');
+            lc.style.display = 'inline-flex'; lc.textContent = entries.length;
+
+            /* Update stats */
+            document.getElementById('returnalStatCount').textContent = entries.length;
+            document.getElementById('returnalStatNominal').textContent = formatNominalDisplay(totalNom);
+            document.getElementById('returnalStatLast').textContent = entries[entries.length - 1].bank;
+
+            /* Simpan riwayat */
+            returnalHistory.unshift({
+                time: formatTime(new Date()),
+                count: entries.length,
+                total: totalNom,
+                last: entries[entries.length - 1].bank,
+                format: formatType,
+                data: entries
+            });
+            renderReturnalHistory();
+
+            showToast(entries.length + ' pengembalian dana berhasil dikonversi', 'success');
+        };
+
+        /* --- Copy functions untuk Returnal --- */
+        function getReturnalText(includeHeader, lastOnly) {
+            if (currentReturnalData.length === 0) return '';
+            var txt = '';
+            if (includeHeader) txt += 'Bank\tNama Rekening\tNo. Rekening\tNominal\n';
+            var arr = lastOnly ? [currentReturnalData[currentReturnalData.length - 1]] : currentReturnalData;
+            arr.forEach(function(e) {
+                /* Gunakan tab sebagai separator — SATU BARIS per entry, TIDAK ada newline di antara field */
+                txt += e.bank + '\t' + e.name + '\t' + e.norek + '\t' + formatNominalDisplay(e.nominal) + '\n';
+            });
+            return txt.trimEnd();
+        }
+
+        window.copyReturnalAll = function() {
+            if (currentReturnalData.length) doCopy(getReturnalText(true, false), 'Semua pengembalian');
+        };
+        window.copyReturnalHeader = function() {
+            doCopy('Bank\tNama Rekening\tNo. Rekening\tNominal', 'Header pengembalian');
+        };
+        window.copyReturnalLast = function() {
+            if (currentReturnalData.length) doCopy(getReturnalText(false, true), '1 baris terakhir');
+        };
+
+        /* --- Render riwayat returnal --- */
+        function renderReturnalHistory() {
+            var el = document.getElementById('returnalHistoryList');
+            var btn = document.getElementById('clearReturnalHistoryBtn');
+            var cnt = document.getElementById('returnalHistoryCount');
+            if (returnalHistory.length === 0) {
+                el.innerHTML = '<div style="text-align:center;padding:32px;color:var(--muted);font-size:13px;"><i class="fa-regular fa-folder-open" style="font-size:28px;display:block;margin-bottom:10px;opacity:0.3;"></i>Belum ada riwayat</div>';
+                btn.style.display = 'none'; cnt.style.display = 'none'; return;
+            }
+            btn.style.display = 'inline-flex'; cnt.style.display = 'inline-flex'; cnt.textContent = returnalHistory.length;
+            el.innerHTML = returnalHistory.map(function(h, i) {
+                var fmtIcon = h.format === 'LABELED' ? 'fa-tags' : 'fa-table-cells';
+                return '<div class="returnal-history-item" onclick="loadReturnalHistory(' + i + ')">' +
+                    '<div style="display:flex;align-items:center;justify-content:space-between;">' +
+                    '<div style="display:flex;align-items:center;gap:8px;">' +
+                    '<span class="mono" style="font-size:11px;color:var(--muted);">' + escHtml(h.time) + '</span>' +
+                    '<span style="font-size:12px;font-weight:600;color:var(--fg);">' + h.count + ' transaksi</span>' +
+                    '<span style="font-size:9px;color:var(--cyan);opacity:0.7;"><i class="fa-solid ' + fmtIcon + '" style="margin-right:3px;"></i>' + escHtml(h.format) + '</span>' +
+                    '</div>' +
+                    '<span class="mono" style="font-size:11px;color:var(--cyan);">' + formatNominalDisplay(h.total) + '</span>' +
+                    '</div>' +
+                    '<div style="font-size:11px;color:var(--muted);margin-top:4px;">Terakhir: ' + escHtml(h.last) + '</div>' +
+                    '</div>';
+            }).join('');
+        }
+
+        window.loadReturnalHistory = function(idx) {
+            var h = returnalHistory[idx]; if (!h) return;
+            currentReturnalData = h.data;
+            var totalNom = h.data.reduce(function(s, e) { return s + e.nominal; }, 0);
+
+            var html = '<table><thead><tr>';
+            html += '<th style="text-align:center;width:44px;">No</th><th>Bank</th><th>Nama Rekening</th><th>No. Rekening</th><th style="text-align:right;">Nominal</th>';
+            html += '</tr></thead><tbody>';
+            h.data.forEach(function(e, i) {
+                html += '<tr class="row-animate" style="animation-delay:' + (i * 0.04) + 's">';
+                html += '<td class="col-no">' + (i + 1) + '</td>';
+                html += '<td class="col-bank">' + escHtml(e.bank) + '</td>';
+                html += '<td class="col-name">' + escHtml(e.name) + '</td>';
+                html += '<td class="col-rek">' + escHtml(e.norek) + '</td>';
+                html += '<td class="col-nominal">' + formatNominalDisplay(e.nominal) + '</td>';
+                html += '</tr>';
+            });
+            html += '<tr class="returnal-total-row"><td colspan="4"><span class="total-label"><i class="fa-solid fa-sigma" style="font-size:10px;margin-right:4px;"></i> Total Pengembalian</span></td><td class="total-value">' + formatNominalDisplay(totalNom) + '</td></tr>';
+            html += '</tbody></table>';
+
+            document.getElementById('returnalTableWrap').innerHTML = html;
+            document.getElementById('returnalTableWrap').classList.add('has-content');
+            document.getElementById('copyReturnalBtn').style.display = 'inline-flex';
+            document.getElementById('returnalOutputActions').style.display = 'flex';
+            var lc = document.getElementById('returnalLineCount'); lc.style.display = 'inline-flex'; lc.textContent = h.count;
+            var fmtBadge = document.getElementById('returnalFormatBadge');
+            var fmtText = document.getElementById('returnalFormatText');
+            fmtBadge.style.display = 'inline-flex';
+            fmtText.textContent = h.format === 'LABELED' ? 'FORMAT LABELED' : 'FORMAT TAB';
+            showToast('Riwayat pengembalian dimuat', 'success');
+        };
+
+        /* ============================================================
+           CLEAR HISTORY
+        ============================================================ */
         window.clearHistory = function(type) {
-            if (type === 'report') { reportHistory = []; renderHistoryList('report'); }
-            else if (type === 'dock') { dockHistory = []; renderHistoryList('dock'); }
-            else { returnalHistory = []; renderHistoryList('returnal'); }
+            if (type === 'report') { reportHistory = []; renderReportHistory(); }
+            else if (type === 'dock') { dockHistory = []; renderDockHistory(); }
+            else if (type === 'returnal') { returnalHistory = []; renderReturnalHistory(); }
             showToast('Riwayat dihapus', 'success');
         };
 
-        // ============================================================
-        //  EXPOSE
-        // ============================================================
-        window.processInput = processInput;
-        window.processDock = processDock;
-        window.processReturnal = processReturnal;
-
-        // ============================================================
-        //  AUTO-PROCESS DENGAN DEBOUNCE
-        // ============================================================
-        var debounceTimers = {};
-        function debounce(key, fn, delay) {
-            if (debounceTimers[key]) clearTimeout(debounceTimers[key]);
-            debounceTimers[key] = setTimeout(fn, delay);
-        }
-
+        /* ============================================================
+           AUTO-PROCESS saat paste (input event)
+        ============================================================ */
         document.getElementById('inputArea').addEventListener('input', function() {
-            debounce('report', processInput, 400);
+            if (this.value.trim().length > 10) processInput();
         });
         document.getElementById('dockInput').addEventListener('input', function() {
-            debounce('dock', processDock, 400);
+            if (this.value.trim().length > 10) processDock();
         });
         document.getElementById('returnalInput').addEventListener('input', function() {
-            debounce('returnal', processReturnal, 400);
+            if (this.value.trim().length > 10) processReturnal();
         });
 
     })();
