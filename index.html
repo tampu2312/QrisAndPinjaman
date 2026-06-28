@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FORMAT REPORTAN TOGELON </title>
+    <title>Report Qris And Peminjaman</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -123,8 +123,8 @@
         </header>
         <div class="tab-nav" style="margin-bottom:24px;">
             <button class="tab-btn active-purple" onclick="switchTab('report', this)"><i class="fa-solid fa-file-export" style="font-size:11px;"></i> Report Qris</button>
-            <button class="tab-btn" onclick="switchTab('dock', this)"><i class="fa-solid fa-table-columns" style="font-size:11px;"></i> Peminjaman</button>
-            <button class="tab-btn" onclick="switchTab('returnal', this)"><i class="fa-solid fa-rotate-left" style="font-size:11px;"></i> Pengembalian</button>
+            <button class="tab-btn" onclick="switchTab('dock', this)"><i class="fa-solid fa-table-columns" style="font-size:11px;"></i> Peminjaman Ctt Dock</button>
+            <button class="tab-btn" onclick="switchTab('returnal', this)"><i class="fa-solid fa-rotate-left" style="font-size:11px;"></i> Pengembalian ADM</button>
             <button class="tab-btn" onclick="switchTab('wdpending', this)"><i class="fa-solid fa-clock" style="font-size:11px;"></i> WD Pending</button>
         </div>
 
@@ -327,7 +327,7 @@
     function copyReportAll(){ if(rLast)doCopy(rLast,'Laporan QRIS'); }
     function loadRHist(i){ document.getElementById('inputArea').value=rHist[i].raw; processInput(); }
 
-    // ===== TAB 2: DOCK =====
+    // ===== TAB 2: DOCK (PERBAIKAN TOTAL PARSER) =====
     var dHist=[], dLast='', dLastCount=0, dLastTotal=0, dLastUser='';
     function processDock() {
         var v=document.getElementById('dockInput').value.trim();
@@ -347,60 +347,87 @@
         
         var l=v.split(/\r?\n/).filter(x => x.trim());
         var e=[], c=null;
+        
         l.forEach(x => {
             x = x.trim();
             if(!x) return;
             
-            if(/KAS BERSIH/i.test(x) || /Bank\s*:/i.test(x)) {
-                if(c && c.b) e.push(c);
-                var bankMatch = '';
-                if(/KAS BERSIH/i.test(x)) {
-                    bankMatch = x.replace(/KAS BERSIH/i, '').trim();
-                    if(!bankMatch) bankMatch = x.split(/\s+/).pop();
-                } else {
-                    bankMatch = x.split(':')[1].trim();
-                }
-                c = { b: bankMatch, n: '', r: '', a: '' };
-            } else if (c) {
-                if(/Nama\s*Rek/i.test(x)) {
-                    c.n = x.split(':')[1].trim();
-                } else if (/Nomor\s*Rek|No\.\s*Rek/i.test(x)) {
-                    c.r = x.split(':')[1].trim();
-                } else if (/Nominal/i.test(x)) {
-                    var nomStr = x.split(':')[1].trim();
-                    var n = parseInt(nomStr.replace(/\D/g, ''), 10);
-                    if(!isNaN(n)) c.a = n.toLocaleString('en-US');
-                }
+            // Cek apakah baris ini adalah detail
+            if(/Nama\s*Rek/i.test(x)) {
+                if(!c) c = { b: '', n: '', r: '', a: '' };
+                c.n = x.split(':')[1].trim();
+            } else if (/Nomor\s*Rek|No\.\s*Rek/i.test(x)) {
+                if(!c) c = { b: '', n: '', r: '', a: '' };
+                c.r = x.split(':')[1].trim();
+            } else if (/Nominal/i.test(x)) {
+                if(!c) c = { b: '', n: '', r: '', a: '' };
+                var nomStr = x.split(':')[1].trim();
+                var n = parseInt(nomStr.replace(/\D/g, ''), 10);
+                if(!isNaN(n)) c.a = n.toLocaleString('en-US');
             } else {
-                var p = x.replace(/\t/g, ' ').replace(/\s{2,}/g, ' ').trim().split(' ');
-                if(p.length >= 4) {
-                    if(/^\d+$/.test(p[1])) {
-                        e.push({b: p[0], r: p[1], n: p.slice(2, -1).join(' '), a: p[p.length-1]});
+                // Jika bukan detail, anggap sebagai baris Bank (atau format 1 baris)
+                if(c && c.n) { 
+                    // Jika c sudah punya nama, berarti ini bank untuk record berikutnya
+                    e.push(c); 
+                    c = { b: x.replace(/KAS BERSIH/i, '').trim(), n: '', r: '', a: '' };
+                } else {
+                    // Cek format 1 baris (misal: DANAMON 123456 Budi 50000)
+                    var p = x.replace(/\t/g, ' ').replace(/\s{2,}/g, ' ').trim().split(' ');
+                    if(p.length >= 4) {
+                        var idx = -1;
+                        for(var i=1; i<p.length; i++) {
+                            if(/^\d{6,}$/.test(p[i])) { idx = i; break; }
+                        }
+                        if(idx !== -1) {
+                            var bank = p[0];
+                            var nomor = p[idx];
+                            var nominal = p[p.length-1];
+                            var namaArr = [];
+                            for(var j=1; j<p.length-1; j++) {
+                                if(j !== idx) namaArr.push(p[j]);
+                            }
+                            e.push({b: bank, r: nomor, n: namaArr.join(' '), a: nominal});
+                        } else {
+                            // Anggap sebagai bank untuk record saat ini
+                            if(!c) c = { b: '', n: '', r: '', a: '' };
+                            c.b = x.replace(/KAS BERSIH/i, '').trim();
+                        }
+                    } else {
+                        // Anggap sebagai bank untuk record saat ini
+                        if(!c) c = { b: '', n: '', r: '', a: '' };
+                        c.b = x.replace(/KAS BERSIH/i, '').trim();
                     }
                 }
             }
         });
-        if(c && c.b) e.push(c);
-        if(!e.length) return;
+        
+        if(c && (c.b || c.n || c.r)) e.push(c);
+        
+        if(!e.length) {
+            o.innerHTML='<span style="color:var(--muted);font-size:12px;">Format tidak dikenali. Pastikan ada Nama/Nomor Rekening.</span>';
+            o.classList.remove('has-content');
+            copyBtn.style.display='none';
+            return;
+        }
         
         var t=0;
         e.forEach(i=>{ 
-            var n=parseInt(i.a.replace(/\D/g,''),10); 
+            var n=parseInt(String(i.a || '').replace(/\D/g,''),10); 
             if(!isNaN(n)) t+=n; 
-            i.ac = i.a; 
+            i.ac = i.a || '-'; 
         });
         
-        dLast = e.map(i => `${i.b}\t${i.r}\t${i.n}\t${i.ac}`).join('\n');
-        dLastCount=e.length; dLastTotal=t; dLastUser=e[e.length-1].n;
+        dLast = e.map(i => `${i.b || '-'}\t${i.r || '-'}\t${i.n || '-'}\t${i.ac}`).join('\n');
+        dLastCount=e.length; dLastTotal=t; dLastUser=e[e.length-1].n || '-';
         
         o.innerHTML='<div class="header-block">Bank\tNomor Rekening\tNama Rekening\tNominal</div>' + 
-        e.map(i => '<div class="entry-block"><span class="header-tag">Bank</span> : '+escHtml(i.b)+'<br><span class="header-tag">Nomor Rekening</span> : '+escHtml(i.r)+'<br><span class="header-tag">Nama Rekening</span> : '+escHtml(i.n)+'<br><span class="header-tag">Nominal</span> : '+escHtml(i.ac)+'</div>').join('');
+        e.map(i => '<div class="entry-block"><span class="header-tag">Bank</span> : '+escHtml(i.b || '-')+'<br><span class="header-tag">Nomor Rekening</span> : '+escHtml(i.r || '-')+'<br><span class="header-tag">Nama Rekening</span> : '+escHtml(i.n || '-')+'<br><span class="header-tag">Nominal</span> : '+escHtml(i.ac)+'</div>').join('');
         o.classList.add('has-content');
         copyBtn.style.display='inline-flex';
         
         document.getElementById('dockStatCount').textContent=e.length;
         document.getElementById('dockStatNominal').textContent=t.toLocaleString('id-ID');
-        document.getElementById('dockStatLast').textContent=e[e.length-1].n;
+        document.getElementById('dockStatLast').textContent=e[e.length-1].n || '-';
     }
     function saveDHist() {
         if(!dLast) return showToast('Tidak ada data untuk disimpan','error');
@@ -435,14 +462,39 @@
             var p=x.replace(/\t/g,' ').replace(/\s{2,}/g,' ').trim().split(' ');
             if(p.length>=4) {
                 var b=p[0], nom='', nam='', n=p[p.length-1];
-                for(var i=1;i<p.length-1;i++){ if(/^\d{6,}$/.test(p[i])){ nom=p[i]; nam=p.slice(1,i).join(' '); break; } }
-                if(!nam) nam=p.slice(1,p.length-1).join(' ');
-                var nn=parseInt(n.replace(/\D/g,''),10); if(!isNaN(nn)){ t+=nn; e.push({b:b,n:nam,r:nom,a:'Rp. '+nn.toLocaleString('id-ID')}); }
+                var nomIdx = -1;
+                
+                // Cari index nomor rekening (angka 6 digit atau lebih)
+                for(var i=1;i<p.length-1;i++){ 
+                    if(/^\d{6,}$/.test(p[i])){ 
+                        nom = p[i]; 
+                        nomIdx = i; 
+                        break; 
+                    } 
+                }
+                
+                // Ambil sisa kata untuk nama rekening
+                if(nomIdx !== -1) {
+                    var nameArr = [];
+                    for(var j=1; j<p.length-1; j++) {
+                        if(j !== nomIdx) nameArr.push(p[j]);
+                    }
+                    nam = nameArr.join(' ');
+                } else {
+                    // Fallback jika tidak ada nomor rekening ditemukan
+                    nam = p.slice(1, p.length-1).join(' ');
+                }
+                
+                var nn=parseInt(n.replace(/\D/g,''),10); 
+                if(!isNaN(nn)){ 
+                    t+=nn; 
+                    e.push({b:b,n:nam,r:nom,a:'Rp. '+nn.toLocaleString('id-ID')}); 
+                }
             }
         });
         if(!e.length) return;
         
-        var h="Info : TogelOn\nPerihal : Pengembalian DANA ( Direct QRIS XPAY -  ke setoran KAS ADM )";
+        var h="Info : TogelOn\nPerihal : Pengembalian DANA ( Direct QRIS MINERAPAY -  ke setoran KAS ADM )";
         var b=e.map(i=>`Bank : ${i.b}\nNama Rekening : ${i.n}\nNomor Rekening : ${i.r}\nNominal : ${i.a}`).join('\n\n');
         retLast=h+'\n\n'+b;
         retLastCount=e.length; retLastTotal=t; retLastUser=e[0].n;
