@@ -3,1249 +3,570 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Report Qris And Peminjaman</title>
+    <title>FORMAT REPORTAN TOGELON </title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         :root {
-            --bg: #0a0f1a;
-            --card: rgba(15, 23, 42, 0.65);
-            --card-solid: #0f172a;
-            --card2: rgba(20, 30, 55, 0.7);
-            --border: rgba(99, 102, 241, 0.15);
-            --border2: rgba(99, 102, 241, 0.3);
-            --glass: rgba(255, 255, 255, 0.03);
-            --glass2: rgba(255, 255, 255, 0.06);
-            --accent: #818cf8;
-            --accent2: #6366f1;
-            --accent-glow: rgba(99, 102, 241, 0.2);
-            --accent-glow2: rgba(99, 102, 241, 0.1);
-            --fg: #e2e8f0;
-            --fg2: #94a3b8;
-            --muted: #64748b;
-            --danger: #f43f5e;
-            --amber: #f59e0b;
-            --amber-dim: rgba(245, 158, 11, 0.12);
-            --amber-border: rgba(245, 158, 11, 0.25);
-            --gold: #fbbf24;
-            --gold-dim: rgba(251, 191, 36, 0.15);
-            --gold-border: rgba(251, 191, 36, 0.3);
-            --cyan: #22d3ee;
-            --cyan2: #06b6d4;
-            --cyan-dim: rgba(6, 182, 212, 0.12);
-            --cyan-border: rgba(6, 182, 212, 0.25);
-            --cyan-glow: rgba(6, 182, 212, 0.15);
+            --bg: #0a0f1a; --card: rgba(15, 23, 42, 0.65); --card2: rgba(20, 30, 55, 0.7);
+            --border: rgba(99, 102, 241, 0.15); --border2: rgba(99, 102, 241, 0.3);
+            --glass: rgba(255, 255, 255, 0.03); --glass2: rgba(255, 255, 255, 0.06);
+            --accent: #818cf8; --accent2: #6366f1; --accent-glow: rgba(99, 102, 241, 0.2);
+            --fg: #e2e8f0; --fg2: #94a3b8; --muted: #64748b; --danger: #f43f5e;
+            --amber: #f59e0b; --amber-dim: rgba(245, 158, 11, 0.12); --amber-border: rgba(245, 158, 11, 0.25);
+            --gold: #fbbf24; --gold-dim: rgba(251, 191, 36, 0.15); --gold-border: rgba(251, 191, 36, 0.3);
+            --cyan: #22d3ee; --cyan-dim: rgba(6, 182, 212, 0.12); --cyan-border: rgba(6, 182, 212, 0.25); --cyan-glow: rgba(6, 182, 212, 0.15);
+            --rose: #fb7185; --rose-dim: rgba(244, 63, 94, 0.12); --rose-border: rgba(244, 63, 94, 0.25); --rose-glow: rgba(244, 63, 94, 0.15);
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            color: var(--fg);
-            min-height: 100vh;
-            overflow-x: hidden;
-            background: #0a0f1a;
+            font-family: 'Plus Jakarta Sans', sans-serif; color: var(--fg); min-height: 100vh; overflow-x: hidden; background: #0a0f1a;
             background-image: url('https://cdn.areabermain.club/assets/cdn/az7/2026/06/13/20260613/6440b79d16d7215decaa0bf5a2f9f1a0/8e35011e-6793-4bfc-ba03-ac317c74beca.png');
-            background-size: cover;
-            background-position: center top;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
+            background-size: cover; background-position: center top; background-attachment: fixed;
         }
-        body::before {
-            content: '';
-            position: fixed; inset: 0;
-            background: linear-gradient(180deg, rgba(10,15,26,0.82) 0%, rgba(10,15,26,0.88) 40%, rgba(10,15,26,0.92) 100%);
-            z-index: 0; pointer-events: none;
-        }
-        body::after {
-            content: '';
-            position: fixed; inset: 0;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
-            pointer-events: none; z-index: 0;
-        }
+        body::before { content: ''; position: fixed; inset: 0; background: linear-gradient(180deg, rgba(10,15,26,0.82) 0%, rgba(10,15,26,0.92) 100%); z-index: 0; pointer-events: none; }
         .bg-glow { position: fixed; border-radius: 50%; filter: blur(150px); pointer-events: none; z-index: 0; }
         .bg-glow-1 { top: -150px; left: -100px; width: 500px; height: 500px; background: var(--accent2); opacity: 0.08; }
         .bg-glow-2 { bottom: -150px; right: -100px; width: 500px; height: 500px; background: #06b6d4; opacity: 0.06; }
-        .bg-glow-3 { top: 40%; left: 50%; transform: translateX(-50%); width: 600px; height: 600px; background: var(--amber); opacity: 0.03; }
         .mono { font-family: 'JetBrains Mono', monospace; }
 
-        .glass-card {
-            background: var(--card);
-            backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
-            border: 1px solid var(--border); border-radius: 16px;
-            transition: all 0.35s cubic-bezier(0.16,1,0.3,1);
-            position: relative; overflow: hidden;
+        .glass-card, .glass-card-gold, .glass-card-cyan, .glass-card-rose {
+            background: rgba(15,23,42,0.65); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+            border-radius: 16px; transition: all 0.35s cubic-bezier(0.16,1,0.3,1); position: relative; overflow: hidden;
         }
-        .glass-card::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
-            pointer-events: none;
-        }
-        .glass-card:hover {
-            border-color: var(--border2);
-            box-shadow: 0 8px 40px rgba(99,102,241,0.08), 0 0 0 1px var(--border2);
-            transform: translateY(-2px);
-        }
-        .glass-card-gold {
-            background: rgba(15,23,42,0.65);
-            backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
-            border: 1px solid var(--gold-border); border-radius: 16px;
-            transition: all 0.35s cubic-bezier(0.16,1,0.3,1);
-            position: relative; overflow: hidden;
-        }
-        .glass-card-gold::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(251,191,36,0.15), transparent);
-            pointer-events: none;
-        }
-        .glass-card-gold:hover {
-            border-color: rgba(251,191,36,0.45);
-            box-shadow: 0 8px 40px var(--gold-dim), 0 0 0 1px rgba(251,191,36,0.4);
-            transform: translateY(-2px);
-        }
-        .glass-card-cyan {
-            background: rgba(15,23,42,0.65);
-            backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
-            border: 1px solid var(--cyan-border); border-radius: 16px;
-            transition: all 0.35s cubic-bezier(0.16,1,0.3,1);
-            position: relative; overflow: hidden;
-        }
-        .glass-card-cyan::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(6,182,212,0.15), transparent);
-            pointer-events: none;
-        }
-        .glass-card-cyan:hover {
-            border-color: rgba(6,182,212,0.45);
-            box-shadow: 0 8px 40px var(--cyan-dim), 0 0 0 1px rgba(6,182,212,0.4);
-            transform: translateY(-2px);
-        }
-        .logo-img {
-            height: 40px; width: auto; object-fit: contain;
-            filter: drop-shadow(0 0 12px rgba(6,182,212,0.4));
-            border-radius: 6px;
-        }
-        .tab-nav {
-            display: flex; gap: 4px;
-            background: rgba(15,23,42,0.7);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border);
-            border-radius: 14px; padding: 5px;
-            position: relative;
-        }
-        .tab-nav::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
-            border-radius: 14px 14px 0 0;
-        }
-        .tab-btn {
-            flex: 1; padding: 11px 16px; border: none; border-radius: 10px;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-weight: 700; font-size: 12px; cursor: pointer;
-            transition: all 0.3s; background: transparent; color: var(--muted);
-            display: flex; align-items: center; justify-content: center; gap: 7px;
-            position: relative; white-space: nowrap;
-        }
+        .glass-card { border: 1px solid var(--border); }
+        .glass-card-gold { border: 1px solid var(--gold-border); }
+        .glass-card-cyan { border: 1px solid var(--cyan-border); }
+        .glass-card-rose { border: 1px solid var(--rose-border); }
+        .glass-card:hover { border-color: var(--border2); box-shadow: 0 8px 40px rgba(99,102,241,0.08); transform: translateY(-2px); }
+        .glass-card-gold:hover { border-color: rgba(251,191,36,0.45); box-shadow: 0 8px 40px var(--gold-dim); transform: translateY(-2px); }
+        .glass-card-cyan:hover { border-color: rgba(6,182,212,0.45); box-shadow: 0 8px 40px var(--cyan-dim); transform: translateY(-2px); }
+        .glass-card-rose:hover { border-color: rgba(244,63,94,0.45); box-shadow: 0 8px 40px var(--rose-dim); transform: translateY(-2px); }
+
+        .tab-nav { display: flex; gap: 4px; background: rgba(15,23,42,0.7); backdrop-filter: blur(20px); border: 1px solid var(--border); border-radius: 14px; padding: 5px; flex-wrap: wrap; }
+        .tab-btn { flex: 1; min-width: 130px; padding: 11px 16px; border: none; border-radius: 10px; font-weight: 700; font-size: 12px; cursor: pointer; transition: all 0.3s; background: transparent; color: var(--muted); display: flex; align-items: center; justify-content: center; gap: 7px; white-space: nowrap; }
         .tab-btn:hover { color: var(--fg2); background: var(--glass2); }
-        .tab-btn.active-purple {
-            background: linear-gradient(135deg, var(--accent2), var(--accent));
-            color: #fff;
-            box-shadow: 0 4px 20px var(--accent-glow), inset 0 1px 0 rgba(255,255,255,0.1);
-        }
-        .tab-btn.active-gold {
-            background: linear-gradient(135deg, #d97706, var(--gold));
-            color: #000;
-            box-shadow: 0 4px 20px var(--gold-dim), inset 0 1px 0 rgba(255,255,255,0.15);
-        }
-        .tab-btn.active-cyan {
-            background: linear-gradient(135deg, #0891b2, var(--cyan));
-            color: #000;
-            box-shadow: 0 4px 20px var(--cyan-glow), inset 0 1px 0 rgba(255,255,255,0.15);
-        }
+        .tab-btn.active-purple { background: linear-gradient(135deg, var(--accent2), var(--accent)); color: #fff; box-shadow: 0 4px 20px var(--accent-glow); }
+        .tab-btn.active-gold { background: linear-gradient(135deg, #d97706, var(--gold)); color: #000; box-shadow: 0 4px 20px var(--gold-dim); }
+        .tab-btn.active-cyan { background: linear-gradient(135deg, #0891b2, var(--cyan)); color: #000; box-shadow: 0 4px 20px var(--cyan-glow); }
+        .tab-btn.active-rose { background: linear-gradient(135deg, #be123c, var(--rose)); color: #fff; box-shadow: 0 4px 20px var(--rose-glow); }
         .tab-panel { display: none; }
         .tab-panel.active { display: block; animation: fadeUp 0.4s cubic-bezier(0.16,1,0.3,1) both; }
 
-        textarea {
-            font-family: 'JetBrains Mono', monospace;
-            background: rgba(5,10,20,0.6);
-            border: 1.5px solid var(--border);
-            color: var(--fg); resize: none; outline: none;
-            transition: border-color 0.3s, box-shadow 0.3s;
-            border-radius: 12px; padding: 16px; width: 100%;
-            font-size: 13px; line-height: 1.7;
-        }
-        textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow2), 0 0 30px var(--accent-glow2); }
-        textarea.amber-focus:focus { border-color: var(--amber); box-shadow: 0 0 0 3px var(--amber-dim), 0 0 30px var(--amber-dim); }
-        textarea.cyan-focus:focus { border-color: var(--cyan); box-shadow: 0 0 0 3px var(--cyan-dim), 0 0 30px var(--cyan-dim); }
-        textarea::placeholder { color: var(--muted); }
+        textarea { font-family: 'JetBrains Mono', monospace; background: rgba(5,10,20,0.6); border: 1.5px solid var(--border); color: var(--fg); resize: none; outline: none; transition: all 0.3s; border-radius: 12px; padding: 16px; width: 100%; font-size: 13px; line-height: 1.7; }
+        textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+        textarea.rose-focus:focus { border-color: var(--rose); box-shadow: 0 0 0 3px var(--rose-dim); }
+        textarea.amber-focus:focus { border-color: var(--amber); box-shadow: 0 0 0 3px var(--amber-dim); }
+        textarea.cyan-focus:focus { border-color: var(--cyan); box-shadow: 0 0 0 3px var(--cyan-dim); }
 
-        .output-box {
-            font-family: 'JetBrains Mono', monospace;
-            background: rgba(5,10,20,0.5);
-            border: 1.5px solid var(--border);
-            border-radius: 12px; padding: 20px;
-            font-size: 13px; line-height: 2.1;
-            color: var(--fg); white-space: pre-wrap;
-            word-break: break-all; min-height: 140px;
-            position: relative; transition: border-color 0.3s;
-        }
-        .output-box.has-content { border-color: var(--border2); }
-
-        /* ===== DOCK TABLE OUTPUT ===== */
-        .dock-table-wrap {
-            background: rgba(5,10,20,0.5);
-            border: 1.5px solid var(--gold-border);
-            border-radius: 12px;
-            overflow: hidden;
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
-        .dock-table-wrap.has-content {
-            border-color: var(--gold);
-            box-shadow: 0 0 25px var(--gold-dim);
-        }
-        .dock-table-wrap table {
-            width: 100%;
-            border-collapse: collapse;
-            font-family: 'JetBrains Mono', monospace;
-        }
-        .dock-table-wrap thead th {
-            background: linear-gradient(135deg, rgba(217,119,6,0.18), rgba(251,191,36,0.12));
-            color: var(--gold);
-            font-size: 10px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            padding: 12px 16px;
-            text-align: left;
-            border-bottom: 1px solid var(--gold-border);
-            white-space: nowrap;
-        }
-        .dock-table-wrap tbody td {
-            font-size: 13px;
-            font-weight: 500;
-            color: var(--fg);
-            padding: 11px 16px;
-            border-bottom: 1px solid rgba(251,191,36,0.07);
-            vertical-align: middle;
-        }
-        .dock-table-wrap tbody tr:last-child td { border-bottom: none; }
-        .dock-table-wrap tbody tr {
-            transition: background 0.2s;
-        }
-        .dock-table-wrap tbody tr:hover {
-            background: rgba(251,191,36,0.04);
-        }
-        .dock-table-wrap tbody td:nth-child(1) {
-            color: var(--gold);
-            font-weight: 700;
-            white-space: nowrap;
-        }
-        .dock-table-wrap tbody td:nth-child(2) {
-            color: var(--fg2);
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            white-space: nowrap;
-        }
-        .dock-table-wrap tbody td:nth-child(4) {
-            color: var(--fg);
-            font-weight: 700;
-            text-align: right;
-            white-space: nowrap;
-        }
-        .dock-empty {
-            padding: 32px;
-            text-align: center;
-            color: var(--muted);
-            font-size: 12px;
-        }
-
-        .returnal-output {
-            font-family: 'JetBrains Mono', monospace;
-            background: rgba(5,10,20,0.5);
-            border: 1.5px solid var(--cyan-border);
-            border-radius: 12px; padding: 20px;
-            font-size: 13px; line-height: 2.1;
-            color: var(--fg); white-space: pre-wrap;
-            word-break: break-all; min-height: 140px;
-            position: relative; transition: border-color 0.3s;
-        }
+        .output-box, .returnal-output, .wdp-output { font-family: 'JetBrains Mono', monospace; background: rgba(5,10,20,0.5); border: 1.5px solid var(--border); border-radius: 12px; padding: 20px; font-size: 13px; line-height: 2.1; color: var(--fg); white-space: pre-wrap; word-break: break-all; min-height: 140px; position: relative; }
+        .returnal-output { border-color: var(--cyan-border); }
+        .wdp-output { border-color: var(--rose-border); }
         .returnal-output.has-content { border-color: var(--cyan); box-shadow: 0 0 25px var(--cyan-dim); }
+        .wdp-output.has-content { border-color: var(--rose); box-shadow: 0 0 25px var(--rose-dim); }
 
-        .btn {
-            display: inline-flex; align-items: center; gap: 8px;
-            padding: 10px 20px; border-radius: 10px;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-weight: 700; font-size: 13px;
-            border: none; cursor: pointer;
-            transition: all 0.25s; overflow: hidden; position: relative;
-        }
-        .btn::after {
-            content: ''; position: absolute; inset: 0;
-            background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, transparent 50%);
-            pointer-events: none;
-        }
+        .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 10px; font-weight: 700; font-size: 13px; border: none; cursor: pointer; transition: all 0.25s; }
         .btn:active { transform: scale(0.96); }
         .btn-primary { background: linear-gradient(135deg, var(--accent2), var(--accent)); color: #fff; box-shadow: 0 2px 12px var(--accent-glow); }
-        .btn-primary:hover { box-shadow: 0 4px 24px var(--accent-glow); transform: translateY(-1px); }
         .btn-amber { background: linear-gradient(135deg, #d97706, var(--gold)); color: #000; box-shadow: 0 2px 12px var(--gold-dim); }
-        .btn-amber:hover { box-shadow: 0 4px 24px var(--gold-dim); transform: translateY(-1px); }
         .btn-cyan { background: linear-gradient(135deg, #0891b2, var(--cyan)); color: #000; box-shadow: 0 2px 12px var(--cyan-dim); }
-        .btn-cyan:hover { box-shadow: 0 4px 24px var(--cyan-dim); transform: translateY(-1px); }
+        .btn-rose { background: linear-gradient(135deg, #be123c, var(--rose)); color: #fff; box-shadow: 0 2px 12px var(--rose-glow); }
         .btn-ghost { background: var(--glass); color: var(--fg2); border: 1.5px solid var(--border); }
-        .btn-ghost::after { display: none; }
         .btn-ghost:hover { border-color: var(--border2); color: var(--fg); background: var(--glass2); }
         .btn-danger { background: var(--glass); color: var(--danger); border: 1.5px solid rgba(244,63,94,0.2); }
-        .btn-danger::after { display: none; }
-        .btn-danger:hover { background: rgba(244,63,94,0.08); border-color: rgba(244,63,94,0.4); }
         .btn-sm { padding: 6px 12px; font-size: 11px; border-radius: 8px; }
 
         .toast-container { position: fixed; top: 24px; right: 24px; z-index: 9999; display: flex; flex-direction: column; gap: 8px; }
-        .toast {
-            padding: 12px 20px; border-radius: 12px; font-size: 13px; font-weight: 600;
-            display: flex; align-items: center; gap: 10px;
-            animation: toastIn 0.4s cubic-bezier(0.16,1,0.3,1);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.5); backdrop-filter: blur(12px);
-            max-width: 360px;
-        }
+        .toast { padding: 12px 20px; border-radius: 12px; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 10px; animation: tIn 0.4s; box-shadow: 0 8px 30px rgba(0,0,0,0.5); backdrop-filter: blur(12px); max-width: 360px; }
         .toast-success { background: rgba(5,46,22,0.92); color: #86efac; border: 1px solid rgba(34,197,94,0.3); }
         .toast-error { background: rgba(76,5,25,0.92); color: #fda4af; border: 1px solid rgba(244,63,94,0.3); }
-        .toast-exit { animation: toastOut 0.3s ease forwards; }
-        @keyframes toastIn { from { opacity:0; transform: translateX(40px) scale(0.95); } to { opacity:1; transform: translateX(0) scale(1); } }
-        @keyframes toastOut { to { opacity:0; transform: translateX(40px) scale(0.95); } }
+        @keyframes tIn { from { opacity:0; transform: translateX(40px); } to { opacity:1; transform: translateX(0); } }
 
-        .history-item {
-            background: var(--card); backdrop-filter: blur(12px);
-            border: 1px solid var(--border); border-radius: 12px; padding: 12px 16px;
-            transition: all 0.25s; cursor: pointer; position: relative; overflow: hidden;
-        }
-        .history-item::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--accent); opacity: 0; transition: opacity 0.2s; }
+        .history-item, .dock-history-item, .returnal-history-item, .wdp-history-item { background: var(--card); backdrop-filter: blur(12px); border: 1px solid var(--border); border-radius: 12px; padding: 12px 16px; transition: all 0.25s; cursor: pointer; position: relative; overflow: hidden; margin-bottom: 8px; }
         .history-item:hover { border-color: var(--border2); background: var(--card2); }
-        .history-item:hover::before { opacity: 1; }
-        .dock-history-item {
-            background: var(--card); backdrop-filter: blur(12px);
-            border: 1px solid var(--border); border-radius: 12px; padding: 12px 16px;
-            transition: all 0.25s; cursor: pointer; position: relative; overflow: hidden;
-        }
-        .dock-history-item::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--gold); opacity: 0; transition: opacity 0.2s; }
         .dock-history-item:hover { border-color: var(--gold-border); background: var(--card2); }
-        .dock-history-item:hover::before { opacity: 1; }
-        .returnal-history-item {
-            background: var(--card); backdrop-filter: blur(12px);
-            border: 1px solid var(--border); border-radius: 12px; padding: 12px 16px;
-            transition: all 0.25s; cursor: pointer; position: relative; overflow: hidden;
-        }
-        .returnal-history-item::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--cyan); opacity: 0; transition: opacity 0.2s; }
         .returnal-history-item:hover { border-color: var(--cyan-border); background: var(--card2); }
-        .returnal-history-item:hover::before { opacity: 1; }
+        .wdp-history-item:hover { border-color: var(--rose-border); background: var(--card2); }
 
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: rgba(99,102,241,0.2); border-radius: 3px; }
-
-        .badge {
-            display: inline-flex; align-items: center; justify-content: center;
-            min-width: 22px; height: 22px; border-radius: 6px;
-            font-size: 11px; font-weight: 800; padding: 0 6px;
-        }
-        .badge-accent { background: linear-gradient(135deg, var(--accent2), var(--accent)); color: #fff; }
-        .badge-amber { background: linear-gradient(135deg, #d97706, var(--gold)); color: #000; }
-        .badge-cyan { background: linear-gradient(135deg, #0891b2, var(--cyan)); color: #000; }
-        .badge-muted { background: var(--glass2); color: var(--fg2); border: 1px solid var(--border); }
-
-        .premium-badge {
-            display: inline-flex; align-items: center; gap: 5px;
-            padding: 4px 10px; border-radius: 6px;
-            font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;
-            background: linear-gradient(135deg, rgba(251,191,36,0.15), rgba(245,158,11,0.1));
-            color: var(--gold); border: 1px solid var(--gold-border);
-        }
-
-        .pulse-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); position: relative; }
-        .pulse-dot::after { content: ''; position: absolute; inset: -3px; border-radius: 50%; border: 2px solid var(--accent); animation: pulse 2s ease infinite; }
-        @keyframes pulse { 0%,100%{opacity:0;transform:scale(0.8)} 50%{opacity:0.5;transform:scale(1.2)} }
-        .fade-up { animation: fadeUp 0.5s cubic-bezier(0.16,1,0.3,1) both; }
-        @keyframes fadeUp { from { opacity:0; transform: translateY(12px); } to { opacity:1; transform: translateY(0); } }
-
-        .grid-bg {
-            background-image: linear-gradient(rgba(99,102,241,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(99,102,241,0.06) 1px, transparent 1px);
-            background-size: 40px 40px; opacity: 0.3;
-            position: absolute; inset: 0; border-radius: 12px; pointer-events: none;
-        }
-        .label-tag { color: var(--accent); font-weight: 600; }
-        .header-tag { color: var(--gold); font-weight: 600; }
-        .cyan-tag { color: var(--cyan); font-weight: 600; }
-
-        .entry-block {
-            padding: 14px 16px; margin-bottom: 10px;
-            background: rgba(99,102,241,0.04);
-            border: 1px solid var(--border); border-radius: 10px; line-height: 2.1;
-        }
-        .entry-block:last-child { margin-bottom: 0; }
-        .header-block {
-            padding: 12px 16px; margin-bottom: 10px;
-            background: rgba(251,191,36,0.05);
-            border: 1px solid var(--gold-border); border-radius: 10px; line-height: 2.1;
-        }
-        .returnal-header-block {
-            padding: 12px 16px; margin-bottom: 10px;
-            background: rgba(6,182,212,0.05);
-            border: 1px solid var(--cyan-border); border-radius: 10px; line-height: 2.1;
-        }
-        .returnal-entry-block {
-            padding: 14px 16px; margin-bottom: 10px;
-            background: rgba(6,182,212,0.04);
-            border: 1px solid var(--cyan-border); border-radius: 10px; line-height: 2.1;
-        }
-        .returnal-entry-block:last-child { margin-bottom: 0; }
-
-        @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
-        .shimmer-line {
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(99,102,241,0.3), transparent);
-            background-size: 200% 100%; animation: shimmer 3s ease infinite;
-        }
-
-        .auto-badge {
-            display: inline-flex; align-items: center; gap: 4px;
-            padding: 2px 8px; border-radius: 5px;
-            font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
-            background: rgba(34,197,94,0.12); color: #86efac; border: 1px solid rgba(34,197,94,0.25);
-            animation: autoPulse 2s ease infinite;
-        }
-        @keyframes autoPulse { 0%,100%{opacity:1} 50%{opacity:0.6} }
-
-        .dock-stats-row {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-bottom: 16px;
-        }
-        .dock-stat-card {
-            background: rgba(251,191,36,0.04);
-            border: 1px solid var(--gold-border);
-            border-radius: 10px;
-            padding: 12px 14px;
-        }
-        .dock-stat-label {
-            font-size: 9px;
-            color: var(--muted);
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-        }
-        .dock-stat-value {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 18px;
-            font-weight: 800;
-            color: var(--gold);
-            margin-top: 4px;
-        }
-
-        @media (max-width: 768px) {
-            .main-grid { grid-template-columns: 1fr !important; }
-            .stats-row { grid-template-columns: repeat(2, 1fr) !important; }
-            .dock-grid { grid-template-columns: 1fr !important; }
-            .returnal-grid { grid-template-columns: 1fr !important; }
-            .tab-btn { font-size: 11px; padding: 10px 10px; gap: 5px; }
-            .dock-table-wrap { overflow-x: auto; }
-            .dock-table-wrap table { min-width: 500px; }
-            .dock-stats-row { grid-template-columns: 1fr !important; }
-        }
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
-        }
+        .badge { display: inline-flex; align-items: center; justify-content: center; min-width: 22px; height: 22px; border-radius: 6px; font-size: 11px; font-weight: 800; padding: 0 6px; }
+        .badge-accent { background: var(--accent); color: #fff; } .badge-amber { background: var(--gold); color: #000; } .badge-cyan { background: var(--cyan); color: #000; } .badge-rose { background: var(--rose); color: #fff; }
+        
+        .label-tag { color: var(--accent); font-weight: 600; } .header-tag { color: var(--gold); font-weight: 600; } .cyan-tag { color: var(--cyan); font-weight: 600; } .rose-tag { color: var(--rose); font-weight: 600; }
+        .entry-block, .returnal-entry-block, .wdp-entry-block { padding: 14px 16px; margin-bottom: 10px; background: rgba(99,102,241,0.04); border: 1px solid var(--border); border-radius: 10px; line-height: 2.1; }
+        .returnal-entry-block { background: rgba(6,182,212,0.04); border-color: var(--cyan-border); }
+        .wdp-entry-block { background: rgba(244,63,94,0.04); border-color: var(--rose-border); }
+        .header-block, .returnal-header-block, .wdp-header-block { padding: 12px 16px; margin-bottom: 10px; background: rgba(251,191,36,0.05); border: 1px solid var(--gold-border); border-radius: 10px; line-height: 2.1; }
+        .returnal-header-block { background: rgba(6,182,212,0.05); border-color: var(--cyan-border); }
+        .wdp-header-block { background: rgba(244,63,94,0.05); border-color: var(--rose-border); }
+        .stats-row, .dock-stats-row, .wdp-stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
+        .stats-row { grid-template-columns: repeat(4, 1fr); }
+        .dock-stat-card, .wdp-stat-card { background: rgba(251,191,36,0.04); border: 1px solid var(--gold-border); border-radius: 10px; padding: 12px 14px; }
+        .wdp-stat-card { background: rgba(244,63,94,0.04); border-color: var(--rose-border); }
+        .dock-stat-value, .wdp-stat-value { font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 800; color: var(--gold); margin-top: 4px; }
+        .wdp-stat-value { color: var(--rose); }
+        @media (max-width: 768px) { .main-grid, .dock-grid, .returnal-grid, .wdp-grid { grid-template-columns: 1fr !important; } .stats-row, .dock-stats-row, .wdp-stats-row { grid-template-columns: 1fr !important; } .tab-btn { font-size: 11px; padding: 10px; min-width: 45%; } }
     </style>
 </head>
 <body>
     <div class="bg-glow bg-glow-1"></div>
     <div class="bg-glow bg-glow-2"></div>
-    <div class="bg-glow bg-glow-3"></div>
     <div class="toast-container" id="toastContainer"></div>
-
     <div style="position:relative; z-index:1; max-width:1200px; margin:0 auto; padding:24px 20px 60px;">
-
         <header class="fade-up" style="margin-bottom:28px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px;">
             <div style="display:flex; align-items:center; gap:14px;">
-                <img src="https://z-cdn-media.chatglm.cn/files/d6f4f54f-a86e-4990-a9e6-fb4775d0ff7c.png?auth_key=1882183480-47465a0a44164b24aac46a58ca5cce4a-0-43a632db2c6abae55ad85b42fcfe166c" alt="TogelOn Logo" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                <div style="display:none; width:46px; height:46px; border-radius:12px; background:linear-gradient(135deg,var(--accent2),var(--accent)); align-items:center; justify-content:center; box-shadow:0 4px 20px var(--accent-glow);">
+                <div style="width:46px; height:46px; border-radius:12px; background:linear-gradient(135deg,var(--accent2),var(--accent)); display:flex; align-items:center; justify-content:center; box-shadow:0 4px 20px var(--accent-glow);">
                     <i class="fa-solid fa-file-lines" style="font-size:19px;color:#fff;"></i>
                 </div>
-                <div>
-                    <div style="display:flex;align-items:center;gap:10px;">
-                        <h1 style="font-size:20px;font-weight:900;letter-spacing:-0.3px;line-height:1.2;">Report Qris And Peminjaman</h1>
-                        <span class="premium-badge"><i class="fa-solid fa-crown" style="font-size:8px;"></i> PRO</span>
-                    </div>
-                    <p style="font-size:12px;color:var(--muted);margin-top:2px;">Tempel data, langsung jadi format laporan</p>
-                </div>
-            </div>
-            <div style="display:flex;align-items:center;gap:10px;">
-                <span class="auto-badge"><i class="fa-solid fa-bolt" style="font-size:7px;"></i> AUTO</span>
-                <div class="pulse-dot"></div>
-                <span style="font-size:12px;color:var(--fg2);font-weight:600;">Ready</span>
+                <div><div style="display:flex;align-items:center;gap:10px;"><h1 style="font-size:20px;font-weight:900;letter-spacing:-0.3px;">Report Qris And Peminjaman</h1></div><p style="font-size:12px;color:var(--muted);margin-top:2px;">Tempel data, langsung jadi format laporan</p></div>
             </div>
         </header>
-
-        <div class="shimmer-line fade-up" style="margin-bottom:24px;animation-delay:0.03s;border-radius:1px;"></div>
-
-        <div class="tab-nav fade-up" style="margin-bottom:24px; animation-delay:0.05s;">
-            <button class="tab-btn active-purple" onclick="switchTab('report', this)" id="tabReport">
-                <i class="fa-solid fa-file-export" style="font-size:11px;"></i> Report Qris
-            </button>
-            <button class="tab-btn" onclick="switchTab('dock', this)" id="tabDock">
-                <i class="fa-solid fa-table-columns" style="font-size:11px;"></i> Peminjaman
-            </button>
-            <button class="tab-btn" onclick="switchTab('returnal', this)" id="tabReturnal">
-                <i class="fa-solid fa-rotate-left" style="font-size:11px;"></i> Pengembalian Dana kas Adm
-            </button>
+        <div class="tab-nav" style="margin-bottom:24px;">
+            <button class="tab-btn active-purple" onclick="switchTab('report', this)"><i class="fa-solid fa-file-export" style="font-size:11px;"></i> Report Qris</button>
+            <button class="tab-btn" onclick="switchTab('dock', this)"><i class="fa-solid fa-table-columns" style="font-size:11px;"></i> Peminjaman</button>
+            <button class="tab-btn" onclick="switchTab('returnal', this)"><i class="fa-solid fa-rotate-left" style="font-size:11px;"></i> Pengembalian</button>
+            <button class="tab-btn" onclick="switchTab('wdpending', this)"><i class="fa-solid fa-clock" style="font-size:11px;"></i> WD Pending</button>
         </div>
 
         <!-- ===== TAB 1: REPORT QRIS ===== -->
         <div class="tab-panel active" id="panelReport">
-            <div class="stats-row fade-up" style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px;animation-delay:0.1s;">
-                <div class="glass-card" style="padding:18px 20px;cursor:default;transform:none;">
-                    <div style="font-size:10px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:0.8px;">Total Diproses</div>
-                    <div id="statTotal" class="mono" style="font-size:26px;font-weight:800;color:var(--fg);margin-top:6px;">0</div>
-                </div>
-                <div class="glass-card" style="padding:18px 20px;cursor:default;transform:none;">
-                    <div style="font-size:10px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:0.8px;">Sesi Ini</div>
-                    <div id="statSession" class="mono" style="font-size:26px;font-weight:800;color:var(--accent);margin-top:6px;">0</div>
-                </div>
-                <div class="glass-card" style="padding:18px 20px;cursor:default;transform:none;">
-                    <div style="font-size:10px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:0.8px;">Total Nominal</div>
-                    <div id="statNominal" class="mono" style="font-size:26px;font-weight:800;color:var(--fg);margin-top:6px;">Rp. 0</div>
-                </div>
-                <div class="glass-card" style="padding:18px 20px;cursor:default;transform:none;">
-                    <div style="font-size:10px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:0.8px;">Terakhir</div>
-                    <div id="statLast" class="mono" style="font-size:13px;font-weight:600;color:var(--fg2);margin-top:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">-</div>
-                </div>
+            <div class="stats-row" style="margin-bottom:24px;">
+                <div class="glass-card" style="padding:18px 20px;"><div style="font-size:10px;color:var(--muted);font-weight:700;text-transform:uppercase;">Total Diproses</div><div id="statTotal" class="mono" style="font-size:26px;font-weight:800;margin-top:6px;">0</div></div>
+                <div class="glass-card" style="padding:18px 20px;"><div style="font-size:10px;color:var(--muted);font-weight:700;text-transform:uppercase;">Sesi Ini</div><div id="statSession" class="mono" style="font-size:26px;font-weight:800;color:var(--accent);margin-top:6px;">0</div></div>
+                <div class="glass-card" style="padding:18px 20px;"><div style="font-size:10px;color:var(--muted);font-weight:700;text-transform:uppercase;">Total Nominal</div><div id="statNominal" class="mono" style="font-size:26px;font-weight:800;margin-top:6px;">Rp. 0</div></div>
+                <div class="glass-card" style="padding:18px 20px;"><div style="font-size:10px;color:var(--muted);font-weight:700;text-transform:uppercase;">Terakhir</div><div id="statLast" class="mono" style="font-size:13px;font-weight:600;color:var(--fg2);margin-top:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">-</div></div>
             </div>
-
             <div class="main-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
-                <div class="glass-card fade-up" style="padding:20px;animation-delay:0.15s;">
-                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-                        <label style="font-size:13px;font-weight:700;color:var(--fg2);display:flex;align-items:center;gap:8px;">
-                            <i class="fa-solid fa-paste" style="color:var(--accent);font-size:12px;"></i> INPUT RAW DATA
-                        </label>
-                        <span class="auto-badge"><i class="fa-solid fa-bolt" style="font-size:6px;"></i> AUTO</span>
-                    </div>
-                    <textarea id="inputArea" rows="8" placeholder="Tempel data di sini...&#10;&#10;Contoh:&#10;Yadie12	100,000		1poh58e89004		https://sleekshot.app/v/xxx" spellcheck="false" aria-label="Area tempel data mentah"></textarea>
+                <div class="glass-card" style="padding:20px;">
+                    <label style="font-size:13px;font-weight:700;color:var(--fg2);display:block;margin-bottom:12px;"><i class="fa-solid fa-paste" style="color:var(--accent);margin-right:8px;"></i> INPUT RAW DATA</label>
+                    <textarea id="inputArea" rows="8" oninput="processInput()" onchange="saveRHist()" placeholder="Tempel data di sini... Hasil akan otomatis muncul." spellcheck="false"></textarea>
                     <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;">
-                        <button class="btn btn-primary" onclick="processInput()"><i class="fa-solid fa-bolt" style="font-size:12px;"></i> Proses</button>
+                        <button class="btn btn-primary" onclick="saveRHist()"><i class="fa-solid fa-bolt" style="font-size:12px;"></i> Simpan Riwayat</button>
                         <button class="btn btn-ghost" onclick="tryPaste('inputArea')"><i class="fa-solid fa-clipboard" style="font-size:12px;"></i> Paste</button>
                         <button class="btn btn-danger" onclick="clearField('inputArea')"><i class="fa-solid fa-xmark" style="font-size:12px;"></i> Clear</button>
                     </div>
                 </div>
-                <div class="glass-card fade-up" style="padding:20px;animation-delay:0.2s;">
-                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-                        <label style="font-size:13px;font-weight:700;color:var(--fg2);display:flex;align-items:center;gap:8px;">
-                            <i class="fa-solid fa-file-export" style="color:var(--accent);font-size:12px;"></i> HASIL FORMAT
-                        </label>
-                        <div style="display:flex;align-items:center;gap:8px;">
-                            <span id="lineCount" class="badge badge-muted" style="display:none;">0</span>
-                            <button class="btn btn-ghost btn-sm" onclick="copyReportAll()" id="copyBtn" style="display:none;"><i class="fa-regular fa-copy" style="font-size:11px;"></i> Salin</button>
-                        </div>
+                <div class="glass-card" style="padding:20px;">
+                    <div style="display:flex;justify-content:space-between;margin-bottom:12px;">
+                        <label style="font-size:13px;font-weight:700;color:var(--fg2);"><i class="fa-solid fa-file-export" style="color:var(--accent);margin-right:8px;"></i> HASIL FORMAT</label>
+                        <button class="btn btn-ghost btn-sm" onclick="copyReportAll()" id="copyBtn" style="display:none;"><i class="fa-regular fa-copy" style="font-size:11px;"></i> Salin</button>
                     </div>
-                    <div style="position:relative;">
-                        <div class="grid-bg"></div>
-                        <div class="output-box" id="outputBox" style="position:relative;z-index:1;">
-                            <span style="color:var(--muted);font-size:12px;">Hasil akan muncul otomatis saat data ditempel...</span>
-                        </div>
-                    </div>
-                    <div id="outputActions" style="display:none;margin-top:12px;gap:8px;flex-wrap:wrap;">
-                        <button class="btn btn-ghost btn-sm" onclick="copyReportAll()"><i class="fa-solid fa-copy" style="font-size:10px;"></i> Salin Semua</button>
-                        <button class="btn btn-ghost btn-sm" onclick="copyReportHeader()"><i class="fa-solid fa-heading" style="font-size:10px;"></i> Salin Header Saja</button>
-                        <button class="btn btn-ghost btn-sm" onclick="copyReportLast()"><i class="fa-solid fa-grip-lines" style="font-size:10px;"></i> Salin 1 Entry Terakhir</button>
-                    </div>
+                    <div class="output-box" id="outputBox"><span style="color:var(--muted);font-size:12px;">Hasil akan muncul otomatis saat data ditempel...</span></div>
                 </div>
             </div>
-
-            <div class="fade-up" style="animation-delay:0.25s;margin-top:28px;">
-                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-                    <div style="display:flex;align-items:center;gap:10px;">
-                        <label style="font-size:13px;font-weight:700;color:var(--fg2);display:flex;align-items:center;gap:8px;">
-                            <i class="fa-solid fa-clock-rotate-left" style="color:var(--accent);font-size:12px;"></i> RIWAYAT
-                        </label>
-                        <span id="historyCount" class="badge badge-accent" style="display:none;">0</span>
-                    </div>
-                    <button class="btn btn-danger btn-sm" onclick="clearHistory('report')" id="clearHistoryBtn" style="display:none;"><i class="fa-solid fa-trash" style="font-size:10px;"></i> Hapus Semua</button>
-                </div>
-                <div id="historyList" style="display:flex;flex-direction:column;gap:8px;">
-                    <div style="text-align:center;padding:32px;color:var(--muted);font-size:13px;"><i class="fa-regular fa-folder-open" style="font-size:28px;display:block;margin-bottom:10px;opacity:0.3;"></i>Belum ada riwayat</div>
-                </div>
-            </div>
+            <div id="historyList" style="margin-top:28px;display:flex;flex-direction:column;gap:8px;"></div>
         </div>
 
         <!-- ===== TAB 2: PEMINJAMAN ===== -->
         <div class="tab-panel" id="panelDock">
-            <!-- Statistik ringkas -->
-            <div class="dock-stats-row fade-up" style="animation-delay:0.1s;">
-                <div class="dock-stat-card">
-                    <div class="dock-stat-label">Total Rekening</div>
-                    <div class="dock-stat-value" id="dockStatCount">0</div>
-                </div>
-                <div class="dock-stat-card">
-                    <div class="dock-stat-label">Total Nominal</div>
-                    <div class="dock-stat-value" id="dockStatNominal">0</div>
-                </div>
-                <div class="dock-stat-card">
-                    <div class="dock-stat-label">Terakhir Diproses</div>
-                    <div class="dock-stat-value" id="dockStatLast" style="font-size:13px;color:var(--fg2);margin-top:8px;">-</div>
-                </div>
+            <div class="dock-stats-row">
+                <div class="dock-stat-card"><div style="font-size:9px;color:var(--muted);font-weight:700;">Total Rekening</div><div class="dock-stat-value" id="dockStatCount">0</div></div>
+                <div class="dock-stat-card"><div style="font-size:9px;color:var(--muted);font-weight:700;">Total Nominal</div><div class="dock-stat-value" id="dockStatNominal">0</div></div>
+                <div class="dock-stat-card"><div style="font-size:9px;color:var(--muted);font-weight:700;">Terakhir</div><div class="dock-stat-value" id="dockStatLast" style="font-size:13px;color:var(--fg2);margin-top:8px;">-</div></div>
             </div>
-
             <div class="dock-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
-                <div class="glass-card-gold fade-up" style="padding:20px;animation-delay:0.12s;">
-                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-                        <label style="font-size:13px;font-weight:700;color:var(--fg2);display:flex;align-items:center;gap:8px;">
-                            <i class="fa-solid fa-building-columns" style="color:var(--gold);font-size:12px;"></i> INPUT DATA REKENING
-                        </label>
-                        <span class="auto-badge"><i class="fa-solid fa-bolt" style="font-size:6px;"></i> AUTO</span>
-                    </div>
-                    <textarea id="dockInput" class="amber-focus" rows="10" placeholder="Tempel data rekening di sini...&#10;&#10;Contoh:&#10;Bank : BCA ( BERSIH )&#10;Nama Rekening : RAHMAT&#10;Nomor Rekening : 5850428672&#10;Nominal : Rp.25,000,000" spellcheck="false" aria-label="Area tempel data rekening"></textarea>
+                <div class="glass-card-gold" style="padding:20px;">
+                    <label style="font-size:13px;font-weight:700;color:var(--fg2);display:block;margin-bottom:12px;"><i class="fa-solid fa-building-columns" style="color:var(--gold);margin-right:8px;"></i> INPUT DATA</label>
+                    <textarea id="dockInput" class="amber-focus" rows="10" oninput="processDock()" onchange="saveDHist()" placeholder="Contoh Format:&#10;KAS BERSIH DANAMON&#10;Nama Rekening : Eva Septiani&#10;Nomor Rekening : 903688425978&#10;Nominal : Rp 50,000,000,-" spellcheck="false"></textarea>
                     <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;">
-                        <button class="btn btn-amber" onclick="processDock()"><i class="fa-solid fa-arrow-right" style="font-size:12px;"></i> Konversi</button>
+                        <button class="btn btn-amber" onclick="saveDHist()"><i class="fa-solid fa-arrow-right" style="font-size:12px;"></i> Simpan Riwayat</button>
                         <button class="btn btn-ghost" onclick="tryPaste('dockInput')"><i class="fa-solid fa-clipboard" style="font-size:12px;"></i> Paste</button>
                         <button class="btn btn-danger" onclick="clearField('dockInput')"><i class="fa-solid fa-xmark" style="font-size:12px;"></i> Clear</button>
                     </div>
                 </div>
-                <div class="glass-card-gold fade-up" style="padding:20px;animation-delay:0.15s;">
-                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-                        <label style="font-size:13px;font-weight:700;color:var(--fg2);display:flex;align-items:center;gap:8px;">
-                            <i class="fa-solid fa-table-columns" style="color:var(--gold);font-size:12px;"></i> HASIL DOCK
-                        </label>
-                        <div style="display:flex;align-items:center;gap:8px;">
-                            <span id="dockLineCount" class="badge badge-amber" style="display:none;">0</span>
-                            <button class="btn btn-ghost btn-sm" onclick="copyDockAll()" id="copyDockBtn" style="display:none;"><i class="fa-regular fa-copy" style="font-size:11px;"></i> Salin</button>
-                        </div>
+                <div class="glass-card-gold" style="padding:20px;">
+                    <div style="display:flex;justify-content:space-between;margin-bottom:12px;">
+                        <label style="font-size:13px;font-weight:700;color:var(--fg2);"><i class="fa-solid fa-table-columns" style="color:var(--gold);margin-right:8px;"></i> HASIL FORMAT</label>
+                        <button class="btn btn-ghost btn-sm" onclick="copyDockAll()" id="copyDockBtn" style="display:none;"><i class="fa-regular fa-copy" style="font-size:11px;"></i> Salin</button>
                     </div>
-                    <div style="margin-bottom:10px;font-size:10px;color:var(--muted);font-weight:600;">Tab-separated, siap tempel ke spreadsheet</div>
-
-                    <!-- Tabel hasil dock -->
-                    <div class="dock-table-wrap" id="dockTableWrap">
-                        <div class="dock-empty">
-                            <i class="fa-regular fa-table" style="font-size:24px;display:block;margin-bottom:8px;opacity:0.3;"></i>
-                            Hasil konversi akan muncul otomatis...
-                        </div>
-                    </div>
-
-                    <div id="dockOutputActions" style="display:none;margin-top:12px;gap:8px;flex-wrap:wrap;">
-                        <button class="btn btn-ghost btn-sm" onclick="copyDockAll()"><i class="fa-solid fa-copy" style="font-size:10px;"></i> Salin Semua</button>
-                        <button class="btn btn-ghost btn-sm" onclick="copyDockHeaderOnly()"><i class="fa-solid fa-heading" style="font-size:10px;"></i> Salin Header Saja</button>
-                        <button class="btn btn-ghost btn-sm" onclick="copyDockLast()"><i class="fa-solid fa-grip-lines" style="font-size:10px;"></i> Salin 1 Baris Terakhir</button>
-                    </div>
+                    <div class="output-box" id="dockTableWrap" style="border-color:var(--gold-border);"><span style="color:var(--muted);font-size:12px;">Hasil konversi akan muncul otomatis...</span></div>
                 </div>
             </div>
-
-            <div style="margin-top:28px;">
-                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-                    <div style="display:flex;align-items:center;gap:10px;">
-                        <label style="font-size:13px;font-weight:700;color:var(--fg2);display:flex;align-items:center;gap:8px;">
-                            <i class="fa-solid fa-clock-rotate-left" style="color:var(--gold);font-size:12px;"></i> RIWAYAT
-                        </label>
-                        <span id="dockHistoryCount" class="badge badge-amber" style="display:none;">0</span>
-                    </div>
-                    <button class="btn btn-danger btn-sm" onclick="clearHistory('dock')" id="clearDockHistoryBtn" style="display:none;"><i class="fa-solid fa-trash" style="font-size:10px;"></i> Hapus Semua</button>
-                </div>
-                <div id="dockHistoryList" style="display:flex;flex-direction:column;gap:8px;">
-                    <div style="text-align:center;padding:32px;color:var(--muted);font-size:13px;"><i class="fa-regular fa-folder-open" style="font-size:28px;display:block;margin-bottom:10px;opacity:0.3;"></i>Belum ada riwayat</div>
-                </div>
-            </div>
+            <div id="dockHistoryList" style="margin-top:28px;display:flex;flex-direction:column;gap:8px;"></div>
         </div>
 
-        <!-- ===== TAB 3: PENGEMBALIAN DANA ===== -->
+        <!-- ===== TAB 3: PENGEMBALIAN ===== -->
         <div class="tab-panel" id="panelReturnal">
             <div class="returnal-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
                 <div class="glass-card-cyan" style="padding:20px;">
-                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-                        <label style="font-size:13px;font-weight:700;color:var(--fg2);display:flex;align-items:center;gap:8px;">
-                            <i class="fa-solid fa-rotate-left" style="color:var(--cyan);font-size:12px;"></i> INPUT DATA PENGEMBALIAN
-                        </label>
-                        <span class="auto-badge"><i class="fa-solid fa-bolt" style="font-size:6px;"></i> AUTO</span>
-                    </div>
-                    <textarea id="returnalInput" class="cyan-focus" rows="10" placeholder="Tempel data di sini...&#10;&#10;Contoh:&#10;DANAMON	Priskila Dewi Rahayu Ningsih	903705373169		37,503,754&#10;&#10;Bisa multiple baris sekaligus." spellcheck="false" aria-label="Area tempel data pengembalian"></textarea>
+                    <label style="font-size:13px;font-weight:700;color:var(--fg2);display:block;margin-bottom:12px;"><i class="fa-solid fa-rotate-left" style="color:var(--cyan);margin-right:8px;"></i> INPUT DATA</label>
+                    <textarea id="returnalInput" class="cyan-focus" rows="10" oninput="processReturnal()" onchange="saveRetHist()" placeholder="Contoh:&#10;DANAMON Priskila Dewi 903705373169 37,503,754" spellcheck="false"></textarea>
                     <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;">
-                        <button class="btn btn-cyan" onclick="processReturnal()"><i class="fa-solid fa-arrow-right" style="font-size:12px;"></i> Konversi</button>
+                        <button class="btn btn-cyan" onclick="saveRetHist()"><i class="fa-solid fa-arrow-right" style="font-size:12px;"></i> Simpan Riwayat</button>
                         <button class="btn btn-ghost" onclick="tryPaste('returnalInput')"><i class="fa-solid fa-clipboard" style="font-size:12px;"></i> Paste</button>
                         <button class="btn btn-danger" onclick="clearField('returnalInput')"><i class="fa-solid fa-xmark" style="font-size:12px;"></i> Clear</button>
                     </div>
-                    <div class="glass-card-cyan" style="margin-top:16px;padding:14px 16px;cursor:default;transform:none;">
-                        <div style="font-size:10px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:8px;">Format Mapping</div>
-                        <div class="mono" style="font-size:11px;color:var(--fg2);line-height:2;">
-                            <span style="color:var(--cyan);">Field 1</span> → Bank<br>
-                            <span style="color:var(--cyan);">Field 2</span> → Nama Rekening<br>
-                            <span style="color:var(--cyan);">Field 3</span> → Nomor Rekening<br>
-                            <span style="color:var(--cyan);">Field 4</span> → (kosongkan/diabaikan)<br>
-                            <span style="color:var(--cyan);">Field 5</span> → Nominal
-                        </div>
-                    </div>
                 </div>
                 <div class="glass-card-cyan" style="padding:20px;">
-                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-                        <label style="font-size:13px;font-weight:700;color:var(--fg2);display:flex;align-items:center;gap:8px;">
-                            <i class="fa-solid fa-file-export" style="color:var(--cyan);font-size:12px;"></i> HASIL FORMAT
-                        </label>
-                        <div style="display:flex;align-items:center;gap:8px;">
-                            <span id="returnalLineCount" class="badge badge-cyan" style="display:none;">0</span>
-                            <button class="btn btn-ghost btn-sm" onclick="copyReturnalAll()" id="copyReturnalBtn" style="display:none;"><i class="fa-regular fa-copy" style="font-size:11px;"></i> Salin</button>
-                        </div>
+                    <div style="display:flex;justify-content:space-between;margin-bottom:12px;">
+                        <label style="font-size:13px;font-weight:700;color:var(--fg2);"><i class="fa-solid fa-file-export" style="color:var(--cyan);margin-right:8px;"></i> HASIL FORMAT</label>
+                        <button class="btn btn-ghost btn-sm" onclick="copyReturnalAll()" id="copyReturnalBtn" style="display:none;"><i class="fa-regular fa-copy" style="font-size:11px;"></i> Salin</button>
                     </div>
-                    <div class="returnal-output" id="returnalOutputBox">
-                        <span style="color:var(--muted);font-size:12px;">Hasil akan muncul otomatis saat data ditempel...</span>
-                    </div>
-                    <div id="returnalOutputActions" style="display:none;margin-top:12px;gap:8px;flex-wrap:wrap;">
-                        <button class="btn btn-ghost btn-sm" onclick="copyReturnalAll()"><i class="fa-solid fa-copy" style="font-size:10px;"></i> Salin Semua</button>
-                        <button class="btn btn-ghost btn-sm" onclick="copyReturnalHeader()"><i class="fa-solid fa-heading" style="font-size:10px;"></i> Salin Header Saja</button>
-                        <button class="btn btn-ghost btn-sm" onclick="copyReturnalLast()"><i class="fa-solid fa-grip-lines" style="font-size:10px;"></i> Salin 1 Entry Terakhir</button>
-                    </div>
+                    <div class="returnal-output" id="returnalOutputBox"><span style="color:var(--muted);font-size:12px;">Hasil akan muncul otomatis...</span></div>
                 </div>
             </div>
-            <div style="margin-top:28px;">
-                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-                    <div style="display:flex;align-items:center;gap:10px;">
-                        <label style="font-size:13px;font-weight:700;color:var(--fg2);display:flex;align-items:center;gap:8px;">
-                            <i class="fa-solid fa-clock-rotate-left" style="color:var(--cyan);font-size:12px;"></i> RIWAYAT
-                        </label>
-                        <span id="returnalHistoryCount" class="badge badge-cyan" style="display:none;">0</span>
-                    </div>
-                    <button class="btn btn-danger btn-sm" onclick="clearHistory('returnal')" id="clearReturnalHistoryBtn" style="display:none;"><i class="fa-solid fa-trash" style="font-size:10px;"></i> Hapus Semua</button>
-                </div>
-                <div id="returnalHistoryList" style="display:flex;flex-direction:column;gap:8px;">
-                    <div style="text-align:center;padding:32px;color:var(--muted);font-size:13px;"><i class="fa-regular fa-folder-open" style="font-size:28px;display:block;margin-bottom:10px;opacity:0.3;"></i>Belum ada riwayat</div>
-                </div>
-            </div>
+            <div id="returnalHistoryList" style="margin-top:28px;display:flex;flex-direction:column;gap:8px;"></div>
         </div>
 
-        <div class="shimmer-line" style="margin-top:36px;border-radius:1px;"></div>
-        <div style="text-align:center;margin-top:14px;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;">
-            <img src="https://z-cdn-media.chatglm.cn/files/d6f4f54f-a86e-4990-a9e6-fb4775d0ff7c.png?auth_key=1882183480-47465a0a44164b24aac46a58ca5cce4a-0-43a632db2c6abae55ad85b42fcfe166c" alt="TogelOn" style="height:18px;width:auto;object-fit:contain;filter:drop-shadow(0 0 6px rgba(6,182,212,0.3));border-radius:3px;opacity:0.7;">
-            <span class="premium-badge"><i class="fa-solid fa-crown" style="font-size:7px;"></i> PREMIUM</span>
-            <span style="font-size:11px;color:var(--muted);font-weight:500;">Report Qris And Peminjaman v3.2</span>
+        <!-- ===== TAB 4: WD PENDING ===== -->
+        <div class="tab-panel" id="panelWdPending">
+            <div class="wdp-stats-row">
+                <div class="wdp-stat-card"><div style="font-size:9px;color:var(--muted);font-weight:700;">Total Transaksi</div><div class="wdp-stat-value" id="wdpStatCount">0</div></div>
+                <div class="wdp-stat-card"><div style="font-size:9px;color:var(--muted);font-weight:700;">Total Nominal</div><div class="wdp-stat-value" id="wdpStatNominal">Rp. 0</div></div>
+                <div class="wdp-stat-card"><div style="font-size:9px;color:var(--muted);font-weight:700;">User Terakhir</div><div class="wdp-stat-value" id="wdpStatLast" style="font-size:13px;color:var(--fg2);margin-top:8px;">-</div></div>
+            </div>
+            <div class="wdp-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+                <div class="glass-card-rose" style="padding:20px;">
+                    <div style="display:flex;justify-content:space-between;margin-bottom:12px;">
+                        <label style="font-size:13px;font-weight:700;color:var(--fg2);"><i class="fa-solid fa-clock" style="color:var(--rose);margin-right:8px;"></i> INPUT DATA WD PENDING</label>
+                    </div>
+                    <textarea id="wdpInput" class="rose-focus" rows="10" oninput="processWdPending()" onchange="saveWHist()" placeholder="Tempel data WD pending mentah apa adanya di sini..." spellcheck="false"></textarea>
+                    <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;">
+                        <button class="btn btn-rose" onclick="saveWHist()"><i class="fa-solid fa-arrow-right" style="font-size:12px;"></i> Simpan Riwayat</button>
+                        <button class="btn btn-ghost" onclick="tryPaste('wdpInput')"><i class="fa-solid fa-clipboard" style="font-size:12px;"></i> Paste</button>
+                        <button class="btn btn-danger" onclick="clearField('wdpInput')"><i class="fa-solid fa-xmark" style="font-size:12px;"></i> Clear</button>
+                    </div>
+                </div>
+                <div class="glass-card-rose" style="padding:20px;">
+                    <div style="display:flex;justify-content:space-between;margin-bottom:12px;">
+                        <label style="font-size:13px;font-weight:700;color:var(--fg2);"><i class="fa-solid fa-file-export" style="color:var(--rose);margin-right:8px;"></i> HASIL FORMAT</label>
+                        <button class="btn btn-ghost btn-sm" onclick="copyWdpAll()" id="copyWdpBtn" style="display:none;"><i class="fa-regular fa-copy" style="font-size:11px;"></i> Salin</button>
+                    </div>
+                    <div class="wdp-output" id="wdpOutputBox"><span style="color:var(--muted);font-size:12px;">Hasil akan muncul otomatis saat data ditempel...</span></div>
+                </div>
+            </div>
+            <div id="wdpHistoryList" style="margin-top:28px;display:flex;flex-direction:column;gap:8px;"></div>
         </div>
     </div>
 
     <script>
-    (function() {
-        'use strict';
+    function doCopy(t, l) { var ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta); showToast(l+' berhasil disalin','success'); }
+    function tryPaste(id) { var el=document.getElementById(id); el.focus(); if(navigator.clipboard) { navigator.clipboard.readText().then(t=>{el.value=t; el.dispatchEvent(new Event('input')); showToast('Data ditempel','success');}).catch(()=>showToast('Ctrl+V manual','error')); } else showToast('Ctrl+V manual','error'); }
+    function showToast(m, t) { var c=document.getElementById('toastContainer'), d=document.createElement('div'); d.className='toast toast-'+(t||'success'); d.innerHTML='<i class="fa-solid '+(t==='error'?'fa-circle-exclamation':'fa-circle-check')+'"></i><span>'+m+'</span>'; c.appendChild(d); setTimeout(()=>d.remove(),3000); }
+    function clearField(id) { document.getElementById(id).value=''; document.getElementById(id).dispatchEvent(new Event('input')); showToast('Input dibersihkan','success'); }
+    function escHtml(s) { var d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+    function switchTab(n, b) { 
+        document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active')); 
+        document.querySelectorAll('.tab-btn').forEach(x=>x.classList.remove('active-purple','active-gold','active-cyan','active-rose')); 
+        var map = { report: 'panelReport', dock: 'panelDock', returnal: 'panelReturnal', wdpending: 'panelWdPending' };
+        document.getElementById(map[n]).classList.add('active'); 
+        var colors = { report: 'purple', dock: 'gold', returnal: 'cyan', wdpending: 'rose' };
+        b.classList.add('active-' + colors[n]); 
+    }
 
-        // ============================================================
-        //  COPY — 100% kerja tanpa Clipboard API
-        // ============================================================
-        function doCopy(text, label) {
-            label = label || 'Data';
-            var ta = document.createElement('textarea');
-            ta.value = text;
-            ta.setAttribute('readonly', '');
-            ta.style.cssText = 'position:fixed;left:-9999px;top:-9999px;opacity:0;width:1px;height:1px;';
-            document.body.appendChild(ta);
-            ta.select();
-            ta.setSelectionRange(0, text.length);
-            var ok = false;
-            try { ok = document.execCommand('copy'); } catch(e) { ok = false; }
-            document.body.removeChild(ta);
-            if (ok) showToast(label + ' berhasil disalin', 'success');
-            else showToast('Gagal menyalin — coba blok teks manual lalu Ctrl+C', 'error');
-            return ok;
+    // ===== TAB 1: QRIS =====
+    var rHist=[], rLast='', rLastCount=0, rLastTotal=0, rLastUser='';
+    function processInput() {
+        var v = document.getElementById('inputArea').value.trim();
+        var o = document.getElementById('outputBox');
+        var copyBtn = document.getElementById('copyBtn');
+        
+        if(!v) {
+            o.innerHTML='<span style="color:var(--muted);font-size:12px;">Hasil akan muncul otomatis saat data ditempel...</span>';
+            o.classList.remove('has-content');
+            copyBtn.style.display='none';
+            document.getElementById('statSession').textContent='0';
+            document.getElementById('statNominal').textContent='Rp. 0';
+            document.getElementById('statLast').textContent='-';
+            rLast=''; rLastCount=0; rLastTotal=0; rLastUser='';
+            return;
         }
-
-        // ============================================================
-        //  PASTE — aman dengan fallback
-        // ============================================================
-        function tryPaste(inputId) {
-            var el = document.getElementById(inputId);
-            el.focus();
-            if (navigator.clipboard && navigator.clipboard.readText) {
-                navigator.clipboard.readText().then(function(txt) {
-                    el.value = txt;
-                    el.dispatchEvent(new Event('input'));
-                }).catch(function() {
-                    showToast('Clipboard diblokir — gunakan Ctrl+V manual', 'error');
-                });
-            } else {
-                showToast('Gunakan Ctrl+V untuk menempel data', 'error');
-            }
-        }
-        window.tryPaste = tryPaste;
-
-        // ============================================================
-        //  UTILITAS
-        // ============================================================
-        function escHtml(s) {
-            var d = document.createElement('div');
-            d.textContent = s;
-            return d.innerHTML;
-        }
-        function showToast(message, type) {
-            type = type || 'success';
-            var c = document.getElementById('toastContainer');
-            var t = document.createElement('div');
-            t.className = 'toast toast-' + type;
-            var icon = type === 'success' ? 'fa-circle-check' : 'fa-circle-exclamation';
-            t.innerHTML = '<i class="fa-solid ' + icon + '" style="font-size:14px;flex-shrink:0;"></i><span>' + escHtml(message) + '</span>';
-            c.appendChild(t);
-            setTimeout(function() {
-                t.classList.add('toast-exit');
-                setTimeout(function() { t.remove(); }, 300);
-            }, 3000);
-        }
-        function formatTime(d) {
-            return String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0') + ':' + String(d.getSeconds()).padStart(2,'0');
-        }
-
-        // Hapus prefix Rp/Rp./Rp dari nominal
-        function stripRp(val) {
-            return val.replace(/^Rp\.?\s*/i, '').trim();
-        }
-
-        // Smart split
-        function smartSplit(line) {
-            var p = line.split('\t');
-            if (p.length > 1) return p.map(function(s){return s.trim();}).filter(function(s){return s.length>0;});
-            p = line.split(/\s{2,}/);
-            if (p.length > 1) return p.map(function(s){return s.trim();}).filter(function(s){return s.length>0;});
-            p = line.split(/\s+/);
-            return p.map(function(s){return s.trim();}).filter(function(s){return s.length>0;});
-        }
-
-        // ============================================================
-        //  TAB SWITCHING
-        // ============================================================
-        var tabBtnIds = { report: 'tabReport', dock: 'tabDock', returnal: 'tabReturnal' };
-        var tabPanelIds = { report: 'panelReport', dock: 'panelDock', returnal: 'panelReturnal' };
-        var activeCls = { report: 'active-purple', dock: 'active-gold', returnal: 'active-cyan' };
-
-        window.switchTab = function(tab, btnEl) {
-            Object.keys(tabBtnIds).forEach(function(k) {
-                document.getElementById(tabBtnIds[k]).classList.remove('active-purple','active-gold','active-cyan');
-                document.getElementById(tabPanelIds[k]).classList.remove('active');
-            });
-            btnEl.classList.add(activeCls[tab]);
-            document.getElementById(tabPanelIds[tab]).classList.add('active');
-        };
-
-        // ============================================================
-        //  TAB 1: REPORT QRIS
-        // ============================================================
-        var reportHistory = [];
-        var sessionCount = 0;
-        var totalNominal = 0;
-        var currentOutput = '';
-        var currentResults = [];
-        var HEADER_LINES = ['Info : TogelOn', 'Perihal : Cek bukti QRIS P2MIH'];
-
-        function parseLine(line) {
-            var parts = smartSplit(line);
-            var userId = '', nominal = '', reffId = '', rrn = '', bukti = '';
-            if (parts.length >= 5) {
-                userId = parts[0]; nominal = parts[1]; reffId = parts[2]; rrn = parts[3]; bukti = parts[4];
-            } else if (parts.length === 4) {
-                userId = parts[0]; nominal = parts[1]; rrn = parts[2]; bukti = parts[3];
-            } else if (parts.length === 3) {
-                userId = parts[0]; nominal = parts[1]; bukti = parts[2];
-            } else if (parts.length >= 1) {
-                var urlIdx = -1, numIdx = -1, digitIdx = -1;
-                parts.forEach(function(p, i) {
-                    if (urlIdx === -1 && /^https?:\/\//i.test(p)) urlIdx = i;
-                    else if (numIdx === -1 && /[\d,\.]+/.test(p) && /[,\.]/.test(p) && !/^\d{4,}$/.test(p.replace(/[,\.]/g,''))) numIdx = i;
-                    else if (digitIdx === -1 && /^[a-z0-9]{8,}$/i.test(p)) digitIdx = i;
-                });
-                if (urlIdx !== -1) bukti = parts[urlIdx];
-                if (numIdx !== -1) nominal = parts[numIdx];
-                if (digitIdx !== -1) rrn = parts[digitIdx];
-                var rest = [];
-                parts.forEach(function(p, i) { if (i !== urlIdx && i !== numIdx && i !== digitIdx) rest.push(p); });
-                userId = rest[0] || '';
-                reffId = rest[1] || '';
-                if (!rrn && rest[2]) rrn = rest[2];
-            }
-            var fmt = nominal.replace(/,/g, '.');
-            if (fmt && !fmt.startsWith('Rp')) fmt = 'Rp. ' + fmt;
-            var numVal = parseFloat(nominal.replace(/[^0-9]/g, '')) || 0;
-            if (!reffId) reffId = '-';
-            var text = 'User ID  : ' + userId + '\nReff ID  : ' + reffId + '\nRRN      : ' + rrn + '\nBukti    : ' + bukti + '\nNominal  : ' + fmt;
-            return { text: text, userId: userId, nominal: fmt, numVal: numVal, rrn: rrn, bukti: bukti, reffId: reffId };
-        }
-
-        function processInput() {
-            var raw = document.getElementById('inputArea').value.trim();
-            if (!raw) {
-                document.getElementById('outputBox').innerHTML = '<span style="color:var(--muted);font-size:12px;">Hasil akan muncul otomatis saat data ditempel...</span>';
-                document.getElementById('outputBox').classList.remove('has-content');
-                document.getElementById('copyBtn').style.display = 'none';
-                document.getElementById('outputActions').style.display = 'none';
-                document.getElementById('lineCount').style.display = 'none';
-                return;
-            }
-            var lines = raw.split('\n').map(function(l){return l.trim();}).filter(function(l){return l.length>0;});
-            var results = [];
-            var bn = 0;
-            lines.forEach(function(l) {
-                var p = parseLine(l);
-                results.push(p);
-                bn += p.numVal;
-            });
-            currentResults = results;
-            var outParts = [HEADER_LINES.join('\n'), ''];
-            results.forEach(function(r, i) {
-                if (i > 0) outParts.push('');
-                outParts.push(r.text);
-            });
-            currentOutput = outParts.join('\n');
-            sessionCount += results.length;
-            totalNominal += bn;
-            renderReportOutput(results);
-            document.getElementById('copyBtn').style.display = 'inline-flex';
-            document.getElementById('outputActions').style.display = 'flex';
-            var lc = document.getElementById('lineCount');
-            lc.style.display = 'inline-flex';
-            lc.textContent = '' + results.length;
-            results.forEach(function(r) {
-                reportHistory.unshift({ text: r.text, userId: r.userId, nominal: r.nominal, numVal: r.numVal, time: new Date() });
-            });
-            document.getElementById('statTotal').textContent = reportHistory.length;
-            document.getElementById('statSession').textContent = sessionCount;
-            document.getElementById('statNominal').textContent = 'Rp. ' + totalNominal.toLocaleString('id-ID');
-            document.getElementById('statLast').textContent = (results[results.length-1] || {}).userId || '-';
-            renderHistoryList('report');
-        }
-
-        function renderReportOutput(results) {
-            if (!results.length) return;
-            var h = '<div class="header-block"><span class="header-tag">Info</span>    : TogelOn\n<span class="header-tag">Perihal</span> : Cek bukti QRIS P2MIH</div>';
-            results.forEach(function(r, i) {
-                if (i > 0) h += '<div style="height:6px;"></div>';
-                h += '<div class="entry-block"><span class="label-tag">User ID</span>  : ' + escHtml(r.userId) + '\n<span class="label-tag">Reff ID</span>  : ' + escHtml(r.reffId) + '\n<span class="label-tag">RRN</span>      : ' + escHtml(r.rrn) + '\n<span class="label-tag">Bukti</span>    : ' + escHtml(r.bukti) + '\n<span class="label-tag">Nominal</span>  : ' + escHtml(r.nominal) + '</div>';
-            });
-            var box = document.getElementById('outputBox');
-            box.innerHTML = h;
-            box.classList.add('has-content');
-        }
-
-        window.copyReportAll = function() { if (currentOutput) doCopy(currentOutput, 'Semua data'); };
-        window.copyReportHeader = function() { doCopy(HEADER_LINES.join('\n'), 'Header'); };
-        window.copyReportLast = function() {
-            if (currentResults.length) doCopy(currentResults[currentResults.length-1].text, '1 entry terakhir');
-        };
-
-        // ============================================================
-        //  TAB 2: PEMINJAMAN (DOCK) — FORMAT BARU
-        // ============================================================
-        var dockHistory = [];
-        var currentDockOutput = '';   // Plain text untuk clipboard
-        var currentDockLines = [];    // Array of {bank, norek, nama, nominal}
-        var DOCK_HEADER = 'NAMA BANK\tNOMOR REKENING\tNAMA REKENING\tNominal';
-
-        function processDock() {
-            var raw = document.getElementById('dockInput').value.trim();
-            if (!raw) {
-                document.getElementById('dockTableWrap').innerHTML = '<div class="dock-empty"><i class="fa-regular fa-table" style="font-size:24px;display:block;margin-bottom:8px;opacity:0.3;"></i>Hasil konversi akan muncul otomatis...</div>';
-                document.getElementById('dockTableWrap').classList.remove('has-content');
-                document.getElementById('copyDockBtn').style.display = 'none';
-                document.getElementById('dockOutputActions').style.display = 'none';
-                document.getElementById('dockLineCount').style.display = 'none';
-                document.getElementById('dockStatCount').textContent = '0';
-                document.getElementById('dockStatNominal').textContent = '0';
-                document.getElementById('dockStatLast').textContent = '-';
-                return;
-            }
-
-            // Parse blok key-value
-            var blocks = raw.split(/\n\s*\n|\n-{3,}\n/).map(function(b){return b.trim();}).filter(function(b){return b.length>0;});
-            var rows = [];
-            var totalNum = 0;
-
-            blocks.forEach(function(block) {
-                var bank = '', nama = '', norek = '', nominal = '';
-                block.split('\n').forEach(function(bl) {
-                    var idx = bl.indexOf(':');
-                    if (idx === -1) return;
-                    var key = bl.substring(0, idx).trim().toLowerCase();
-                    var val = bl.substring(idx + 1).trim();
-                    if (key.indexOf('bank') !== -1) bank = val.replace(/\(.*?\)/g, '').trim();
-                    else if (key.indexOf('nama') !== -1) nama = val;
-                    else if (key.indexOf('nomor') !== -1 || key.indexOf('norek') !== -1 || key.indexOf('no rek') !== -1 || key.indexOf('no ') !== -1) norek = val;
-                    else if (key.indexOf('nominal') !== -1) nominal = stripRp(val);
-                });
-                if (bank || nama || norek || nominal) {
-                    var numVal = parseFloat(nominal.replace(/[^0-9]/g, '')) || 0;
-                    totalNum += numVal;
-                    rows.push({ bank: bank, norek: norek, nama: nama, nominal: nominal, numVal: numVal });
-                    dockHistory.unshift({ bank: bank, norek: norek, nama: nama, nominal: nominal, text: [bank, norek, nama, nominal].join('\t'), time: new Date() });
+        
+        var l = v.split(/\r?\n/).filter(x => x.trim());
+        var e=[], t=0;
+        
+        l.forEach(x => {
+            var parts = x.replace(/\t/g, ' ').replace(/\s{2,}/g, ' ').trim().split(' ');
+            var userId = '', nominal = '', rrn = '', bukti = [];
+            
+            parts.forEach(p => {
+                if (/^https?:\/\//i.test(p)) {
+                    bukti.push(p);
+                } else if (!userId) {
+                    userId = p;
+                } else if (/^\d/.test(p) && !nominal) {
+                    nominal = p;
+                } else if (!rrn && p.length > 4) {
+                    rrn = p;
                 }
             });
-
-            if (!rows.length) {
-                showToast('Format tidak dikenali. Pastikan ada "Bank :", "Nama Rekening :", "Nomor Rekening :", "Nominal :"', 'error');
-                return;
+            
+            if(userId || nominal || rrn || bukti.length) {
+                var nomNum = parseInt(nominal.replace(/\D/g, ''), 10);
+                if(!isNaN(nomNum)) t += nomNum;
+                var nomStr = isNaN(nomNum) ? (nominal || '-') : 'Rp. ' + nomNum.toLocaleString('id-ID');
+                e.push({u: userId, r: rrn, b: bukti, n: nomStr});
             }
+        });
+        
+        if(!e.length) return;
+        
+        var h = "Info : TogelOn\nPerihal : Cek bukti QRIS P2MIH";
+        var b = e.map(i => `User ID  : ${i.u}\nReff ID  : -\nRRN      : ${i.r || '-'}\nBukti    : ${i.b.join(' , ') || '-'}\nNominal  : ${i.n}`).join('\n\n');
+        rLast = h + '\n\n' + b;
+        rLastCount = e.length; rLastTotal = t; rLastUser = e[e.length-1].u;
+        
+        o.innerHTML='<div class="header-block">'+escHtml(h).replace(/\n/g,'<br>')+'</div>'+e.map(i=>'<div class="entry-block"><span class="label-tag">User ID</span>  : '+escHtml(i.u)+'<br><span class="label-tag">Reff ID</span>  : -<br><span class="label-tag">RRN</span>      : '+escHtml(i.r || '-')+'<br><span class="label-tag">Bukti</span>    : '+escHtml(i.b.join(' , ') || '-')+'<br><span class="label-tag">Nominal</span>  : '+escHtml(i.n)+'</div>').join('');
+        o.classList.add('has-content');
+        copyBtn.style.display='inline-flex';
+        
+        document.getElementById('statSession').textContent=e.length;
+        document.getElementById('statNominal').textContent='Rp. ' + t.toLocaleString('id-ID');
+        document.getElementById('statLast').textContent=rLastUser;
+    }
+    function saveRHist() {
+        if(!rLast) return showToast('Tidak ada data untuk disimpan','error');
+        var rawV = document.getElementById('inputArea').value;
+        if(rHist.length > 0 && rHist[0].raw === rawV) return showToast('Riwayat ini sudah tersimpan','error');
+        rHist.unshift({time:new Date(), c:rLastCount, t:rLastTotal, u:rLastUser, f:rLast, raw: rawV});
+        if(rHist.length > 30) rHist.pop();
+        document.getElementById('statTotal').textContent = parseInt(document.getElementById('statTotal').textContent) + rLastCount;
+        renderHist('historyList', rHist, 'history-item', 'accent', 'loadRHist');
+        showToast('Riwayat disimpan','success');
+    }
+    function copyReportAll(){ if(rLast)doCopy(rLast,'Laporan QRIS'); }
+    function loadRHist(i){ document.getElementById('inputArea').value=rHist[i].raw; processInput(); }
 
-            currentDockLines = rows;
-
-            // Build plain text: header + data rows (tab-separated)
-            var plainLines = [DOCK_HEADER];
-            rows.forEach(function(r) {
-                plainLines.push([r.bank, r.norek, r.nama, r.nominal].join('\t'));
-            });
-            currentDockOutput = plainLines.join('\n');
-
-            // Render tabel visual
-            renderDockTable(rows);
-
-            // Update stats
-            document.getElementById('dockStatCount').textContent = rows.length;
-            document.getElementById('dockStatNominal').textContent = totalNum.toLocaleString('id-ID');
-            document.getElementById('dockStatLast').textContent = (rows[rows.length-1] || {}).bank + ' / ' + (rows[rows.length-1] || {}).nama;
-
-            document.getElementById('copyDockBtn').style.display = 'inline-flex';
-            document.getElementById('dockOutputActions').style.display = 'flex';
-            var lc = document.getElementById('dockLineCount');
-            lc.style.display = 'inline-flex';
-            lc.textContent = '' + rows.length;
-            renderHistoryList('dock');
+    // ===== TAB 2: DOCK =====
+    var dHist=[], dLast='', dLastCount=0, dLastTotal=0, dLastUser='';
+    function processDock() {
+        var v=document.getElementById('dockInput').value.trim();
+        var o=document.getElementById('dockTableWrap');
+        var copyBtn=document.getElementById('copyDockBtn');
+        
+        if(!v) {
+            o.innerHTML='<span style="color:var(--muted);font-size:12px;">Hasil konversi akan muncul otomatis...</span>';
+            o.classList.remove('has-content');
+            copyBtn.style.display='none';
+            document.getElementById('dockStatCount').textContent='0';
+            document.getElementById('dockStatNominal').textContent='0';
+            document.getElementById('dockStatLast').textContent='-';
+            dLast=''; dLastCount=0; dLastTotal=0; dLastUser='';
+            return;
         }
-
-        function renderDockTable(rows) {
-            var wrap = document.getElementById('dockTableWrap');
-            var h = '<table><thead><tr>';
-            h += '<th>NAMA BANK</th>';
-            h += '<th>NOMOR REKENING</th>';
-            h += '<th>NAMA REKENING</th>';
-            h += '<th style="text-align:right;">Nominal</th>';
-            h += '</tr></thead><tbody>';
-            rows.forEach(function(r) {
-                h += '<tr>';
-                h += '<td>' + escHtml(r.bank) + '</td>';
-                h += '<td>' + escHtml(r.norek) + '</td>';
-                h += '<td>' + escHtml(r.nama) + '</td>';
-                h += '<td style="text-align:right;">' + escHtml(r.nominal) + '</td>';
-                h += '</tr>';
-            });
-            h += '</tbody></table>';
-            wrap.innerHTML = h;
-            wrap.classList.add('has-content');
-        }
-
-        window.copyDockAll = function() {
-            if (currentDockOutput) doCopy(currentDockOutput, 'Semua data rekening');
-        };
-        window.copyDockHeaderOnly = function() {
-            doCopy(DOCK_HEADER, 'Header kolom');
-        };
-        window.copyDockLast = function() {
-            if (currentDockLines.length) {
-                var last = currentDockLines[currentDockLines.length - 1];
-                var line = [last.bank, last.norek, last.nama, last.nominal].join('\t');
-                doCopy(line, '1 baris terakhir');
-            }
-        };
-
-        // ============================================================
-        //  TAB 3: PENGEMBALIAN DANA (RETURNAL)
-        // ============================================================
-        var returnalHistory = [];
-        var currentReturnalOutput = '';
-        var currentReturnalResults = [];
-        var RETURNAL_HEADER = 'Info : TogelOn\nPerihal : Perihal : Pengembalian DANA ( Direct QRIS MINERA -  ke setoran KAS ADM ) \nDari situs : ';
-
-        function processReturnal() {
-            var raw = document.getElementById('returnalInput').value.trim();
-            if (!raw) {
-                document.getElementById('returnalOutputBox').innerHTML = '<span style="color:var(--muted);font-size:12px;">Hasil akan muncul otomatis saat data ditempel...</span>';
-                document.getElementById('returnalOutputBox').classList.remove('has-content');
-                document.getElementById('copyReturnalBtn').style.display = 'none';
-                document.getElementById('returnalOutputActions').style.display = 'none';
-                document.getElementById('returnalLineCount').style.display = 'none';
-                return;
-            }
-            var lines = raw.split('\n').map(function(l){return l.trim();}).filter(function(l){return l.length>0;});
-            var results = [];
-            lines.forEach(function(line) {
-                var parts = smartSplit(line);
-                var bank = '', nama = '', norek = '', nominal = '';
-                if (parts.length >= 5) {
-                    bank = parts[0]; nama = parts[1]; norek = parts[2]; nominal = parts[4];
-                } else if (parts.length === 4) {
-                    var digits = [], withComma = [], texts = [];
-                    parts.forEach(function(p) {
-                        if (/^\d{6,}$/.test(p)) digits.push(p);
-                        else if (/[\d,\.]+/.test(p) && /[,\.]/.test(p)) withComma.push(p);
-                        else texts.push(p);
-                    });
-                    if (digits.length && texts.length) {
-                        bank = texts[0] || '';
-                        nama = texts[1] || '';
-                        norek = digits[0];
-                        nominal = withComma[0] || digits[1] || '';
-                    } else {
-                        bank = parts[0]; nama = parts[1]; norek = parts[2]; nominal = parts[3];
-                    }
-                } else if (parts.length === 3) {
-                    var d3 = [], t3 = [];
-                    parts.forEach(function(p) {
-                        if (/^\d{6,}$/.test(p)) d3.push(p);
-                        else t3.push(p);
-                    });
-                    if (d3.length === 1 && t3.length === 2) {
-                        bank = t3[0]; nama = t3[1]; norek = d3[0];
-                    } else {
-                        bank = parts[0]; nama = parts[1]; norek = parts[2];
-                    }
-                } else if (parts.length === 2) {
-                    if (/^\d{6,}$/.test(parts[1])) { bank = parts[0]; norek = parts[1]; }
-                    else { bank = parts[0]; nama = parts[1]; }
-                } else if (parts.length === 1) {
-                    var m = parts[0].match(/^(.+?)\s+(\d{6,})\s+([\d,\.]+)$/);
-                    if (m) { bank = m[1]; norek = m[2]; nominal = m[3]; }
-                    else bank = parts[0];
+        
+        var l=v.split(/\r?\n/).filter(x => x.trim());
+        var e=[], c=null;
+        l.forEach(x => {
+            x = x.trim();
+            if(!x) return;
+            
+            if(/KAS BERSIH/i.test(x) || /Bank\s*:/i.test(x)) {
+                if(c && c.b) e.push(c);
+                var bankMatch = '';
+                if(/KAS BERSIH/i.test(x)) {
+                    bankMatch = x.replace(/KAS BERSIH/i, '').trim();
+                    if(!bankMatch) bankMatch = x.split(/\s+/).pop();
+                } else {
+                    bankMatch = x.split(':')[1].trim();
                 }
-                var fmt = nominal.replace(/,/g, '.');
-                if (fmt && !fmt.startsWith('Rp')) fmt = 'Rp. ' + fmt;
-                var numVal = parseFloat(nominal.replace(/[^0-9]/g, '')) || 0;
-                var text = 'Bank          : ' + bank + '\nNama Rekening : ' + nama + '\nNomor Rekening: ' + norek + '\nNominal       : ' + fmt;
-                results.push({ text: text, bank: bank, nama: nama, norek: norek, nominal: fmt, numVal: numVal });
-                returnalHistory.unshift({ text: text, bank: bank, nama: nama, norek: norek, nominal: fmt, numVal: numVal, time: new Date() });
-            });
-            if (!results.length) {
-                showToast('Format tidak dikenali. Gunakan tab atau spasi antar field.', 'error');
-                return;
-            }
-            currentReturnalResults = results;
-            var outParts = [RETURNAL_HEADER, ''];
-            results.forEach(function(r, i) {
-                if (i > 0) outParts.push('');
-                outParts.push(r.text);
-            });
-            currentReturnalOutput = outParts.join('\n');
-            renderReturnalOutput(results);
-            document.getElementById('copyReturnalBtn').style.display = 'inline-flex';
-            document.getElementById('returnalOutputActions').style.display = 'flex';
-            var lc = document.getElementById('returnalLineCount');
-            lc.style.display = 'inline-flex';
-            lc.textContent = '' + results.length;
-            renderHistoryList('returnal');
-        }
-
-        function renderReturnalOutput(results) {
-            if (!results.length) return;
-            var h = '<div class="returnal-header-block"><span class="cyan-tag">Info</span>    : TogelOn\n<span class="cyan-tag">Perihal</span> : Pengembalian DANA ( Direct QRIS MINERA -  ke setoran KAS ADM </div>';
-            results.forEach(function(r, i) {
-                if (i > 0) h += '<div style="height:6px;"></div>';
-                h += '<div class="returnal-entry-block"><span class="cyan-tag">Bank</span>          : ' + escHtml(r.bank) + '\n<span class="cyan-tag">Nama Rekening</span> : ' + escHtml(r.nama) + '\n<span class="cyan-tag">Nomor Rekening</span>: ' + escHtml(r.norek) + '\n<span class="cyan-tag">Nominal</span>       : ' + escHtml(r.nominal) + '</div>';
-            });
-            var box = document.getElementById('returnalOutputBox');
-            box.innerHTML = h;
-            box.classList.add('has-content');
-        }
-
-        window.copyReturnalAll = function() { if (currentReturnalOutput) doCopy(currentReturnalOutput, 'Data pengembalian'); };
-        window.copyReturnalHeader = function() { doCopy(RETURNAL_HEADER, 'Header'); };
-        window.copyReturnalLast = function() {
-            if (currentReturnalResults.length) doCopy(currentReturnalResults[currentReturnalResults.length-1].text, '1 entry terakhir');
-        };
-
-        // ============================================================
-        //  CLEAR FIELD
-        // ============================================================
-        window.clearField = function(id) {
-            var el = document.getElementById(id);
-            el.value = '';
-            el.focus();
-            el.dispatchEvent(new Event('input'));
-        };
-
-        // ============================================================
-        //  RIWAYAT
-        // ============================================================
-        function renderHistoryList(type) {
-            var listEl, historyArr, itemClass, countEl, clearBtn;
-            if (type === 'report') {
-                listEl = document.getElementById('historyList');
-                historyArr = reportHistory;
-                itemClass = 'history-item';
-                countEl = document.getElementById('historyCount');
-                clearBtn = document.getElementById('clearHistoryBtn');
-            } else if (type === 'dock') {
-                listEl = document.getElementById('dockHistoryList');
-                historyArr = dockHistory;
-                itemClass = 'dock-history-item';
-                countEl = document.getElementById('dockHistoryCount');
-                clearBtn = document.getElementById('clearDockHistoryBtn');
+                c = { b: bankMatch, n: '', r: '', a: '' };
+            } else if (c) {
+                if(/Nama\s*Rek/i.test(x)) {
+                    c.n = x.split(':')[1].trim();
+                } else if (/Nomor\s*Rek|No\.\s*Rek/i.test(x)) {
+                    c.r = x.split(':')[1].trim();
+                } else if (/Nominal/i.test(x)) {
+                    var nomStr = x.split(':')[1].trim();
+                    var n = parseInt(nomStr.replace(/\D/g, ''), 10);
+                    if(!isNaN(n)) c.a = n.toLocaleString('en-US');
+                }
             } else {
-                listEl = document.getElementById('returnalHistoryList');
-                historyArr = returnalHistory;
-                itemClass = 'returnal-history-item';
-                countEl = document.getElementById('returnalHistoryCount');
-                clearBtn = document.getElementById('clearReturnalHistoryBtn');
+                var p = x.replace(/\t/g, ' ').replace(/\s{2,}/g, ' ').trim().split(' ');
+                if(p.length >= 4) {
+                    if(/^\d+$/.test(p[1])) {
+                        e.push({b: p[0], r: p[1], n: p.slice(2, -1).join(' '), a: p[p.length-1]});
+                    }
+                }
             }
-            if (!historyArr.length) {
-                listEl.innerHTML = '<div style="text-align:center;padding:32px;color:var(--muted);font-size:13px;"><i class="fa-regular fa-folder-open" style="font-size:28px;display:block;margin-bottom:10px;opacity:0.3;"></i>Belum ada riwayat</div>';
-                countEl.style.display = 'none';
-                clearBtn.style.display = 'none';
-                return;
+        });
+        if(c && c.b) e.push(c);
+        if(!e.length) return;
+        
+        var t=0;
+        e.forEach(i=>{ 
+            var n=parseInt(i.a.replace(/\D/g,''),10); 
+            if(!isNaN(n)) t+=n; 
+            i.ac = i.a; 
+        });
+        
+        dLast = e.map(i => `${i.b}\t${i.r}\t${i.n}\t${i.ac}`).join('\n');
+        dLastCount=e.length; dLastTotal=t; dLastUser=e[e.length-1].n;
+        
+        o.innerHTML='<div class="header-block">Bank\tNomor Rekening\tNama Rekening\tNominal</div>' + 
+        e.map(i => '<div class="entry-block"><span class="header-tag">Bank</span> : '+escHtml(i.b)+'<br><span class="header-tag">Nomor Rekening</span> : '+escHtml(i.r)+'<br><span class="header-tag">Nama Rekening</span> : '+escHtml(i.n)+'<br><span class="header-tag">Nominal</span> : '+escHtml(i.ac)+'</div>').join('');
+        o.classList.add('has-content');
+        copyBtn.style.display='inline-flex';
+        
+        document.getElementById('dockStatCount').textContent=e.length;
+        document.getElementById('dockStatNominal').textContent=t.toLocaleString('id-ID');
+        document.getElementById('dockStatLast').textContent=e[e.length-1].n;
+    }
+    function saveDHist() {
+        if(!dLast) return showToast('Tidak ada data untuk disimpan','error');
+        var rawV = document.getElementById('dockInput').value;
+        if(dHist.length > 0 && dHist[0].raw === rawV) return showToast('Riwayat ini sudah tersimpan','error');
+        dHist.unshift({time:new Date(), c:dLastCount, t:dLastTotal, u:dLastUser, f:dLast, raw: rawV});
+        if(dHist.length > 30) dHist.pop();
+        renderHist('dockHistoryList', dHist, 'dock-history-item', 'gold', 'loadDHist');
+        showToast('Riwayat disimpan','success');
+    }
+    function copyDockAll(){ if(dLast)doCopy(dLast,'Data Peminjaman'); }
+    function loadDHist(i){ document.getElementById('dockInput').value=dHist[i].raw; processDock(); }
+
+    // ===== TAB 3: RETURNAL =====
+    var retHist=[], retLast='', retLastCount=0, retLastTotal=0, retLastUser='';
+    function processReturnal() {
+        var v=document.getElementById('returnalInput').value.trim();
+        var o=document.getElementById('returnalOutputBox');
+        var copyBtn=document.getElementById('copyReturnalBtn');
+        
+        if(!v) {
+            o.innerHTML='<span style="color:var(--muted);font-size:12px;">Hasil akan muncul otomatis...</span>';
+            o.classList.remove('has-content');
+            copyBtn.style.display='none';
+            retLast=''; retLastCount=0; retLastTotal=0; retLastUser='';
+            return;
+        }
+        
+        var l=v.split(/\r?\n/).filter(x => x.trim());
+        var e=[], t=0;
+        l.forEach(x => {
+            var p=x.replace(/\t/g,' ').replace(/\s{2,}/g,' ').trim().split(' ');
+            if(p.length>=4) {
+                var b=p[0], nom='', nam='', n=p[p.length-1];
+                for(var i=1;i<p.length-1;i++){ if(/^\d{6,}$/.test(p[i])){ nom=p[i]; nam=p.slice(1,i).join(' '); break; } }
+                if(!nam) nam=p.slice(1,p.length-1).join(' ');
+                var nn=parseInt(n.replace(/\D/g,''),10); if(!isNaN(nn)){ t+=nn; e.push({b:b,n:nam,r:nom,a:'Rp. '+nn.toLocaleString('id-ID')}); }
             }
-            countEl.style.display = 'inline-flex';
-            countEl.textContent = '' + historyArr.length;
-            clearBtn.style.display = 'inline-flex';
-            var shown = historyArr.slice(0, 20);
-            var h = '';
-            shown.forEach(function(item, idx) {
-                var timeStr = formatTime(item.time);
-                var label = '';
-                if (type === 'report') label = item.userId + ' — ' + item.nominal;
-                else if (type === 'dock') label = item.bank + ' / ' + item.nama + ' — ' + item.nominal;
-                else label = item.bank + ' / ' + item.nama + ' — ' + item.nominal;
-                h += '<div class="' + itemClass + '" data-type="' + type + '" data-idx="' + idx + '">';
-                h += '<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">';
-                h += '<div style="flex:1;min-width:0;"><div class="mono" style="font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + escHtml(label) + '</div></div>';
-                h += '<div style="font-size:10px;color:var(--muted);font-weight:600;white-space:nowrap;">' + timeStr + '</div>';
-                h += '</div></div>';
-            });
-            if (historyArr.length > 20) {
-                h += '<div style="text-align:center;padding:10px;color:var(--muted);font-size:11px;">...dan ' + (historyArr.length - 20) + ' lainnya</div>';
+        });
+        if(!e.length) return;
+        
+        var h="Info : TogelOn\nPerihal : Pengembalian DANA ( Direct QRIS XPAY -  ke setoran KAS ADM )";
+        var b=e.map(i=>`Bank : ${i.b}\nNama Rekening : ${i.n}\nNomor Rekening : ${i.r}\nNominal : ${i.a}`).join('\n\n');
+        retLast=h+'\n\n'+b;
+        retLastCount=e.length; retLastTotal=t; retLastUser=e[0].n;
+        
+        o.innerHTML='<div class="returnal-header-block">'+escHtml(h).replace(/\n/g,'<br>')+'</div>'+e.map(i=>'<div class="returnal-entry-block"><span class="cyan-tag">Bank</span> : '+escHtml(i.b)+'<br><span class="cyan-tag">Nama Rekening</span> : '+escHtml(i.n)+'<br><span class="cyan-tag">Nomor Rekening</span> : '+escHtml(i.r)+'<br><span class="cyan-tag">Nominal</span> : '+escHtml(i.a)+'</div>').join('');
+        o.classList.add('has-content');
+        copyBtn.style.display='inline-flex';
+    }
+    function saveRetHist() {
+        if(!retLast) return showToast('Tidak ada data untuk disimpan','error');
+        var rawV = document.getElementById('returnalInput').value;
+        if(retHist.length > 0 && retHist[0].raw === rawV) return showToast('Riwayat ini sudah tersimpan','error');
+        retHist.unshift({time:new Date(), c:retLastCount, t:retLastTotal, u:retLastUser, f:retLast, raw: rawV});
+        if(retHist.length > 30) retHist.pop();
+        renderHist('returnalHistoryList', retHist, 'returnal-history-item', 'cyan', 'loadRetHist');
+        showToast('Riwayat disimpan','success');
+    }
+    function copyReturnalAll(){ if(retLast)doCopy(retLast,'Laporan Pengembalian'); }
+    function loadRetHist(i){ document.getElementById('returnalInput').value=retHist[i].raw; processReturnal(); }
+
+    // ===== TAB 4: WD PENDING (SMART EXTRACTOR) =====
+    var wHist=[], wLast='', wLastCount=0, wLastTotal=0, wLastUser='';
+    function processWdPending() {
+        var v=document.getElementById('wdpInput').value.trim();
+        var o=document.getElementById('wdpOutputBox');
+        var copyBtn=document.getElementById('copyWdpBtn');
+        
+        if(!v) {
+            o.innerHTML='<span style="color:var(--muted);font-size:12px;">Hasil akan muncul otomatis saat data ditempel...</span>';
+            o.classList.remove('has-content');
+            copyBtn.style.display='none';
+            document.getElementById('wdpStatCount').textContent='0';
+            document.getElementById('wdpStatNominal').textContent='Rp. 0';
+            document.getElementById('wdpStatLast').textContent='-';
+            wLast=''; wLastCount=0; wLastTotal=0; wLastUser='';
+            return;
+        }
+        
+        var l=v.split(/\r?\n/).filter(x => x.trim());
+        var e=[], fu='';
+        
+        l.forEach(x => {
+            var clean = x.replace(/\([^)]*\)/g, '').replace(/\t/g, ' ').replace(/\s{2,}/g, ' ').trim();
+            var parts = clean.split(' ');
+            var ref='', user='', nama='', nomor='', nominal='';
+            
+            var mRef = clean.match(/TGN-[a-z0-9-]+/i);
+            if(mRef) ref = mRef[0];
+            
+            var mUser = clean.match(/SMB\d+/i);
+            if(mUser) { user = mUser[0]; if(!fu) fu = user; }
+            
+            var mNomor = clean.match(/\b\d{8,16}\b/);
+            if(mNomor) {
+                nomor = mNomor[0];
+                var idx = parts.indexOf(nomor);
+                if(idx !== -1 && idx + 1 < parts.length) {
+                    var nParts = [];
+                    for(var i = idx + 1; i < parts.length; i++) {
+                        if(/^Rp/i.test(parts[i]) || /^Bank/i.test(parts[i])) break;
+                        nParts.push(parts[i]);
+                    }
+                    nama = nParts.join(' ');
+                }
             }
-            listEl.innerHTML = h;
-            listEl.querySelectorAll('[data-type]').forEach(function(el) {
-                el.addEventListener('click', function() {
-                    var t = this.getAttribute('data-type');
-                    var i = parseInt(this.getAttribute('data-idx'));
-                    var arr = t === 'report' ? reportHistory : t === 'dock' ? dockHistory : returnalHistory;
-                    if (arr[i]) doCopy(arr[i].text, 'Riwayat');
+            
+            var mNoms = clean.match(/Rp\s*[\d.,]+/gi);
+            if(mNoms) {
+                var maxVal = 0;
+                mNoms.forEach(n => {
+                    var val = parseInt(n.replace(/\D/g, ''), 10);
+                    if(!isNaN(val) && val > maxVal) { 
+                        maxVal = val; 
+                        nominal = n.replace(/\s+/g, ''); 
+                    }
                 });
-            });
-        }
-
-        window.clearHistory = function(type) {
-            if (type === 'report') { reportHistory = []; renderHistoryList('report'); }
-            else if (type === 'dock') { dockHistory = []; renderHistoryList('dock'); }
-            else { returnalHistory = []; renderHistoryList('returnal'); }
-            showToast('Riwayat dihapus', 'success');
-        };
-
-        // ============================================================
-        //  EXPOSE
-        // ============================================================
-        window.processInput = processInput;
-        window.processDock = processDock;
-        window.processReturnal = processReturnal;
-
-        // ============================================================
-        //  AUTO-PROCESS DENGAN DEBOUNCE
-        // ============================================================
-        var debounceTimers = {};
-        function debounce(key, fn, delay) {
-            if (debounceTimers[key]) clearTimeout(debounceTimers[key]);
-            debounceTimers[key] = setTimeout(fn, delay);
-        }
-
-        document.getElementById('inputArea').addEventListener('input', function() {
-            debounce('report', processInput, 400);
+                if(!nominal && mNoms.length > 0) nominal = mNoms[0].replace(/\s+/g, '');
+            }
+            
+            if(ref || nomor || nama) {
+                e.push({ref: ref||'-', nama: nama||'-', nomor: nomor||'-', nominal: nominal||'-', user: user||fu||'SMB17'});
+            }
         });
-        document.getElementById('dockInput').addEventListener('input', function() {
-            debounce('dock', processDock, 400);
-        });
-        document.getElementById('returnalInput').addEventListener('input', function() {
-            debounce('returnal', processReturnal, 400);
-        });
+        
+        if(!e.length) return;
+        
+        var utag = fu || e[0].user || 'SMB17';
+        var h = `Info : TogelOn\nPerihal : Transaksi Withdraw QRIS Minerapay Pending (${utag})\nTanggal : -`;
+        var b = e.map(i => `Reference No. : ${i.ref}\nNama Rekening : ${i.nama}\nNomor Rekening : ${i.nomor}\nNominal : ${i.nominal}`).join('\n\n');
+        wLast = h + '\n\n' + b;
+        
+        var t=0;
+        e.forEach(i=>{ var n=parseInt(i.nominal.replace(/\D/g,''),10); if(!isNaN(n))t+=n; });
+        wLastCount = e.length; wLastTotal = t; wLastUser = utag;
+        
+        o.innerHTML='<div class="wdp-header-block">'+escHtml(h).replace(/\n/g,'<br>')+'</div>'+e.map(i=>'<div class="wdp-entry-block"><span class="rose-tag">Reference No.</span> : '+escHtml(i.ref)+'<br><span class="rose-tag">Nama Rekening</span> : '+escHtml(i.nama)+'<br><span class="rose-tag">Nomor Rekening</span> : '+escHtml(i.nomor)+'<br><span class="rose-tag">Nominal</span> : '+escHtml(i.nominal)+'</div>').join('');
+        o.classList.add('has-content');
+        copyBtn.style.display='inline-flex';
+        
+        document.getElementById('wdpStatCount').textContent=e.length;
+        document.getElementById('wdpStatNominal').textContent='Rp. '+t.toLocaleString('id-ID');
+        document.getElementById('wdpStatLast').textContent=utag;
+    }
+    function saveWHist() {
+        if(!wLast) return showToast('Tidak ada data untuk disimpan','error');
+        var rawV = document.getElementById('wdpInput').value;
+        if(wHist.length > 0 && wHist[0].raw === rawV) return showToast('Riwayat ini sudah tersimpan','error');
+        wHist.unshift({time:new Date(), c:wLastCount, t:wLastTotal, u:wLastUser, f:wLast, raw: rawV});
+        if(wHist.length > 30) wHist.pop();
+        renderHist('wdpHistoryList', wHist, 'wdp-history-item', 'rose', 'loadWHist');
+        showToast('Riwayat disimpan','success');
+    }
+    function copyWdpAll(){ if(wLast)doCopy(wLast,'Laporan WD Pending'); }
+    function loadWHist(i){ document.getElementById('wdpInput').value=wHist[i].raw; processWdPending(); }
 
-    })();
+    // Helper Render History
+    function renderHist(id, arr, cls, color, loadFn) {
+        var el = document.getElementById(id);
+        if(!arr.length) { el.innerHTML=''; return; }
+        el.innerHTML = arr.map((i, idx) => `<div class="${cls}" onclick="${loadFn}(${idx})" style="display:flex;justify-content:space-between;align-items:center;">
+            <div><div class="mono" style="color:var(--${color});font-weight:700;font-size:12px;">${escHtml(i.u)} • ${i.c} trx</div></div>
+            <div style="text-align:right;"><div class="mono" style="font-size:11px;font-weight:700;">Rp. ${i.t.toLocaleString('id-ID')}</div></div>
+        </div>`).join('');
+    }
     </script>
 </body>
 </html>
